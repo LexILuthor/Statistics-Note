@@ -1,0 +1,222 @@
+\chapter{Concentration Measure}
+\label{cha:Prop R S}
+\vspace{15pt}
+
+
+We're now going to investigate some methods to study the tail of a distribution.\\
+Consider a non negative \rv \  and let $t>0$. Then by Markow inequality we have:
+$$\p (X\geq t)\leq \frac{\e [X]}{t}$$
+We can try to improve this inequality using a function $\Phi$ that is strictly increasing with non negative values. Then we can write
+$$\p (X\geq t)=\p (\Phi(X)\geq \Phi(t) )\leq \frac{ \e [\Phi(X)]}{\Phi(t)}$$
+In particular we can take $\Phi(x)=x^q$ , $X\geq 0, q>0$ so we have
+$$\p (|X- \e [X]|\geq t)\leq \frac{ \e [|X-\e [X]|^q]}{t^q}$$
+In specific examples one can choose the value of $q$ that optimize the upper bound.\\
+A related idea is a the basis of \textbf{Chernoff's bounding method}: taking $\Phi(X)=e^{sx}$ where $s$ is an arbitrary positive number for any random variable $X$ and $t\in \mathbb{R}$ we have:
+\begin{equation}\label{ineq:Chernoffb}
+	\p (X \geq t)= \p (e^{sX}\geq e^{st})\leq \frac{\e[e^{sX}]}{e^{st}}
+\end{equation}
+
+So we can bound the probability using the characteristic function which is usually easier than $\e [X^q]$ to compute.\\
+However it can be proven that the bounding given form $\Phi (X)=x^q$ is always better than the one given by $\Phi(X)=E^{sX}$.\\
+\begin{teo}\textbf{Cauchy Swartz inequality}\\
+	Given two \rv s with finite second moments then:
+	$$|\e[XY]|^2\leq \e[X^2]\e[Y^2]$$
+\end{teo}
+
+\begin{teo}
+	let $t\geq 0$ then
+	$$\p(X - \e[X]\geq t)\leq \frac{Var(X)}{Var(X)+t^2}$$
+\end{teo}
+\begin{proof}
+	We assume that $E[X]=0$ (the proof for the general case is the same).\\
+	For all $t$ we can write 
+	$$t=\e[t]=\e[t]-e[X]=\e[t-X]\leq \e[(t-X)\mathbbm{1}_{[X<t]}(X)]$$
+	Then for $t\geq 0$ from Cauchy Swartz inequality:
+	\[
+	\begin{split}
+	t^2 
+	& \leq \e[(t-X)^2] \e[(\mathbbm{1}_{[X<t]}(X))^2]\\
+	&= \e[(t-X)^2] \p(X<t)\\
+	&= (Var(X)+t^2)\p(x<t)
+	\end{split}	
+	\]
+	$\implies \p(X<t)\geq \frac{t^2}{Var(X)+t^2}$\\
+	$\implies \p(X\geq t)= 1-\p(X<t)\leq 1-\frac{t^2}{Var(X)+t^2}= \frac{Var(X)}{Var(X)+t^2} $
+\end{proof}
+
+\begin{teo}
+	Let $f,g$ be non decreasing real valued functions defined on the real line. If $X$ is a real valued \rv \  then:$$\e[f(x)g(x)]\geq \e[f(x)]\e[g(x)]$$
+	If $f$ is non increasing and $g$ is non decreasing then:
+	$$\e[f(x)g(x)]\leq \e[f(x)]\e[g(x)]$$ 
+\end{teo}
+\begin{proof}
+	Let $Y$ be a \rv \  with the same distribution of $X$ and $X\coprod Y$. Because $f,g$ are non decreasing functions we have $(f(x)-f(y))(g(x)-g(y))\geq 0$
+	\[
+		\implies  0 \leq \e[(f(x)-f(y))((g(x)-g(y))]=\e[f(x)g(x)-f(x)g(y)-f(y)g(x) + f(y)g(y)]
+	\]
+	$\implies$
+	\[
+	\begin{split}
+\e[f(x)g(x)] &\geq \e[f(x)g(y)]+ \e[f(y)g(x)]- \e[f(x)g(y)] \\&=\e[f(x)g(y)]\\&=\e[f(x)]\e[g(y)]\\&=\e[f(x)]\e[g(x)]
+	\end{split}
+	\]
+	The second part of the theorem can be proved in the same way.
+\end{proof}
+The previous theorem can be generalized as following:
+\begin{teo}
+	Let $f,g: \mathbb{R}^n\to \mathbb{R}$ be non increasing functions. Let $X_1...X_n$ be independent real valued \rv s and define the \rv \ $X=(X_1...X_n)$ that take values in $\mathbb{R}^n$ then:
+	$$\e[f(x)g(x)]\geq \e[f(x)]\e[g(x)]$$
+	If $f$ is non increasing and $g$ is non decreasing then:
+	$$\e[f(x)g(x)]\leq \e[f(x)]\e[g(x)]$$
+\end{teo}
+
+\section{Concentration for sum of \rv s}
+
+We want to bound the probability $\p(S_n-\e[S_n]\geq t)$ where $S_n=\sum_{i=1}^{n} X_i$ and $X_1...Xn$ are independent \rv s real valued.\\
+An application of the Chebyshev's inequality give us:
+$$\p(|S_n-\e[S_n]|\geq t)\leq \frac{Var(S_n)}{t^2}=\frac{\sum_{i=1}^{n}Var(X_i)}{t^2}$$
+Applying the Chebyshev's inequality to $ \frac{1}{n} \sum_{i=1}^{n}x_i$ we get
+\[
+\begin{split}
+\p\bigg( \bigg| \frac{1}{n} \bigg( \sum_{i=1}^{n}x_i - \e [X_i] \bigg) \bigg| \geq \epsilon \bigg)
+&=\p\bigg( \bigg| S_n - \e [S_n] \bigg| \geq \epsilon n \bigg)\\
+&\leq \frac{\sum_{i=1}^{n}Var(X_i)}{\epsilon^2 n^2}
+\end{split}
+\]
+If we define $\sigma^2 :=\frac{1}{n}\sum_{i=1}^{n}x_i$ then:
+\begin{equation} \label{eq:FromChebishev}
+	\p\bigg( \bigg| \frac{1}{n} \sum_{i=1}^{n}x_i - \e [X_i] \bigg| \geq \epsilon \bigg)\geq \frac{\sigma^2}{n\epsilon^2}
+\end{equation}
+To understand why the equation \ref{eq:FromChebishev} is unsatisfying recall what appens with the \textit{Central Limit Theorem}:
+$$\p\bigg(\sqrt{\frac{n}{\sigma^2}}\bigg( \frac{1}{n}\sum_{i=1}^{n} X_i -\e[X_i] \bigg) \geq y \bigg) \varinjlim^{n\to \infty} 1- \Phi(y)\leq \frac{1}{\sqrt{2\pi}}\frac{e^{-y^2/2}}{y}$$
+(where $\Phi$ is the CDF of the standard Gaussian distribution)\\
+so
+$$\p\bigg(\sqrt{\frac{n}{\sigma^2}}\bigg( \frac{1}{n}\sum_{i=1}^{n} X_i -\e[X_i] \bigg) \geq \epsilon  \bigg)\lesssim \exp\bigg\{ \frac{-n\epsilon^2}{2\sigma} \bigg\}$$
+So for $\p\bigg(\sqrt{\frac{n}{\sigma^2}}\bigg( \frac{1}{n}\sum_{i=1}^{n} X_i -\e[X_i] \bigg) \geq \epsilon \bigg)$ we have:
+$$\exp\bigg\{ \frac{-n\epsilon^2}{2\sigma} \bigg\}\leftarrow \text{from Central Limit Theorem}$$
+$$\frac{\sigma^2}{n\epsilon^2}\leftarrow \text{from Chebyshev's inequaity}$$
+From here we can see that the Chebyshev's inequality doesen't work well for the sum of $n$ \rv s when $n$ is large. Meanwhile the Chebyshev's inequality works better than the Central Limit Theorem for small $n$.\\
+
+Another instrument previously introduced that can be helpful for bounding tail probabilities of sum of independent \rv s is the \textbf{Chernoff bounding} \ref{ineq:Chernoffb}:
+\begin{equation}
+\label{eq:ChernoffSum}
+\p(S_n-\e[S_n]\geq t)\leq e^{-st}\e[\exp \{ s \sum_{i=1}^{n} (x_i-\e[X_i]) \}]=e^{st} \prod_{i=1}^{n}\e[\exp \{ s(x_i-\e[X_i]) \}]	
+\end{equation}
+(remember that $s$ is an arbitrary positive number)
+
+Now the problem of finding bond on the tail probability reduces to the problem of finding (upper) bounds for the moments generating function of $X_i-\e[X_i]$.
+
+
+As we saw Chebyshev's inequality \ref{eq:Chebyshev} does not work well for sums of \rv s.\\
+In this section we will see a partial solution given by \textit{Hoeffding's Inequality}, then a more complete solution given by \textit{Bernstein Inequality}.
+
+\begin{lem}\label{lem:Hoeffding}
+	Let $X$ be a \r with $\e [X]=0$ (actually it can be generalized for a \rv \  with any expected value), $a\leq X \leq b$ ($X$ bounded \rv). Then
+	\[
+	\e[e^{sx}] \leq \exp \bigg\{\frac{s^2(b-a)^2}{8} \bigg\}\ \ \ \ \ for  \ \ s>0
+	\]
+\end{lem}
+
+\begin{proof}
+	By the convexity of the exp function we have 
+	\[
+	e^{sx} \leq \frac{x-a}{b-a}e^{sb}+\frac{b-x}{b-a}e^{sa} \ \ \ \  \text{     with $a\leq x\leq b$}
+	\]
+	Using $\e[X]=0$ and defining $p:=\frac{-a}{b-a}$ we obtain
+	\[
+	\begin{split}
+		\e[e^{sx}]
+		&\leq \e[\frac{x-a}{b-a}e^{sb}+\frac{b-x}{b-a}e^{sa} ]\\
+		& \leq \frac{b}{b-a}e^{sa}-\frac{a}{b-a}e^{sb}\\
+		& =\frac{b-a+a}{b-a}e^{sa}+pe^{sb}\\
+		&= (1-p)e^{sa}+pe^{sb}\\
+		&= (1-p)e^{sa}+pe^{s(b-a+a)}\\
+		&= (1-p)e^{sa}+pe^{s(b-a)}e^{sa}\\
+		&= (1-p+pe^{s(b-a)})e^{sa}\\
+		&= (1-p)e^{sa}+pe^{s(b-a)}e^{sa\frac{b-a}{b-a}}\\
+		&= (1-p)e^{sa}+pe^{s(b-a)}e^{-ps(b-a)}\\
+	\end{split}
+	\]
+	Then defining 
+	$$\mu=s(s-a)$$
+	$$\Phi(\mu)=-p\mu + \ln(1-p+pe^{\mu})$$
+	so we have that the last equality $(1-p)e^{sa}+pe^{s(b-a)}e^{-ps(b-a)}=e^{\phi(\mu)}$\\
+	It is possible to show 
+	$$\Phi'(X)=-p +\frac{p}{p+(1-p)e^{-\mu}}$$
+	therefore $\Phi(\mu)=\Phi'(0)=0$, moreover
+	$$\Phi(\mu)=\frac{p(1-p)e^{-\mu}}{(p+(1+p)p^{-\mu})^4}\leq \frac{1}{4}$$
+	by Taylor's theorem we have:
+	$$\Phi(x)=\Phi(0)+\mu\Phi'(0)+\frac{\mu}{2}\Phi''(\sigma)\leq \frac{\mu^2}{8}=\frac{s^2(b-a)^2}{8}$$
+	with $\sigma \in [0,\mu]$.
+\end{proof}
+We're now ready for the \textbf{Hoeffding's Inequality}
+\begin{teo}
+	Let \xii be independent \rv \ such that $x_i\in[a_i,b_i]$ then for any $t>0$
+	$$\p(S_n-\e[S_n]\geq t)\leq e^{-\frac{2t^2}{\sum_{i=1}^{n}(b_i-a_i)^2}}$$
+	$$\p(S_n-\e[S_n]\leq -t)\leq e^{-\frac{2t^2}{\sum_{i=1}^{n}(b_i-a_i)^2}}$$
+\end{teo}
+
+
+\begin{proof}
+	Using the \textit{Chernoff's bounding} for sums of \rv s  \ref{eq:ChernoffSum} and the precedent lemma \ref{lem:Hoeffding} we obtain
+	$$\p(S_n-\e[S_n]\geq t)\leq e^{-st} \prod_{i=1}^{n}e^{\frac{s^2(b-a)^2}{8}}=e^{-st}e^{\frac{s^2}{8}\sum_{i=1}^{n}(b_i-a_i)^2}=e^{-\frac{2t^2}{\sum_{i=1}^{n}(b_i-a_i)^2}}$$
+	where we chose $s=\frac{4t}{\sum_{i=1}^{n}(b_i-a_i)^2}$
+\end{proof}
+
+This inequality has the same form as the one based on the central limit theorem except that the average variance $\sigma^2$ is replaced by the upper bound $\frac{1}{4}\sum_{i=1}^{n}(b_i-a_i)^2$. Next we will see \textit{Bernstein Inequality} an inequality that take into account also the variance.\\
+
+\begin{lem} \label{lem:Bernstain}
+	Assume that $\e[X_i]=0$ then if for all $X_i$, $|X_i|\leq c$ ($X_i$ are bounded):
+	$$\e [e^{sx_i}] \leq \exp\bigg\{ s^2\sigma^2_i \frac{e^{sc}-1-sc}{sc} \bigg\}$$
+	where $\sigma_i^2:=\e[X_i^2]$
+\end{lem}
+\begin{proof}
+	define $F_i=\sum_{r=2}^{\infty} s^{r-2} \frac{\e [x_i^r]}{r! \sigma_i^2 }$.\\
+	Since (for Taylor) $e^{sx}=1+sx+\sum_{r=2}^{\infty} s^r\frac{x^r}{r!}$ then taking into account  $\e[X_i]=0$
+	$$\e[s^{sX_i}]=1+s \e [X_i] \sum_{r=2}^{\infty}s^r\frac{\e [x^r_i]}{r!}=1+s^2\sigma^2 F_i \leq e^{s^2\sigma_i^2F_i}$$
+	Because we supposed $|X_i|\leq c$ for each index $r$ we have
+	$$\e[X_i^r]= \e [X_i^{r-2}X_i^2] \leq \e [c^{r-2}X_i^2] = c^{r-2}\sigma_i^2$$
+	Thus
+	\[
+	\begin{split}
+	F_i
+	& \leq \sum_{r=2}^{\infty}\frac{s^{r-2}c^{r-2} \not \sigma_i^2}{r! \not\sigma_i^2}\\
+	& = \frac{1}{(sc)^2}\sum_{r=2}^{\infty}\frac{(sc)^{r}}{r!}\\
+	&= \frac{e^{sc}-1-sc}{(sc)^2}
+	\end{split}
+	\]
+	where in the last step we recognized the summation as the exponential wrote in Taylor series missing the first two terms
+\end{proof}
+\begin{teo}\textbf{Bernstein Inequality}\\
+	Let \xii be independent real valued \rv s with $\e[X_i]=0$ and $|X_i|\leq c$. Set $\sigma^2=\frac{1}{n}\sum_{i=1}^{Var[X_i]}$ (note that $Var[X_i]=\e[X_i^2]$ because$\e[X_i]=0$). Then for $t>0$
+	$$\p(\sum_{i=1}^{n}X_i\geq t)\leq \exp\bigg\{-\frac{n\sigma^2}{c^2} h\bigg(\frac{ct}{n\sigma^2} \bigg)\bigg\}$$
+	where $h(\mu)=(1+\mu)\ln(1+\mu)-\mu$ for $\mu \geq 0$.
+\end{teo}
+
+\begin{proof}
+		Using the \textit{Chernoff's bounding} for sums of \rv s  \ref{eq:ChernoffSum} we obtain and the precedent lemma \ref{lem:Bernstain} we obtain 
+			$$\p(\sum_{i=1}^{n}X_i \geq t)\leq \exp \bigg\{\frac{n\sigma^2(e^{sc}-1-sc)}{c^2}-st\bigg\}$$
+			and the bound is minimized by $s=\frac{1}{c}\ln\bigg(1+\frac{tc}{n\sigma^2} \bigg)$
+\end{proof}
+
+\begin{corol}
+	Referring to the \textit{Bernstein Inequality} there is a lower bound for $h$:
+	$$h(\mu)\geq \frac{\sigma^2}{2+2\frac{\mu}{\epsilon}}$$
+	so for $\epsilon >0$ the \textit{Bernstein Inequality} becomes:
+	$$\p(\sum_{i=1}^{n}X_i\geq t)\leq \exp\bigg\{-\frac{n\epsilon}{2\sigma^2+\frac{2}{3}c\epsilon}\bigg\}$$
+\end{corol}
+This result is extremely useful in hypothesis testing ($\p(T_n>t)=\alpha$) because usually to do the test we have to invert the CDF of $T_n$. With this result we can instead use the second term of the \textit{Bernstein Inequality} as $\alpha$ and then we can isolate the $\epsilon$ to find the small $t$. Sadly this work only if $T_n$ is a sum of independent \rv s which however is the most common situation.\\
+
+We consider now the problem of deriving inequalities for the Variance of functions of independent \rv s.
+
+\begin{lem}
+	Let $\mathcal{X}$ be some set and let $g:\mathcal{X}^n\to \mathbb{R}$ be a measurable function. Define $Z:=g(X_1...X_n)$ where \xii are independent \rv s in $\mathcal{X}$ and $\e_iZ$ the expected value of $Z$ \wrt $X_i$ that is $\e_iZ=\e[Z|X_1...X_{i-1},X_{i+1}...X_n]$. Then
+	$$Var(Z)\leq \sum_{i=1}^{n}\e[(Z-\e_iZ)^2]$$
+\end{lem}
+
+Directly from this lemma follows
+\begin{teo}\textbf{Efron-Stein Inequality}
+	Let $X_1'...X_n'$ be from an independent copy of $X_1...X_n$ and define $Z_i'=g(X_1...X_{i-1},X_{i}',X_{i+1}...X_n)$ then
+	$$Var(Z)\leq \sum_{i=1}^{n}\e[(Z-Z_i')^2]$$
+	when $g(X_1...X_n)=\sum_{i=1}^{n}X_i$ the inequality becomes an equality.
+\end{teo}

@@ -1,0 +1,271 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% Template per Elaborato di Laurea
+
+%
+% 
+%
+% Per la generazione corretta del 
+% pdflatex nome_file.tex
+% bibtex nome_file.aux
+% pdflatex nome_file.tex
+% pdflatex nome_file.tex
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%\documentclass[epsfig,a4paper,11pt,titlepage,twoside,openany]{book} %formato FRONTE RETRO
+\documentclass[epsfig,a4paper,11pt,titlepage,oneside,openany]{book} %formato SOLO FRONTE
+
+
+\usepackage{fancyhdr}  %%capitolo a inizio pagina
+\usepackage{graphicx}
+\usepackage{mathtools}
+\usepackage{lipsum}
+\usepackage{caption}
+\usepackage{epsfig}
+\usepackage{plain}
+\usepackage{setspace}
+\usepackage[verbose]{hyperref}  %%Indice con link
+\usepackage{blindtext}
+%\usepackage[italian]{babel}
+\usepackage[british,UKenglish,USenglish,english,american]{babel}
+\usepackage{enumitem}
+\usepackage[paperheight=29.7cm,paperwidth=21cm,outer=1.5cm,inner=2.5cm,top=2cm,bottom=2cm]{geometry} % per definizione layout
+\usepackage{titlesec} % per formato custom dei titoli dei capitoli
+
+
+
+% supporto lettere accentate
+%\usepackage[utf8x]{inputenc} % per Linux (richiede il pacchetto unicode);
+\usepackage[latin1]{inputenc} % per Windows;
+%\usepackage[applemac]{inputenc} % per Mac.
+
+\singlespacing
+
+%%%%%%%%%%%%%%%% immagini
+\usepackage{graphicx}
+\graphicspath{ {images/} }
+\usepackage{tikz}
+
+%pacchetti di matematica
+
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage[T1]{fontenc}
+\newtheorem{teo}{Theorem}[section]
+\newtheorem{corol}{Corollary}[section]
+\newtheorem{prop}{Proposition}[section]
+\newtheorem{eg}{Example}[section]
+\newtheorem{ex}{Exercise}
+\newtheorem{lem}{Lemma}[section]
+\theoremstyle{definition}
+\newtheorem{defi}{Definition}[section]
+\newtheorem{oss}{Observation}
+\numberwithin{equation}{section}
+\usepackage{mathtools}
+\usepackage{systeme}
+\usepackage{bbm}
+%%%%%%%%%%%%%%%%
+
+
+
+
+%%%%%%%%%%%%%%%%%
+\newcommand{\iid}{independent and identically distributed }
+\newcommand{\rs}{random sample }
+\newcommand{\ux}{\underline x}
+\newcommand{\uX}{\underline X}
+\newcommand{\nor}{N(\mu, \sigma^2)}
+\newcommand{\lf}{\mathcal{L}_n(\theta,\underline x)}
+\newcommand{\lfd}{f_{\underline X}(\underline{x};\theta)}
+\newcommand{\ifn}{\mathcal{I}_n(\theta)}
+\newcommand{\rsf}{$(x_1...x_n)$ from $X\sim F_X(x;\theta)$}
+\newcommand{\spacep}{$(\Omega,\mathcal{F} ,\mathbb{P})$}
+\newcommand{\p}{\mathbb{P}}
+\newcommand{\lep}{legge di probabilit� $\{p_1...p_n \}$ }
+\newcommand{\xii}{$(x_1...x_n)$}
+\newcommand{\leggeq}{legge di probabilit� $\{q_1...q_m \}$ }
+\newcommand{\va}{$\{a_1...a_n \}$ }
+\newcommand{\vb}{$\{b_1...b_m \}$ }
+\newcommand{\lepc}{$\{p(j|i); 1 \leq i \leq n , \ 1 \leq j \leq m \}$ }
+\newcommand{\wrt}{with respect to }
+\newcommand{\e}{\mathbb{E}}
+\newcommand{\Gaus}{\frac{1}{\sqrt{2\pi \sigma ^2}} \exp  \Big\{ - \frac{(x-\mu)^2}{2 \sigma^2} \Big\}}
+\newcommand{\acode}{$\{ c_1...c_r \}$}
+\newcommand{\rv}{random variable}
+\newcommand{\var}{due variabili casuali $X,Y$}
+\newcommand{\sumj}{\sum_{j=1}^n}
+\newcommand{\sumi}{\sum_{i=1}^N}
+\newcommand{\sumin}{\sum_{i=1}^n}
+\newcommand{\sumk}{\sum_{k=1}^m}
+\newcommand{\suma}{\sum_{i_0...i_n=1}^N}
+\newcommand{\sumaa}{\sum_{i_0...i_n,i_{n+1}=1}^N}
+\newcommand{\limi}{\lim_{n\to \infty}}
+\newcommand{\sumij}{-\sum_{i,j=1}^n}
+\newcommand{\sume}{\sum_{k=0}^{[mp]}  {m \choose k} }
+\newcommand{\g}{ \frac{1}{\sigma (2\pi)^{1/2}} \exp \bigg( - \frac{1}{2} \bigg( \frac{x-\mu}{ \sigma} \bigg)^2 \bigg)  }
+\newcommand{\sig}{\mathcal{B}(y,r)}
+\begin{document}
+
+
+
+  % nessuna numerazione
+  \pagenumbering{gobble} 
+  \input{pagina_iniziale}
+  
+  
+  
+  
+  
+
+
+
+    
+		%%%%%%%%%pagina bianca
+	
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Nota
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Sezione Ringraziamenti opzionale
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%  \input{ringraziamenti}
+  \clearpage
+  \pagestyle{plain} % nessuna intestazione e pie pagina con numero al centro
+
+  
+  % inizio numerazione pagine in numeri arabi
+  \mainmatter
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Nota
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% Nel conteggio delle facciate sono incluse 
+%%   indice
+%%   sommario
+%%   capitoli
+%% Dal conteggio delle facciate sono escluse
+%%   frontespizio
+%%   ringraziamenti
+%%   allegati    
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+    % indice
+    \tableofcontents
+    \clearpage
+    
+    
+          
+    % gruppo per definizone di successione capitoli senza interruzione di pagina
+    \begingroup
+      % nessuna interruzione di pagina tra capitoli
+      % ridefinizione dei comandi di clear page
+      \renewcommand{\cleardoublepage}{} 
+      \renewcommand{\clearpage}{} 
+      % redefinizione del formato del titolo del capitolo
+      % da formato
+      %   Capitolo X
+      %   Titolo capitolo
+      % a formato
+      %   X   Titolo capitolo
+      
+      \titleformat{\chapter}
+        {\normalfont\Huge\bfseries}{\thechapter}{1em}{}
+        
+      \titlespacing*{\chapter}{0pt}{0.59in}{0.02in}
+      \titlespacing*{\section}{0pt}{0.20in}{0.02in}
+      \titlespacing*{\subsection}{0pt}{0.10in}{0.02in}
+      
+      
+    
+      
+      
+      % sommario
+      \input{sommario}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Nota
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Sommario e' un breve riassunto del lavoro svolto dove si descrive 
+%% l’obiettivo, l’oggetto della tesi, le metodologie e 
+%% le tecniche usate, i dati elaborati e la spiegazione delle conclusioni 
+%% alle quali siete arrivati.
+%% Il sommario dell’elaborato consiste al massimo di 3 pagine e deve contenere le seguenti informazioni: 
+%%   contesto e motivazioni
+%%   breve riassunto del problema affrontato
+%%   tecniche utilizzate e/o sviluppate
+%%   risultati raggiunti, sottolineando il contributo personale del laureando/a
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%      
+      
+      %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+      % lista dei capitoli
+      %
+      % \input oppure \include
+      %
+      
+	  \newpage
+      \input{capitolo1}
+      \newpage
+      \input{capitolo2}
+      \newpage
+      \input{capitolo3}
+      \newpage
+      \input{capitolo4}
+      \newpage
+      \input{Esercizi}
+      
+    \endgroup
+
+	%mostra sempre
+
+    % bibliografia in formato bibtex
+    %
+    % aggiunta del capitolo nell'indice
+    \addcontentsline{toc}{chapter}{Bibliografia}
+    % stile con ordinamento alfabetico in funzione degli autori
+    \bibliographystyle{plain}
+    \bibliography{biblio}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Nota
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Nella bibliografia devono essere riportati tutte le fonti consultate 
+%% per lo svolgimento della tesi. La bibliografia deve essere redatta 
+%% in ordine alfabetico sul cognome del primo autore. 
+%% 
+%% La forma della citazione bibliografica va inserita secondo la fonte utilizzata:
+%% 
+%% LIBRI
+%% Cognome e iniziale del nome autore/autori, la data di edizione, titolo, casa editrice, eventuale numero dell’edizione. 
+%% 
+%% ARTICOLI DI RIVISTA
+%% Cognome e iniziale del nome autore/autori, titolo articolo, titolo rivista, volume, numero, numero di pagine.
+%% 
+%% ARTICOLI DI CONFERENZA
+%% Cognome e iniziale del nome autore/autori (anno), titolo articolo, titolo conferenza, luogo della conferenza (città e paese), date della conferenza, numero di pagine. 
+%% 
+%% SITOGRAFIA
+%% La sitografia contiene un elenco di indirizzi Web consultati e disposti in ordine alfabetico. 
+%% E’ necessario:
+%%   Copiare la URL (l’indirizzo web) specifica della pagina consultata
+%%   Se disponibile, indicare il cognome e nome dell’autore, il titolo ed eventuale sottotitolo del testo
+%%   Se disponibile, inserire la data di ultima consultazione della risorsa (gg/mm/aaaa).    
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    
+
+    \titleformat{\chapter}
+        {\normalfont\Huge\bfseries}{Allegato \thechapter}{1em}{}
+    % sezione Allegati - opzionale
+    \appendix
+    %\input{allegati}
+
+\end{document}

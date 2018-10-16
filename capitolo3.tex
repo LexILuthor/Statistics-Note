@@ -1,0 +1,255 @@
+\chapter{Likelihood Function}
+\label{cha:likf}
+\vspace{15pt}
+
+
+
+The \textit{likelihood function} is a function that contains all the statistical information required to make inference.\\
+\begin{defi}
+	Consider a random sample  $(X_1...X_n)$ from $ X \sim f_X(X; \theta)$, then the distribution of $(X_1..X_n)$ will be:
+	$$f_{\underline X}(\underline x;\theta)=\prod_{i=1}^{n}f_{X_i}(x_i;\theta)$$
+	when we see $f_{\underline X}(\underline x;\theta)$ as a function of $\theta$ for fixed $\underline x$, is the \textit{likelihood function}
+	$$\mathcal{L}(\theta,\underline x)=\prod_{i=1}^{n}f_{X_i}(x_i;\theta)$$
+\end{defi}
+	An important function related to the likelihood function is the \textit{log likelihood function} 
+\begin{defi}
+	The $\log$ of the likelihood function is said \textit{log likelihood function}
+	$$V_n(\theta)=\log\mathcal{L}(\theta,\underline x)=\log \bigg( \prod_{i=1}^{n}f_{X_i}(x_i;\theta) \bigg)=\sum_{i=1}^{n}\log( f_{X_i}(x_i;\theta))$$
+\end{defi}
+\begin{defi}\label{defi:scoref}
+	\textit{Score function}:
+	$$V'_n=\frac{d}{d \theta}V_n(\theta)=\frac{\mathcal{L}'(\theta, \ux)}{\mathcal{L}(\theta, \ux)}$$
+\end{defi}
+Note that if we fix $\theta$ then $\mathcal{L}(\theta,\underline x)$ is (related to) the probability that the particular value we fixed for $\theta$ has generated $\underline x$.\\
+Suppose we fix two value $\theta,\theta_2\in \Theta$ and 
+$$\mathcal{L}(\theta_1,\underline x)>\mathcal{L}(\theta_2,\underline x)$$
+we say that $\ux$ \textit{"more likely"} generate under $\theta_1$.\\
+Note that the same meaning is conserved with the log likelihood function.\\
+It is because of that we usually search for the max of the likelihood function. Usually to find it we just derive, but sometimes $\mathcal{L}$ is not regular enough so we have to \textit{"regularize"}.
+\section{Likekihood principles}
+he statistical inference based on the likelihood function is a consequence of two principles.
+\begin{enumerate}
+	\item \textbf{Week likelihood principle:} for a fixed parametric model $X\sim F_X(x,\theta)$ if two observed samples $\ux$ and $ \underline{y}$ are such that $$\mathcal{L}(\theta,\underline x) \propto \mathcal{L}(\theta,\underline y)$$ 
+	then the two likelihood functions are equivalent i.e. sample must produce the same inference result on $\theta$.
+	\item \textbf{Strong likelihood principle:} let $\ux$ be an observed sample under the model $X\sim F_X(x,\theta)$ with likelihood function $\mathcal{L}(\theta,\underline x)$ and let $\underline y$ be an observed sample under the model $X\sim F_Y(y,\theta)$ with likelihood function $\mathcal{L}(\theta,\underline y)$, if $\mathcal{L}(\theta,\underline x) \propto \mathcal{L}(\theta,\underline y)$ the the two samples provides with the same inference.\\
+	The fundamental difference between \textit{Probability} and \textit{Statistic} is that in the first one the goal is to find the chance of a \rv \ to take a particular value, statistic instead given the results of a experiment, try to find the distribution where it came from.\\
+	\begin{eg}
+		Take $(X_1,X_2,X_3)$ from one of the following distribution:
+		\begin{enumerate}
+			\item $X\sim Ber(\theta_1), \theta_1=\frac{1}{2}$
+			\item $X\sim Ber(\theta_2), \theta_2=\frac{1}{3}$
+			\item $X\sim Ber(\theta_3), \theta_3=\frac{1}{4}$
+		\end{enumerate}
+	$X\in [0,1]$ $\Theta = [0,1]$.\\
+	We can imagine $(x_1,x_2,x_3)$ as the results of a experiment where we had to flip a coin 3 times. Now we want to know the parameter $\theta$ of the coin we flipped tree times.
+	\\So $(x1,x_2,x_3)\in \{0 ,1 \}^3$
+	
+	\begin{center}
+		\begin{tabular}{ | c | c | c | c | }
+			\hline
+			$x_1,x_2,x_3$ & $\theta_1 \frac{1}{2}$ & $\theta_2=\frac{1}{3}$ & $\theta_3=\frac{1}{4}$ \\ \hline
+			0,0,0 & $\frac{1}{8}$ & $\frac{8}{27}$ & $\frac{27}{64} \cdot$ \\ \hline
+			0,0,1 & $\frac{1}{8}$ & $\frac{4}{27} \cdot$ & $\frac{9}{64}$ \\ \hline
+			0,1,0 & $\frac{1}{8}$ & $\frac{4}{27} \cdot$ & $\frac{9}{64}$ \\ \hline
+			1,0,0 & $\frac{1}{8}$ & $\frac{4}{27} \cdot$ & $\frac{9}{64}$ \\ \hline
+			0,1,1 & $\frac{1}{8} \cdot$ & $\frac{2}{27}$ & $\frac{3}{64}$ \\ \hline
+			1,0,1 & $\frac{1}{8} \cdot$ & $\frac{2}{27}$ & $\frac{3}{64}$ \\ \hline
+			1,1,0 & $\frac{1}{8} \cdot$ & $\frac{2}{27}$ & $\frac{3}{64}$ \\ \hline
+			1,1,1 & $\frac{1}{8} \cdot$ & $\frac{1}{27}$ & $\frac{1}{64}$ \\
+			\hline
+		\end{tabular}
+	\end{center}
+	Once we know the result of the throw we will "guess" the value of $\theta$ choosing the one that give us more probability for the given result.
+	\end{eg}
+\end{enumerate}
+\section{Condition of Regularity}
+In our investigations on $\theta$ we will assume some condition of regularity for our model.\\
+Given $X\sim F_x(x,\theta)$
+\begin{enumerate}
+	\item we assume that $\theta \in \Theta$ where $\Theta$  is a open real set
+	\item for any $\theta \in \Theta$ there exist the  derivative of $\mathcal{L}(\theta;z)$ \wrt $\theta$ at least up to the third order
+	\item for any $\theta_0 \in \Theta$ there exist tree functions $g,h,H$ that are integrable in a neighborhood of $\theta_0$  and 
+	\begin{itemize}
+		\item $\bigg| \frac{d}{d\theta} f_X(x,\theta) \bigg|\leq g(x)$
+		\item $\bigg| \frac{d2}{d^2\theta} f_X(x,\theta) \bigg|\leq h(x)$
+		\item $\bigg| \frac{d^3}{d^3\theta} \log(f_X(x,\theta)) \bigg|\leq H(x)$
+	\end{itemize}
+	\item for any $\theta \in \Theta$
+	$$0<\e[(\log(\mathcal{L}(\theta, \uX)))^2]<\infty$$
+	(With $\uX$ we're tanking it as \rv).
+\end{enumerate}
+In addition there is the condition of identifiability.
+\begin{itemize}
+	\item[5.] We say that a statistical model is identifiable if for every  $\theta_1,\theta2$ there is al least one event $E$ such that:
+	$$\p(X\in E | \theta_1)\not =\p(X\in E | \theta_2)$$
+\end{itemize}
+(We will always take 5. as granted)
+\section{Properties of the Likelihood Function}
+\begin{prop}
+	\begin{enumerate}Some properties of the score function \ref{defi:scoref} are:
+		\item $\e[V_n'(\theta)]=0$
+		\item $Var(V_n'(\theta)=\e[(V_n'(\theta))^2])=- \e[V_n''(\theta)]$
+	\end{enumerate}
+\end{prop}
+\begin{proof}
+	\begin{enumerate}
+		\item 
+		\[
+			\begin{split}
+			\e[V_n'(\theta)]
+			&=\int_{\mathbb{R}^n} V_n'(\theta)f_{\uX}(\ux, \theta) dx\\
+			&=\int_{\mathbb{R}^n}\frac{f_{\uX}'(\ux, \theta)}{f_{\uX}(\ux, \theta)}f_{\uX}(\ux, \theta)dx\\
+			&=\int_{\mathbb{R}^n} \frac{d}{d\theta}f_{\uX}(\ux, \theta))dx\\
+			&= \frac{d}{d\theta}\int_{\mathbb{R}^n}f_{\uX}(\ux, \theta))dx\\
+			&= \frac{d}{d\theta} 1\\
+			&=0
+			\end{split}
+		\]
+		Where in the in the fourth equal we used Leibniz and for the fifth recall that $f_{\uX}(\ux, \theta)$ is the PDF of $\uX$
+		\item Start by showing that $V_n''(\theta)=V_n''(\theta)=\frac{f_{\uX}''(\ux;\theta)}{f_{\uX}(\ux;\theta)}-\bigg( \frac{f_{\uX}'(\ux;\theta)}{f_{\uX}(\ux;\theta)} \bigg)^2$
+		\[
+		\begin{split}
+		V_n''(\theta)
+		&=\frac{d^2}{d \theta^2} \mathcal{L}(\theta,ux)\\
+		&=\frac{d}{d\theta}\frac{f_{\uX}'(\ux;\theta)}{f_{\uX}(\ux;\theta)}\\
+		&=\frac{f_{\uX}''(\ux;\theta)f_{\uX}(\ux;\theta)-f_{\uX}'(\ux;\theta)f_{\uX}'(\ux;\theta)}{|f_{\uX}(\ux;\theta)|^2}\\
+		&=\frac{f_{\uX}''(\ux;\theta)}{f_{\uX}(\ux;\theta)}-\bigg( \frac{f_{\uX}'(\ux;\theta)}{f_{\uX}(\ux;\theta)} \bigg)^2\\
+		&=\frac{f_{\uX}''(\ux;\theta)}{f_{\uX}(\ux;\theta)}-(V_n'(\theta))^2
+		\end{split}		
+		\]
+		So now
+		\[
+		\begin{split}
+			\e[V_n''(\theta)]
+			&=\int_{\mathbb{R}^n}\frac{f_{\ux}''(\ux;\theta)}{f_{\ux}(\ux;\theta)}f_{\ux}(\ux;\theta)dx-\e[V_n'(\theta)^2]\\
+			&=\int_{\mathbb{R}^n}\frac{d^2}{d\sigma^2}f_{\uX}(\ux;\theta)dx-\e[V_n'(\theta)^2]\\
+			&=\frac{d^2}{d\sigma^2}\int_{\mathbb{R}^n}f_{\uX}(\ux;\theta)dx-\e[V_n'(\theta)^2]\\
+			&=-\e[V_n'(\theta)^2]
+		\end{split}
+		\]
+	\end{enumerate}
+\end{proof}
+
+\begin{defi}
+	we define the \textit{Fisher Information} as:
+	$$\ifn=-\e[V_n''(\theta)]$$
+\end{defi}
+Note that this is the definition of Fisher information just for a particular case, there exist a more general one.\\
+The Fisher information has a central role in statistic because it can be shown that for \textit{unbiased estimators} $\tilde \theta$ it holds: $Var(\tilde \theta)\geq \frac{1}{\ifn}$. So i we can find an estimator with  $Var(\tilde \theta)= \frac{1}{\ifn}$ we are sure that it is the one with the lowest variance.\\
+P\begin{prop}
+	Consider \rsf \  regular then
+	$$\ifn=n\mathcal{I}_1(\theta)$$
+\end{prop}
+\begin{eg}
+	Consider $(x_1...x_n)$ from $X\sim Ber(\theta)$
+	$$\lf = \prod_{i=1}^{n} f_{\underline{X_i}}(\underline{x_i};\theta)=\theta^{\sum_{i=1}^{n}x_i}(1-\theta)^{n-\sum_{i=1}^{n}x_i}$$
+	$$V_n(theta)=\log(\lf)=\log(\theta)\sum_{i=1}^{n}x_i+(\log(1-\theta))\bigg(n-\sum_{i=1}^{n}x_i\bigg)$$
+	$$V_n'(\theta)=\frac{\sum_{i=1}^{n}x_i}{\theta}-\frac{n- \sum_{i=1}^{n}x_i}{1-\theta}$$
+	$$V_n''(\theta)=\frac{-\sum_{i=1}^{n}x_i}{\theta^2}-\frac{-\sum_{i=1}^{n}x_i}{(1-\theta)^2}$$
+	\[
+	\begin{split}
+	\e[V_n(\theta)]
+	&	=\frac{1}{\theta}\sum_{i=1}^{n}\e[x_i]-\frac{1}{1-\theta}\bigg( n- \sum_{i=1}^{n}\e[x_i]\bigg)\\
+	&=\frac{n\not \theta}{\not \theta}-\frac{1}{1-\theta}(n-n\theta)\\
+	&=n-n=0
+	\end{split}
+	\]
+	\[
+	\begin{split}
+		[V_n''(\theta)]
+		&=-\frac{1}{\theta}\sum_{i=1}^{n}\e[X_i]-\frac{1}{1-\theta}\bigg( n- \sum_{i=1}^{n}\e[X_i] \bigg)\\
+		&=-\frac{n\theta}{\theta^2}-\frac{n-n\theta}{(1-\theta)^2}\\
+		&=-\frac{n}{\theta}-\frac{n(1-\theta)}{(1-\theta)^2}\\
+		&=-\frac{n\theta}{(1-\theta)\theta}
+	\end{split}
+	\]
+	\[
+	\begin{split}
+	\ifn
+	&=-\e[V_n''(\theta)]\\
+	&=\frac{n}{(1-\theta)\theta}
+	\end{split}
+	\]
+\end{eg}
+
+\section{Exponential Families}
+\begin{defi}
+	We say that the distribution of a \rv is an element of an \textit{Exponential Family}	$X\sim EF(\theta)$ if its PDF can be written as follow:
+	$$f_X(x;\theta)=\exp \{ Q(\theta)A(x)+ C(x) -k(\theta) \}$$
+\end{defi}
+
+\begin{defi}
+	We say that the distribution of a \rs $(x_1...x_n)$ from $X\sim EF(\theta)$ is an element of an \textit{Exponential Family}	$X\sim EF(\theta)$ if its PDF can be written as follow:
+	$$\lfd=\exp \{ Q(\theta)\sum_{i=1}^{n}A(x_i)+ \sum_{i=1}^{n} C(x_i) -nK(\theta) \}$$
+\end{defi}
+\begin{eg}
+	$X\sim Ber(\theta),X\in\{0,1\}, \Theta=(0,1)$
+	\[
+	\begin{split}
+	P_X(x)
+	&=\theta^x (1\theta)^{1-x}\mathbbm{1}_{\{0,1\}}(x)\\
+	&=\exp\{x\ln(\theta)+(1-x)\ln(1-\theta)  \}\\
+	&=\exp\{x\ln(\theta)+\ln(1-\theta)-x\ln(1-\theta)  \}\\
+	&=\exp\bigg\{xln{\bigg(\frac{\theta}{1-\theta}\bigg)}+\ln(1-\theta)\bigg\}
+	\end{split}
+	\]
+	so we get 
+	\begin{itemize}
+		\item[$Q(\theta)$]$=\ln\bigg( \frac{\theta}{1-\theta} \bigg)$
+		\item[$A(x)$]$=x$
+		\item[$C(x)$]$=0$
+		\item[$K(\theta)$]$=-\ln(1-\theta)$
+	\end{itemize}
+	Note that for $K(\theta)$ we had to put a $-$because in the definition we have $-K$.
+\end{eg}
+
+\begin{prop}
+	Let $X\sim EF(\theta)$ then
+	\begin{enumerate}
+		\item $\e[A(X)]=\frac{K'(\theta)}{Q'(\theta)}$
+		\item $Var(A(X))=\frac{K(\theta)}{(Q'(\theta))^2}-\frac{Q''(\theta)}{(Q'(\theta))^2}\frac{K'(\theta)}{Q'(\theta)}$
+	\end{enumerate}
+\end{prop}
+Note that this proposition gives us only the expectation and variance for $A(X)$, but it is not a problem because usually $A(X)=X$.
+\begin{proof}
+	\begin{enumerate}
+		\item because the exponential family is regular we can use Leibniz so \[
+		\begin{split}
+		0
+		&=\frac{d}{d\theta} 1\\
+		&=\frac{d}{d\theta}\int f_X(x;\theta)dx\\
+		&=\int \frac{d}{d\theta} f_X(x;\theta)dx\\
+		&=\int (A(x)Q'(\theta)-K'(\theta))f_X(x;\theta)dx\\
+		&=Q'(\theta)\int A(x) f_X(x;\theta)dx-K'(\theta)\int f_X(x;\theta)dx\\
+		&=Q'(\theta)\e[A(X)]-K'(\theta)
+		\end{split}
+		\]
+		\[\implies \e[A(X)]=\frac{K'(\theta)}{Q'(\theta)}\]
+		\item because the exponential family is regular we can use Leibniz so
+		\[
+		\begin{split}
+		0
+		&=\frac{d^2}{d\theta^2}\int f_X(x;\theta)\\
+		&=\int \frac{d^2}{\theta^2} f_X(x;\theta)\\
+		&=\int (A(x)Q''(\theta)-K''(\theta))f_X(x;\theta)+(A(x)Q'(\theta)-K'(\theta))^2f_X(x;\theta)dx\\
+		&=Q''(\theta)\e[A(X)]-K''(\theta)+(Q'(\theta))^2\int \bigg( A(x)-\frac{K'(\theta)}{Q'(\theta)} \bigg)^2 f_X(x;\theta)dx\\
+		&=Q''(\theta)\frac{K'(\theta)}{Q'(\theta)}-K''(\theta)+(Q'(\theta))^2\int ( A(x)-\e[A(X)] )^2 f_X(x;\theta)dx\\
+		&=Q''(\theta)\frac{K'(\theta)}{Q'(\theta)}-K''(\theta)+(Q'(\theta))^2Var(A(X))\\
+		\end{split}
+		\]
+		\[
+		\implies Var(A(X))=\frac{K(\theta)}{(Q'(\theta))^2}-\frac{Q''(\theta)}{(Q'(\theta))^2}\frac{K'(\theta)}{Q'(\theta)}=\frac{K(\theta)}{(Q'(\theta))^2}-\frac{Q''(\theta)}{(Q'(\theta))^2}\e[A(X)]
+		\]
+	\end{enumerate}
+\end{proof}
+\begin{oss}
+	If $Q(\theta)=\theta$ we get$$\e[A(X)]=K'(\theta)$$
+	$$Var(A(X))=K''(\theta)$$
+\end{oss}
+\section{Natural Exponential Families}
+\begin{defi}
+	We say that the distribution of a \rs $(x_1...x_n)$ from $X\sim NEF(\theta)$ is an element of a \textit{Natural Exponential Family}	$X\sim NEF(\theta)$ if its PDF can be written as follow:
+	$$f_X(x;\nu)=\exp \{ \nu x + C(x) -K(\nu) \}$$
+\end{defi}
+
+

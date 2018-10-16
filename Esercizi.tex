@@ -1,0 +1,291 @@
+\chapter{Exercises}
+\label{cha:ex}
+\vspace{15pt}
+\begin{ex}
+	Let $X_1$ an $X_2$ two \rv s independent and uniformly distributed on the interval $[0,1]$. Find the distribution of:
+	\begin{enumerate}
+		\item $Y=X_1+X_2$
+		\item $W=\frac{X_1}{X_2}$
+		\item $Z=X_1X_2$
+	\end{enumerate}
+	
+	
+	\textit{Solution:}
+	\begin{enumerate}
+		\item Let's start with the sum of two generic \rv s:\\
+		we know that $f_{Y|X_1}(y|x_1)=f_{X_2}(y-x)$ and the joint distribution on two random variables is:
+		\[
+		f_{X_1,Y}(x_1,y)=f_{Y|X_1}(y|x_1)f_{X_1}(x_1)
+		\]
+		so in our case:
+		\[
+		f_{X_1,Y}(x_1,y)=f_{X_2}(y-x_1)f_{X_1}(x_1)
+		\]
+		and now we can calculate the PDF of $Y$ simply by integrating the PDF of the joint distribution:
+		\[
+		\begin{split}
+		f_{Y}(y)
+		&=\int_{- \infty}^{\infty}f_{X_1,Y}(x_1,y)dx_1\\
+		&= \int_{- \infty}^{\infty}f_{X_2}(y-x_1)f_{X_1}(x_1)dx_1
+		\end{split}
+		\]
+		(For a more detailed analysis see the convolution product).\\
+		Now we can proceed replacing he generic PDF with the one of a uniform distribution on the interval $[0,1]$ is $\mathbbm{1}_{[0,1]}(t)$, we have:
+		\[
+		\begin{split}
+		f_{Y}(y)
+		&= \int_{- \infty}^{\infty}\mathbbm{1}_{[0,1]}(y-x_1)\mathbbm{1}_{[0,1]}(x_1)dx_1\\
+		&= \int_{0}^{1}\mathbbm{1}_{[0,1]}(y-x_1)dx_1
+		\end{split}
+		\]
+		and by separating the integral in various cases we can solve it obtaining:
+		\[
+		f_{Y}(y)=
+		\begin{cases}
+		0 \ \  if \ y < 0 \\
+		y \ \  if \  y\in[0,1]\\
+		2-y \ if \  y\in(1,2]\\
+		0 \ \ if \  y>2
+		\end{cases}
+		\]
+		\item for the distribution of $W$ we will use the CDF function:\\
+		fir of all it is easy to prove that for$w\leq 0,F_W(w)=0$, so in the next passage we can assume $w>0$ 
+		\[
+		\begin{split}
+		F_W(w)
+		&=\p [W<w]\\
+		&=\p[\frac{X_2}{X_1}<w]\\
+		&=\p[\frac{X_2}{X_1}<w,X_1>0]+\p[\frac{X_2}{X_1}<w,X_1<0]\\
+		&=\p[X_2<X_1w,X_1>0]+0\\
+		&=\int_{0}^{\infty}f_{x_1}(x_1)\int_{-\infty}^{wx_1}f_{x_2}(x_2)dx_2dx_1\\
+		&=\int_{0}^{\infty}\mathbbm{1}_{[0,1]}(x_1)\int_{-\infty}^{wx_1}\mathbbm{1}_{[0,1]}(x_2)dx_2dx_1\\
+		&=\int_{0}^{1}	\begin{cases}
+		1 \ \ \ \ \  if \ wx_1>1 \\
+		wx_1 \ \  if \  wx_1<1
+		\end{cases}dx_1\\
+		&=\begin{cases}
+		\int_0^1 wx_1 dx \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ if \ w\leq 1\\
+		\int_{0}^{\frac{1}{w}} wx_1dx_1+\int_{\frac{1}{w}}^{1} 1\ dx_1 \ \  if \ w>1
+		\end{cases} \\
+		&=\begin{cases}
+		\frac{w}{2} \ \ \ if \ 0\leq w\leq 1\\
+		1-\frac{1}{2w} \ \  if \ w>1
+		\end{cases}
+		\end{split}
+		\]
+		\item for the distribution of $Z$ we will adopt a more straight forward approach an we will use the CDF function:
+		\[
+		\begin{split}
+		F_Z(z)
+		&=\p [Z<z]\\
+		&=\p[X_1X_2<z]\\
+		&=\p[X_1X_2<z,X_1>0]+\p[X_1X_2<z,X_1<0]\\
+		&=\p[X_2<\frac{z}{X_1},X_1>0]+0\\
+		&=\int_{0}^{\infty}f_{X_1}(x_1)\int_{-\infty}^{z/x_1}f_{X_2}(x_2)dx_2 dx_1\\
+		&=\int_{0}^{\infty}\mathbbm{1}_{[0,1]}(x_1)\int_{-\infty}^{z/x_1}\mathbbm{1}_{[0,1]}(x_2)dx_2 dx_1\\
+		&=\int_{0}^{\infty} \mathbbm{1}_{[0,1]}(x_1)
+		\begin{cases}
+		1 \ \ \ \  if \ \frac{z}{x_1}>1 \\
+		\frac{z}{x_1} \ \  if \  \frac{z}{x_1}<1
+		\end{cases}dx_1\\
+		&=\int_{0}^{1}
+		\begin{cases}
+		1 \ \ \ \  if \ \frac{z}{x_1}>1 \\
+		\frac{z}{x_1} \ \  if \  \frac{z}{x_1}<1
+		\end{cases}dx_1\\
+		&=\begin{cases}
+		\int_{0}^{z}1\ dx_1+ \int_{z}^{1} \frac{z}{x_1} dx_1 \ \  if  \ z<1 \\
+		\int_0^1 1 \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ if \ z \geq 1
+		\end{cases}\\
+		&=\begin{cases}
+		z-z\ln(z) \  \   if \  0<z<1\\
+		1 \ \ \ \ \ \ \ \ \ \ \ \ \ if \ \ z\geq 1
+		\end{cases}.
+		\end{split}
+		\]
+	\end{enumerate}
+\end{ex}
+
+\begin{ex}
+	Consider $X_1,X_2,X_3$ tree \rv s \iid with distribution $\sim Exp(\frac{1}{2})$.\\
+	Find the distribution of:
+	\begin{enumerate}
+		\item $U=\frac{X_2}{X_1}$
+		\item $W=\sum_{i=1}^{3}X_1$
+	\end{enumerate}
+	(in this exercise we will consider the PDF of the exponential $f_X=\lambda e^{-\lambda x}$).
+
+\textit{Solution:}
+\begin{enumerate}
+	\item For the distribution of $U$ we will use the CDF function:\\
+	first of all it is easy to prove that for$u\leq 0,F_U(u)=0$, so in the next passage we can assume $u>0$ 
+	\[
+	\begin{split}
+	F_(u)
+	&=\p [U<u]\\
+	&=\p[\frac{X_2}{X_1}<u]\\
+	&=\p[\frac{X_2}{X_1}<u,X_1>0]+\p[\frac{X_2}{X_1}<u,X_1<0]\\
+	&=\p[X_2<X_1u,X_1>0]+0\\
+	&=\int_{0}^{\infty}f_{x_1}(x_1)\int_{-\infty}^{ux_1}f_{x_2}(x_2)dx_2dx_1\\
+	&=\int_{0}^{\infty}\lambda e^{-\lambda x_1}\int_{0}^{ux_1}\lambda e^{-\lambda x_2}dx_2dx_1\\
+	&=\int_{0}^{\infty}\lambda e^{-\lambda x_1}(1-e^{-\lambda ux_1})x_1\\
+	&=1-\frac{1}{1+u}
+	\end{split}
+	\]
+	\item Here we will use the moment-generating function to demonstrate that $W\sim Gamma(\alpha =3, \beta=\frac{1}{2})$.\\
+	The the moment-generating function of the exponential with parameter $2$ is: $M_X(t)=\frac{\frac{1}{2}}{\frac{1}{2}-t}$.
+	\[
+	\begin{split}
+	M_W(t)
+	&=\e [e^{wt}]\\
+	&=\e [e^{\sum_{i=1}^{3}X_it}]\\
+	&=\e [\prod_{i=1}^{3}e^{X_it}]\\
+	&=\prod_{i=1}^{3} \e [e^{X_it}]\\
+	&=\prod_{i=1}^{3} \frac{\frac{1}{2}}{\frac{1}{2}-t} \\
+	&=\bigg( \frac{\frac{1}{2}}{\frac{1}{2}-t} \bigg) ^3\\
+	&=\bigg( \frac{\frac{1}{2}-t}{\frac{1}{2}} \bigg)^{-3}\\
+	&=\bigg( 1-\frac{t}{\frac{1}{2}} \bigg)^{-3}
+	\end{split}
+	\]
+	which is the MGF of a $Gamma\big( 3,\frac{1}{2} \big)$
+\end{enumerate}
+\end{ex}
+\begin{ex}
+	Let $(X,Y)$ be a bivariate \rv such that $X\sim U(-1,1)$ and $Y|X\sim U(x,x+1)$. Find he distribution of $Z=-\ln(Y-X)$
+
+\textit{Solution:}
+\[
+\begin{split}
+\p (Z<z)
+&=\p (-log(X-Y)<t)\\
+&=\p(log(X-Y)\geq z)\\
+&=\p(Y\geq X+ e^{-z})\\
+&=\int_{-1}^{1}\int_{x+e^{-z}}^{x+1} \frac{1}{2} dxdy\\
+&=1-e^{-z}
+\end{split}
+\]
+Which is the distribution function of neg exp
+\end{ex}
+\begin{ex}
+	Let $A,B$ be two \iid \rv s with distribution $\sim U(0,h)$. Compute the probability that the equation $Z^2 -2AZ+B=0$ doesn't admit real solutions.
+
+\textit{Solution:}
+We are asked to compute $\p(A^2-B<0)$.
+\end{ex}
+\begin{ex}
+	Let $X\sim Gamma(r,1), Y\sim Gamma(s,1)$ independent \rv s. Find the distribution of
+	\begin{enumerate}
+		\item $W:=X+Y$
+		\item $Z:=\frac{X}{W}$
+		\item $(Z,w)$
+	\end{enumerate}
+
+\textit{Solution:}
+Did in class.
+\end{ex}
+\begin{ex}
+	Let $X_1,X_2,X_3$ \rv s with distribution:
+	\begin{itemize}
+		\item $X_1 \sim Gamma (\alpha_1,1)$
+		\item $X_2 \sim Gamma (\alpha_2,1)$
+		\item $X_3 \sim Gamma (\alpha_3,1)$
+	\end{itemize}
+	Define:
+	\begin{itemize}
+		\item $Z=\frac{X_1}{X_1+X_2+X_3}$
+		\item $W=\frac{X_2}{X_1+X_2+X_3}$
+	\end{itemize}
+	Find the distribution of $(Z,W)$
+
+
+
+For this exercise we will use the theorem on page 165 of \cite{Casella}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\iffalse
+For this exercise we will use the following theorem:
+
+\begin{teo}
+	Let $n\leq N$ positive integers, $C \subset \mathbb{R}^{n}$ a compact, $\phi:C\to \mathbb{R}^N$ a $(n,N)$ regular parametrization and $f:\phi (C)\to \mathbb{R}$ a continuous function, then:
+	$$\int_{\phi(C)} f d\mathcal{H}^n= \int_{C}(f \circ \phi) J_{\phi}d \mathcal{L}^n$$
+	Where
+	$$J_{\phi}:=(det[D_{\phi}^T \times D_{\phi}])^{1/2}\not = 0$$
+\end{teo}
+${H}^n$ and $\mathcal{L}^n$ indicates the Hausdorff and Lebesgue function and
+\[
+D_{\phi}=\begin{bmatrix}
+\frac{\partial \phi_1}{\partial x_1} & \dots  & \frac{\partial \phi_1}{\partial x_n} \\
+\vdots &  \ddots & \vdots \\
+\frac{\partial \phi_N}{\partial x_1} &  \dots  & \frac{\partial \phi_N}{\partial x_n}
+\end{bmatrix}	
+\]
+$$\phi (W,Z,S)=(ZS,WS,S-S(Z+W))$$
+
+\fi
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\textit{Solution:}
+To have a $(3,3)$ parametrization we will add another \rv $S:=X_1+X_2+X_3$.
+Consider the parametrization
+\begin{itemize}
+\item $X_1=ZS$
+\item $X_2=WS$
+\item $X_3=S-S(Z+W)$
+\end{itemize}
+The Jacobian matrix is defined as:
+\[J:=\begin{bmatrix}
+\frac{\partial \phi_1}{\partial x_1} & \dots  & \frac{\partial \phi_1}{\partial x_n} \\
+\vdots &  \ddots & \vdots \\
+\frac{\partial \phi_N}{\partial x_1} &  \dots  & \frac{\partial \phi_N}{\partial x_n}
+\end{bmatrix}	
+\]
+in our situation then:
+\[
+|J|=\Bigg| \begin{bmatrix}
+S & 0  & Z \\
+0 &  S & W \\
+-S &  -S  & 1-Z-W
+\end{bmatrix}	
+\Bigg|=S^2
+\]
+So by the previous theorem we have:
+\[f_{Z,W,S}(z,w,s) = f_{X_1,X_2,X_3}(zs,ws,s-s(z+w)) |J|
+\]
+Remembering that $X_1,X_2,X_3$ are independent then $f_{X_1,X_2,X_3}(zs,ws,s-s(z+w))=f_{X_1}(zs)f_{X_2}(ws)f_{X_3}(s-s(z+w))$
+so
+\[
+\begin{split}
+f_{Z,W,S}(z,w,s)
+& =f_{X_1}(zs)f_{X_2}(ws)f_{X_3}(s-s(z+w))s^2\\
+&=\frac{(zs)^{\alpha_1-1}(ws)^{\alpha_2-1}(s-s(z+w))^{\alpha_3-1}e^{- s}}{\Gamma(\alpha_1)\Gamma(\alpha_2)\Gamma(\alpha_3)} s^2 \mathbbm{1}_{[\min(zs,ws,s-s(z+w)),\infty)}(0)\\
+&=\frac{z^{\alpha_1-1}w^{\alpha_2-1} (1-(z+w))^{\alpha_3-1}}{\Gamma (\alpha_1)\Gamma (\alpha_2)\Gamma (\alpha_3)}s^{\alpha_1+\alpha_2+\alpha_3-1} e^{-s}
+\end{split}
+\]
+Notice that the second member is the kernel of a Gamma distribution with parameters $\alpha_1+\alpha_2+\alpha_3, 1$.\\
+We know that $s\geq 0$ so $\min(zs,ws,s-s(z+w))$ has the same sign of $\min(z,w,1-(z+w))$.\\
+To get the distribution of $Z,W$ we have to integrate $f_{Z,W,S}(z,w,s)$ with respect to $s$:
+\[
+\begin{split}
+f_{Z,W}(z,w)
+&=\int_{0}^{\infty}f_{Z,W,S}(z,w,s)\mathbbm{1}_{[\min(z,w,1-(z+w)),\infty)}(0)ds\\
+&=\mathbbm{1}_{[\min(z,w,1-(z+w)),\infty)}(0)\int_{0}^{\infty}\frac{z^{\alpha_1-1}w^{\alpha_2-1} (1-(z+w))^{\alpha_3-1}}{\Gamma (\alpha_1)\Gamma (\alpha_2)\Gamma (\alpha_3)}s^{\alpha_1+\alpha_2+\alpha_3-1} e^{-s}ds\\
+&=\mathbbm{1}_{[\min(z,w,1-(z+w)),\infty)}(0)\frac{z^{\alpha_1-1}w^{\alpha_2-1} (1-(z+w))^{\alpha_3-1}}{\Gamma (\alpha_1)\Gamma (\alpha_2)\Gamma (\alpha_3)} \int_{0}^{\infty}s^{\alpha_1+\alpha_2+\alpha_3-1} e^{-s}ds\\
+&=\frac{z^{\alpha_1-1}w^{\alpha_2-1} (1-(z+w))^{\alpha_3-1}}{\Gamma (\alpha_1)\Gamma (\alpha_2)\Gamma (\alpha_3)}\Gamma(\alpha_1+\alpha_2+\alpha_3)\mathbbm{1}_{[\min(z,w,1-(z+w)),\infty)}(0)
+\end{split}
+\]
+\end{ex}
+\begin{ex}
+	Show that the moment generating function of a \rv $X\sim NEF(\nu)$ is
+	$$\e[e^{sx}]=e^{K(s+\nu)-K^\nu}$$
+\textit{Solution:}
+\[
+\begin{split}
+e[e^{sx}]
+&=\int e^{sx}e^{x\nu+C(x)-K(\nu)}dx=\int e^{x(s+\nu)+C(x)+K(s+\nu)-K(s+\nu)-K(\nu)}dx\\
+&=e^{K(s+\nu)-K(\nu)}\int e^{x(s+\nu)+C(x)-K(s+\nu)}dx\\
+&=e^{K(s+\nu)-K(\nu)} 1\\
+&=e^{K(s+\nu)-K(\nu)}
+	\end{split}
+	\]
+\end{ex}

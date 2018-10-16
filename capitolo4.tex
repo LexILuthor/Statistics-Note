@@ -1,0 +1,84 @@
+\chapter{Statistics}
+\vspace{15pt}
+
+
+
+The notation of statistic was introduced by fisher (1920).\\
+The importance of sufficiency is that ot can be found in any statistical decision (point estimation, testing, confidential bound)
+\begin{defi}
+	Let $X=(X_1... X_n)$ be a random sample from a parametric model $X\sim f_X(x,\theta)$ for some $\theta \in \Theta$ unknown.\\
+	We say that $T_n=T(X)$ \textbf{sufficient for the parameter $\theta$} if the conditional distribution of $X$ given $T_n$ does not depend of $\theta$ i.e.
+	\begin{itemize}
+		\item $f_{\uX|T_n=t}(X;t,\theta)$ conditional distribution of $\uX$ given $T_n$
+		\item $h_{\uX,T_n}(z,t,\theta)$ joint distribution of $\uX$ and $T_n$
+		\item $g_{T_n}(t,\theta)$ marginal distribution of $T_n$
+	\end{itemize}
+then $T_n$ is \textbf{sufficient for the parameter $\theta$} only if $f_{\uX|T_n=t}(X;t,\theta)$ does not depend of $\theta$.\\
+Note that
+\[
+f_{\uX|T_n=t}(X;t,\theta)=\frac{h_{\uX,T_n}(z,t,\theta)}{g_{T_n}(t,\theta)}
+\]
+\end{defi}
+\begin{eg} \label{eg:ber}
+	$(X_1... X_n)\in \{0,1\}^n$ from a $Ber(\theta)$, $\theta \in (0,1)$.\\
+	Define $T_n=\sum_{i=1}^{n}X_i$ then we want to verify if $T_n$ is sufficient.\\
+	\begin{itemize}
+		\item $f_{\uX}(\ux;\theta) = \prod_{i=1}^{n} f_{\underline{X_i}}(\underline{x_i};\theta)=\theta^{\sum_{i=1}^{n}x_i}(1-\theta)^{n-\sum_{i=1}^{n}x_i}$
+		\item$g_{T_n}(t,\theta)={{n}\choose{t}}\sigma^t(1-\sigma)^{n-t}\mathbbm{1}_{0,1...n}(t)$
+		\item$h_{\uX,T_n(z,t,\theta)}\p(\uX=\ux,T_n=t)=\sigma^t(1-\sigma)^{n-t}$
+	\end{itemize}
+	so 
+	$$f_{\uX|T_n=t}=\frac{\sigma^t(1-\sigma)^{n-t}}{{{n}\choose{t}}\sigma^t(1-\sigma)^{n-t}}=\frac{1}{{{n}\choose{t}}}$$
+	So $T_n$ is a sufficient statistic for $\theta$.\\
+	This is a really special case because all the $X_i$ are already in function of $T_n$.
+\end{eg}
+
+\begin{oss}
+	If $T_n$ is sufficient for $\theta$ then all the statistical information of $\theta$ is contained in the random sample relocated in $T_n$. In the example above we just need $\sum_{i=1}^{n}X_i$.\\
+\end{oss}
+\begin{oss}
+	The notation of sufficiency derive from the probability structure of the parametric family $X\sim f_X(x;\theta)$ We can talk about sufficiency for a parameter $\theta$ only after we have specified $X\sim f_X(x;\theta)$
+\end{oss}
+The definition of sufficiency based on conditional probability is not of practical use because we need this two distributions $
+\begin{cases}
+g_{T_n}(\cdot)\\
+h_{\uX,T_n}(\cdot,\cdot)
+\end{cases}
+$ that can be difficult to find.
+To avoid that there is a corollary of the \textit{Fisher Factorization Theorem}:
+\begin{corol}
+	Let $\uX=(X_1... X_n)$ from $X\sim f_x(x,\theta)$. Then a statistic $T_n$ is sufficient for $\theta$ if and only if there exist two non negative functions $g(\cdot), h(\cdot)$ such that $\lf=g(T(\uX);\theta)h(\uX)$
+\end{corol}
+\begin{oss}
+	\begin{itemize}
+		\item $g$ is a function of the observed sample via $T_n$
+		\item $h$ is a function of the observed sample and does not depend on $\theta$
+ 	\end{itemize}
+\end{oss}
+\begin{eg}
+	Recall The example \ref{eg:ber} 
+		$(X_1... X_n)\in \{0,1\}^n$ from a $Ber(\theta)$, $\theta \in (0,1)$.\\
+	Define $T_n=\sum_{i=1}^{n}X_i$ then we want to verify if $T_n$ is sufficient.
+	\begin{itemize}
+	 \item $f_{\uX}(\ux;\theta) = \prod_{i=1}^{n} f_{\underline{X_i}}(\underline{x_i};\theta)=\theta^{\sum_{i=1}^{n}x_i}(1-\theta)^{n-\sum_{i=1}^{n}x_i}$\\
+	\item $h(\uX)=1$
+	\item$g(T_n(\uX),\theta)=\theta^{\sum_{i=1}^{n}x_i}(1-\theta)^{n-\sum_{i=1}^{n}x_i}$
+	\end{itemize}
+\end{eg}
+\begin{eg}
+		$(X_1... X_n)\in \{0,1\}^n$ from a $N(\theta,1)$. We want to verify that $T_n=\sum_{i=1}^{n} X_i$ is a sufficient statistic
+		\[
+		\begin{split}
+			\lf
+			&=\prod_{i=1}^{n}\frac{1}{\sqrt{2 \pi}} \exp \bigg\{ -\frac{1}{2} (x_i-\theta)^2 \bigg\}\\
+			&=(2\pi)^{-n/2}\exp \bigg\{ -\frac{1}{2} \sum_{i=1}^{n}(x_i-\theta)^2 \bigg\}\\
+			&=(2\pi)^{-n/2}\exp \bigg\{ -\frac{1}{2} \sum_{i=1}^{n}x_i^2- \frac{n\theta^2}{2}+\theta\sum_{i=1}^{n} x_i \bigg\}\\
+			&=(2\pi)^{-n/2}\exp \bigg\{ -\frac{1}{2} \sum_{i=1}^{n}x_i^2 \bigg\} \exp \bigg\{- \frac{n\theta^2}{2}+\theta\sum_{i=1}^{n} x_i \bigg\}
+		\end{split}
+		\]
+		so
+		\begin{itemize}
+			\item $h(x)=\exp \bigg\{ -\frac{1}{2} \sum_{i=1}^{n}x_i^2 \bigg\}$
+			\item $g(\sum_{i=1}^n,\theta) = \exp \bigg\{- \frac{n\theta^2}{2}+\theta\sum_{i=1}^{n} x_i \bigg\}$
+		\end{itemize}
+\end{eg}
