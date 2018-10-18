@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018/W32TeX) (preloaded format=pdflatex 2018.9.27)  17 OCT 2018 01:17
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018/W32TeX) (preloaded format=pdflatex 2018.9.27)  17 OCT 2018 19:37
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1351,11 +1351,32 @@ Underfull \hbox (badness 10000) in paragraph at lines 63--64
  []
 
 Package hyperref Info: Anchor `eg.4.0.3' on input line 69.
-)
-Package hyperref Info: Anchor `page.24' on input line 222.
- [24
+Package hyperref Info: Anchor `teo.4.0.1' on input line 86.
+Package hyperref Info: Reference (link) `corol.4.0.1' on input line 94.
+Package hyperref Info: Anchor `corol.4.0.2' on input line 95.
+
+Underfull \hbox (badness 10000) in paragraph at lines 100--102
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 102--104
+
+ []
+
+Package hyperref Info: Anchor `page.24' on input line 108.
+[24
 Package `hyperref' Info: End of reference (link) `eg.4.0.1', line 59.
-] (./Esercizi.tex
+Package `hyperref' Info: End of reference (link) `corol.4.0.1', line 94.
+]
+Package hyperref Info: Anchor `eg.4.0.4' on input line 140.
+Package hyperref Info: Reference (link) `eg.4.0.3' on input line 140.
+Package hyperref Info: Anchor `page.25' on input line 154.
+ [25
+Package `hyperref' Info: End of reference (link) `eg.4.0.3', line 140.
+])
+Package hyperref Info: Anchor `page.26' on input line 222.
+ [26] (./Esercizi.tex
 Package hyperref Info: Anchor `chapter.5' on input line 1.
 
 Chapter 5.
@@ -1371,19 +1392,19 @@ Package hyperref Info: Anchor `Item.33' on input line 8.
 Package hyperref Info: Anchor `Item.34' on input line 9.
 Package hyperref Info: Anchor `Item.35' on input line 15.
 Package hyperref Info: Anchor `Item.36' on input line 51.
-Package hyperref Info: Anchor `page.25' on input line 75.
-[25]
+Package hyperref Info: Anchor `page.27' on input line 75.
+[27]
 Package hyperref Info: Anchor `Item.37' on input line 76.
 Package hyperref Info: Anchor `ex.2' on input line 110.
 Package hyperref Info: Anchor `Item.38' on input line 113.
 Package hyperref Info: Anchor `Item.39' on input line 114.
-Package hyperref Info: Anchor `page.26' on input line 118.
- [26]
+Package hyperref Info: Anchor `page.28' on input line 118.
+ [28]
 Package hyperref Info: Anchor `Item.40' on input line 120.
 Package hyperref Info: Anchor `Item.41' on input line 135.
 Package hyperref Info: Anchor `ex.3' on input line 154.
-Package hyperref Info: Anchor `page.27' on input line 166.
- [27]
+Package hyperref Info: Anchor `page.29' on input line 166.
+ [29]
 Package hyperref Info: Anchor `ex.4' on input line 170.
 Package hyperref Info: Anchor `ex.5' on input line 176.
 Package hyperref Info: Anchor `Item.42' on input line 178.
@@ -1403,8 +1424,8 @@ Overfull \hbox (17.65865pt too wide) in paragraph at lines 254--257
  (\OML/cmm/m/it/10.95 s \OMS/cmsy/m/n/10.95 ^^@
  []
 
-Package hyperref Info: Anchor `page.28' on input line 257.
-[28
+Package hyperref Info: Anchor `page.30' on input line 257.
+[30
 Package `hyperref' Info: End of reference (cite) `cite.Casella', line 202.
 ]
 Package hyperref Info: Anchor `ex.7' on input line 279.
@@ -1416,13 +1437,13 @@ Package hyperref Info: bookmark on input line 232:
 (hyperref)             toclevel {0}
 (hyperref)             type {toc}.
  (./cognome_nome_laurea_aa.bbl
-Package hyperref Info: Anchor `page.29' on input line 1.
- [29]
+Package hyperref Info: Anchor `page.31' on input line 1.
+ [31]
 Package hyperref Info: Anchor `chapter*.3' on input line 1.
 Package hyperref Info: Anchor `cite.Casella' on input line 3.
 )
-Package hyperref Info: Anchor `page.30' on input line 271.
- [30
+Package hyperref Info: Anchor `page.32' on input line 271.
+ [32
 
 ]
 Package atveryend Info: Empty hook `BeforeClearDocument' on input line 271.
@@ -1436,10 +1457,10 @@ Package rerunfilecheck Info: File `cognome_nome_laurea_aa.out' has not changed.
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 271.
  ) 
 Here is how much of TeX's memory you used:
- 20493 strings out of 492639
- 366132 string characters out of 6133088
- 564914 words of memory out of 5000000
- 23781 multiletter control sequences out of 15000+600000
+ 20500 strings out of 492639
+ 366198 string characters out of 6133088
+ 564972 words of memory out of 5000000
+ 23783 multiletter control sequences out of 15000+600000
  23994 words of font info for 66 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  55i,22n,54p,524b,720s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -1466,10 +1487,10 @@ exlive/2018/texmf-dist/fonts/type1/public/cm-super/sfcc1440.pfb><c:/texlive/201
 st/fonts/type1/public/cm-super/sfrm1440.pfb><c:/texlive/2018/texmf-dist/fonts/t
 ype1/public/cm-super/sfrm1728.pfb><c:/texlive/2018/texmf-dist/fonts/type1/publi
 c/cm-super/sfti1095.pfb>
-Output written on cognome_nome_laurea_aa.pdf (31 pages, 432010 bytes).
+Output written on cognome_nome_laurea_aa.pdf (33 pages, 439836 bytes).
 PDF statistics:
- 505 PDF objects out of 1000 (max. 8388607)
- 443 compressed objects within 5 object streams
- 174 named destinations out of 1000 (max. 500000)
+ 519 PDF objects out of 1000 (max. 8388607)
+ 455 compressed objects within 5 object streams
+ 179 named destinations out of 1000 (max. 500000)
  157 words of extra memory for PDF output out of 10000 (max. 10000000)
 

@@ -46,7 +46,7 @@ h_{\uX,T_n}(\cdot,\cdot)
 \end{cases}
 $ that can be difficult to find.
 To avoid that there is a corollary of the \textit{Fisher Factorization Theorem}:
-\begin{corol}
+\begin{corol}\label{corol:Savage}
 	Let $\uX=(X_1... X_n)$ from $X\sim f_x(x,\theta)$. Then a statistic $T_n$ is sufficient for $\theta$ if and only if there exist two non negative functions $g(\cdot), h(\cdot)$ such that $\lf=g(T(\uX);\theta)h(\uX)$
 \end{corol}
 \begin{oss}
@@ -65,7 +65,7 @@ To avoid that there is a corollary of the \textit{Fisher Factorization Theorem}:
 	\item$g(T_n(\uX),\theta)=\theta^{\sum_{i=1}^{n}x_i}(1-\theta)^{n-\sum_{i=1}^{n}x_i}$
 	\end{itemize}
 \end{eg}
-\begin{eg}
+\begin{eg}\label{eg:gauss}
 		$(X_1... X_n)\in \{0,1\}^n$ from a $N(\theta,1)$. We want to verify that $T_n=\sum_{i=1}^{n} X_i$ is a sufficient statistic
 		\[
 		\begin{split}
@@ -81,4 +81,76 @@ To avoid that there is a corollary of the \textit{Fisher Factorization Theorem}:
 			\item $h(x)=\exp \bigg\{ -\frac{1}{2} \sum_{i=1}^{n}x_i^2 \bigg\}$
 			\item $g(\sum_{i=1}^n,\theta) = \exp \bigg\{- \frac{n\theta^2}{2}+\theta\sum_{i=1}^{n} x_i \bigg\}$
 		\end{itemize}
+\end{eg}
+
+\begin{teo}\textbf{Fisher Theorem}\\
+	If $\lfd$ is the joint density function or the joint probability mass function of $\uX$ and $q(t;\theta)$ is the density function or the probability mass function of $T_n(\uX)$, then $T_n(\uX)$ is sufficient for $\theta$ if for eery point in the sample space, the ratio
+	$$\frac{\lfd}{q(t;\theta)}$$ 
+	is a constant function of $\theta$
+\end{teo}
+\begin{proof}
+	MISSING
+\end{proof}
+We can see now the prof of the corollary \ref{corol:Savage}
+\begin{corol}\textbf{Savage}
+	Let $\lfd$ be the jonit PDF or PMFof a random sample $\uX=(X_1... X_n)$. A statistic $T_n$ is sufficient for $\theta$ if and only if there exist two non negative functions $g(t,\theta), h(\ux)$ such that for all $\ux$ in the sample space and for all $\theta\in \Theta$ 
+	$$\lfd=g(T(\ux);\theta)h(\ux)$$
+\end{corol}
+\begin{proof}
+	We re going to prove that in the discrete settings.\\
+	\begin{itemize}
+		\item[$\Rightarrow$] Suppose that $T(\uX)$ is sufficient for $\theta$.\\
+		\begin{itemize}
+			\item $g(t,\theta)=\p(T(\uX)=t)$
+			\item $h(\ux)=\p(\uX=\ux|T(\uX)=T(\ux)$
+		\end{itemize}
+	Because $T(\uX)$ is sufficient for $\theta$ the conditional probability defining $h(\ux)$ does not depend on $\theta$. Hence the choice of $g(t,\theta)$ and $h(\ux)$ is legitimate and for this choice we have
+	\[
+	\begin{split}
+	\p(\uX=\ux)
+	&=\p(\uX=\ux \wedge T(\uX)=T(\ux))\\
+	&=\p(T(\uX)=T(\ux))\p(\uX=\ux|T(\uX)=T(\ux)\\
+	&=g(t,\theta)h(\ux)
+	\end{split}
+	\]
+	So we have the factorization and in particular we can see that
+	$$\p(T(\uX)=T(\ux))=g(t,\theta)$$
+	$\implies g(T(\ux),\theta)$ is the PMF of $T(s)$
+	\item[$\Leftarrow$] We assume that the factorization holds.\\
+	Let $q(t,\theta)$ be the PMF of $T(\uX)$ we study the ratio
+	$$\frac{\lfd}{q(T(\ux);\theta)}$$
+	in particular define
+	$$A_{T(\ux)}=\{\underline y | T(\underline y)= T(\ux) \}$$
+	Then 
+	\[
+	\begin{split}
+	\frac{\lfd}{q(T(\ux);\theta)}
+	&=\frac{g(T(\ux);\theta)h(\ux)}{q(T(\ux);\theta)}\\
+	&=\frac{g(T(\ux);\theta)h(\ux)}{\sum_{\underline y \in A_{T(\ux)}}{g(T(\ux);\theta)h(\underline y)}}\\
+	&=\frac{g(T(\ux);\theta)h(\ux)}{g(T(\ux);\theta) {\sum_{\underline y \in A_{T(\ux)}}h(\underline y)}}\\
+	&=\frac{h(\ux)}{\sum_{\underline y \in A_{T(\ux)}}h(\underline y)}
+	\end{split}
+	\]
+	This is constant \wrt $\theta$.\\
+	Then by the Fisher Theorem $T(\uX)$ is sufficient for $\theta$.
+	\end{itemize}
+
+\end{proof}
+
+\begin{eg}In with similar condition of the example \ref{eg:gauss} we want to find if $T_n=\frac{1}{n}\sum_{i=1}^{n} X_i$ is a sufficient statistic for $\mu$.
+	$(X_1... X_n)\in \{0,1\}^n$ from a $N(\mu,\sigma^2)$, $\sigma^2$ known.
+	\[
+	\begin{split}
+	f_{\uX}(\ux;\mu\sigma^2)
+	&=(2 \pi \sigma^2)^{-n/2} \exp \bigg\{ -\frac{1}{2\sigma^2}\sum_{i=1}^{n} (x_i-\mu)^2 \bigg\}\\
+	&=(2 \pi \sigma^2)^{-n/2} \exp \bigg\{ -\frac{1}{2\sigma^2} \sum_{i=1}^{n}(x_i-\bar x_n -\bar x_n -\mu)^2 \bigg\}\\
+	&=(2 \pi \sigma^2)^{-n/2} \exp \bigg\{ -\frac{1}{2\sigma^2}\bigg( \sum_{i=1}^{n} (x_i-\bar x_n)^2 + n(\bar x_n-\mu)^2  \bigg) \bigg\}\\
+	\end{split}
+	\]
+	we already have the distribution of $T(\ux)=\bar x_n=\frac{1}{n}\sum_{i=1}^{n}x_i$ which is $\bar X_n\sim N(\mu,\sigma^2/n)$.
+	so we try o apply Fisher theorem to the ratio:
+	\[
+	\frac{(2 \pi \sigma^2)^{-n/2} \exp \bigg\{ -\frac{1}{2\sigma^2}\bigg( \sum_{i=1}^{n} (x_i-\bar x_n)^2 + n(\bar x_n-\mu)^2  \bigg) \bigg\}}{(2 \pi \sigma^2/n)^{-1/2}\exp \bigg\{- \frac{n}{2\sigma^2} (\bar x_n -\mu)^2 \bigg\}}
+	\]
+	So by Fisher Theorem $T_n=\frac{1}{n}\sum_{i=1}^{n} X_i$ is sufficient for $\mu$
 \end{eg}
