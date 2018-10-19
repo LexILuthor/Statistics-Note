@@ -15,5 +15,6 @@
 \contentsline {section}{\numberline {3.4}Exponential Families}{20}{section.3.4}
 \contentsline {section}{\numberline {3.5}Natural Exponential Families}{22}{section.3.5}
 \contentsline {chapter}{\numberline {4}Statistics}{23}{chapter.4}
-\contentsline {chapter}{\numberline {5}Exercises}{25}{chapter.5}
-\contentsline {chapter}{Bibliografia}{29}{ex.7}
+\contentsline {section}{\numberline {4.1}Estimators}{27}{section.4.1}
+\contentsline {chapter}{\numberline {5}Exercises}{29}{chapter.5}
+\contentsline {chapter}{Bibliografia}{33}{ex.7}
