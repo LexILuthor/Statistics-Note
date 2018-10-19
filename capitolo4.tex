@@ -235,6 +235,12 @@ Now we re going to introduce some definition of \textit{"good"} estimators.
 \begin{defi}
 	$T_n(\uX)$ is said to be \textbf{unbiased} for $\theta$ if $\e[T_n(\uX)]=\theta$
 \end{defi}
+\begin{defi}
+	\textbf{Bias}
+	\[
+		Bias_\theta (T_n(\uX))=\e\bigg[T_n(\uX)-\e[T_n(\uX)]\bigg]
+	\]
+\end{defi}
 \begin{oss}
 	In the definition we used the expected value because it is one of the linearity of the operator.
 \end{oss}
@@ -244,7 +250,7 @@ Another parameter that give us information about the goodness of an estimator is
 	Variance is a good parameter to watch only if the estimator is unbiased
 \end{oss}
 To avoid this problem we can introduce the \textit{Mean Squared Error}
-\begin{defi}\textbf{Mean Squared Error}
+\begin{defi}\textbf{Mean Squared Error}(MSE)
 	\[
 	\e[(T_n(\uX)-\theta)^2]
 	\]
@@ -253,9 +259,27 @@ The importance of this quantity comes from the \textit{Chebyshev's Inequality} \
 \[
 \p(|T_n(\ux)-\theta|< k)>1-\frac{\e[(T_n(\uX)-\theta)^2]}{k^2}
 \]
-
-
-
-
-
-
+Indeed we notice that the smaller the MSE the greater is $\p(|T_n(\ux)-\theta|< k)$.
+\begin{prop}
+	$$\e[(T_n(\uX)-\theta)^2]=Var(T_n(\uX))+Bias_\theta(T_n(\uX))$$
+\end{prop}
+\begin{proof}
+	\[
+	\begin{split}
+		\e[(T_n(\uX)-\theta)^2]
+		&=\e[(T_n(\uX) - \e[T_n(\uX)] + \e[T_n(\uX)]-\theta)^2 ]\\
+		&=\e[(T_n(\uX)-\e[T_n(\uX)])^2]+\e[(\e[T_n(\uX)]-\theta)^2]+2\e[(T_n(\uX)-\e[T_n(\uX)])(\e[T_n(\uX)]-\theta)]\\
+		&=\e[(T_n(\uX)-\e[T_n(\uX)])^2]+\e[(\e[T_n(\uX)]-\theta)^2]\\
+		&=Var(T_n(\uX))+Bias_\theta(T_n(\uX))
+	\end{split}
+	\]
+\end{proof}
+\begin{oss}
+	If $\e[T_n(\uX)]=\theta$ then $MSE(T_n(\uX))=Var(T_n(\uX))$.
+\end{oss}
+\begin{defi}
+	Let $X_1.. X_n$ from $X\sim f_X(x,\theta)$, $T_n'$ and $T_n''$ estimators for $\theta$. We say $T_n'$ is  \textbf{more efficient} than $T_n''$ if
+	$$MSE(T_n')<MSE(T_n'')$$
+\end{defi}
+Usually we choose the estimator with the lower MSE even if it is not unbiased.\\
+The new problem now is to find a lower bond for the MSE.
