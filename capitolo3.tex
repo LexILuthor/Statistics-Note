@@ -8,30 +8,33 @@ The \textit{likelihood function} is a function that contains all the statistical
 \begin{defi}
 	Consider a random sample  $(X_1...X_n)$ from $ X \sim f_X(X; \theta)$, then the distribution of $(X_1..X_n)$ will be:
 	$$f_{\underline X}(\underline x;\theta)=\prod_{i=1}^{n}f_{X_i}(x_i;\theta)$$
-	when we see $f_{\underline X}(\underline x;\theta)$ as a function of $\theta$ for fixed $\underline x$, is the \textit{likelihood function}
+	when we see $f_{\underline X}(\underline x;\theta)$ as a function of $\theta$ for fixed $\underline x$ we call it \textbf{likelihood function}
 	$$\mathcal{L}(\theta,\underline x)=\prod_{i=1}^{n}f_{X_i}(x_i;\theta)$$
 \end{defi}
-	An important function related to the likelihood function is the \textit{log likelihood function} 
+	An important function related to the likelihood function is the \textbf{log likelihood function} 
 \begin{defi}
-	The $\log$ of the likelihood function is said \textit{log likelihood function}
-	$$V_n(\theta)=\log\mathcal{L}(\theta,\underline x)=\log \bigg( \prod_{i=1}^{n}f_{X_i}(x_i;\theta) \bigg)=\sum_{i=1}^{n}\log( f_{X_i}(x_i;\theta))$$
+	The $\ln$ of the likelihood function is said \textit{log likelihood function}
+	$$V_n(\theta)=\ln\mathcal{L}(\theta,\underline x)=\ln \bigg( \prod_{i=1}^{n}f_{X_i}(x_i;\theta) \bigg)=\sum_{i=1}^{n}\ln( f_{X_i}(x_i;\theta))$$
 \end{defi}
 \begin{defi}\label{defi:scoref}
-	\textit{Score function}:
+	\textbf{Score function}:
 	$$V'_n=\frac{d}{d \theta}V_n(\theta)=\frac{\mathcal{L}'(\theta, \ux)}{\mathcal{L}(\theta, \ux)}$$
 \end{defi}
 Note that if we fix $\theta$ then $\mathcal{L}(\theta,\underline x)$ is (related to) the probability that the particular value we fixed for $\theta$ has generated $\underline x$.\\
 Suppose we fix two value $\theta,\theta_2\in \Theta$ and 
-$$\mathcal{L}(\theta_1,\underline x)>\mathcal{L}(\theta_2,\underline x)$$
-we say that $\ux$ \textit{"more likely"} generate under $\theta_1$.\\
-Note that the same meaning is conserved with the log likelihood function.\\
-It is because of that we usually search for the max of the likelihood function. Usually to find it we just derive, but sometimes $\mathcal{L}$ is not regular enough so we have to \textit{"regularize"}.
+$\mathcal{L}(\theta_1,\underline x)>\mathcal{L}(\theta_2,\underline x)$ then
+we say $\ux$ is \textit{"more likely"} generated under $\theta_1$.\\
+Note that the same meaning is also applicable to the log likelihood function.\\
+It is because of this that we usually search for the maximum of the likelihood function. Often to find it we just derive, but sometimes $\mathcal{L}$ is not regular enough so we have to \textit{"regularize"} it.
 \section{Likekihood principles}
-he statistical inference based on the likelihood function is a consequence of two principles.
+The statistical inference based on the likelihood function is a consequence of two principles:
 \begin{enumerate}
 	\item \textbf{Week likelihood principle:} for a fixed parametric model $X\sim F_X(x,\theta)$ if two observed samples $\ux$ and $ \underline{y}$ are such that $$\mathcal{L}(\theta,\underline x) \propto \mathcal{L}(\theta,\underline y)$$ 
-	then the two likelihood functions are equivalent i.e. sample must produce the same inference result on $\theta$.
-	\item \textbf{Strong likelihood principle:} let $\ux$ be an observed sample under the model $X\sim F_X(x,\theta)$ with likelihood function $\mathcal{L}(\theta,\underline x)$ and let $\underline y$ be an observed sample under the model $X\sim F_Y(y,\theta)$ with likelihood function $\mathcal{L}(\theta,\underline y)$, if $\mathcal{L}(\theta,\underline x) \propto \mathcal{L}(\theta,\underline y)$ the the two samples provides with the same inference.\\
+	then the two likelihood functions are equivalent i.e. must produce the same inference result on $\theta$.
+	\item \textbf{Strong likelihood principle:} let $\ux$ be an observed sample under the model $X\sim F_X(x,\theta)$ with likelihood function $\mathcal{L}(\theta,\underline x)$ and let $\underline y$ be an observed sample under the model $X\sim F_Y(y,\theta)$ with likelihood function $\mathcal{L}(\theta,\underline y)$.\\
+	If $\mathcal{L}(\theta,\underline x) \propto \mathcal{L}(\theta,\underline y)$ the the two samples provides with the same inference.\\
+	
+	
 	The fundamental difference between \textit{Probability} and \textit{Statistic} is that in the first one the goal is to find the chance of a \rv \ to take a particular value, statistic instead given the results of a experiment, try to find the distribution where it came from.\\
 	\begin{eg}
 		Take $(X_1,X_2,X_3)$ from one of the following distribution:
@@ -41,8 +44,8 @@ he statistical inference based on the likelihood function is a consequence of tw
 			\item $X\sim Ber(\theta_3), \theta_3=\frac{1}{4}$
 		\end{enumerate}
 	$X\in [0,1]$ $\Theta = [0,1]$.\\
-	We can imagine $(x_1,x_2,x_3)$ as the results of a experiment where we had to flip a coin 3 times. Now we want to know the parameter $\theta$ of the coin we flipped tree times.
-	\\So $(x1,x_2,x_3)\in \{0 ,1 \}^3$
+	We can imagine $(x_1,x_2,x_3)$ as the results of a experiment where we had to flip a coin 3 times. Now we want to know the parameter $\theta$ of the coin we flipped tree times and we have tree possibilities:$\theta_1=\frac{1}{2}, \theta_2=\frac{1}{3}, \theta_3=\frac{1}{4}$ .
+	\\So $(x_1,x_2,x_3)\in \{0 ,1 \}^3$
 	
 	\begin{center}
 		\begin{tabular}{ | c | c | c | c | }
@@ -72,15 +75,15 @@ Given $X\sim F_x(x,\theta)$
 	\begin{itemize}
 		\item $\bigg| \frac{d}{d\theta} f_X(x,\theta) \bigg|\leq g(x)$
 		\item $\bigg| \frac{d2}{d^2\theta} f_X(x,\theta) \bigg|\leq h(x)$
-		\item $\bigg| \frac{d^3}{d^3\theta} \log(f_X(x,\theta)) \bigg|\leq H(x)$
+		\item $\bigg| \frac{d^3}{d^3\theta} \ln(f_X(x,\theta)) \bigg|\leq H(x)$
 	\end{itemize}
 	\item for any $\theta \in \Theta$
-	$$0<\e[(\log(\mathcal{L}(\theta, \uX)))^2]<\infty$$
+	$$0<\e[(\ln(\mathcal{L}(\theta, \uX)))^2]<\infty$$
 	(With $\uX$ we're tanking it as \rv).
 \end{enumerate}
 In addition there is the condition of identifiability.
 \begin{itemize}
-	\item[5.] We say that a statistical model is identifiable if for every  $\theta_1,\theta2$ there is al least one event $E$ such that:
+	\item[5.] We say that a statistical model is identifiable if for every  $\theta_1,\theta_2$ there is al least one event $E$ such that:
 	$$\p(X\in E | \theta_1)\not =\p(X\in E | \theta_2)$$
 \end{itemize}
 (We will always take 5. as granted)
@@ -131,7 +134,7 @@ In addition there is the condition of identifiability.
 \end{proof}
 
 \begin{defi}
-	we define the \textit{Fisher Information} as:
+	we define the \textbf{Fisher Information} as:
 	$$\ifn=-\e[V_n''(\theta)]$$
 \end{defi}
 Note that this is the definition of Fisher information just for a particular case, there exist a more general one.\\
@@ -143,7 +146,7 @@ P\begin{prop}
 \begin{eg}
 	Consider $(x_1...x_n)$ from $X\sim Ber(\theta)$
 	$$\lf = \prod_{i=1}^{n} f_{\underline{X_i}}(\underline{x_i};\theta)=\theta^{\sum_{i=1}^{n}x_i}(1-\theta)^{n-\sum_{i=1}^{n}x_i}$$
-	$$V_n(theta)=\log(\lf)=\log(\theta)\sum_{i=1}^{n}x_i+(\log(1-\theta))\bigg(n-\sum_{i=1}^{n}x_i\bigg)$$
+	$$V_n(theta)=\ln(\lf)=\ln(\theta)\sum_{i=1}^{n}x_i+(\ln(1-\theta))\bigg(n-\sum_{i=1}^{n}x_i\bigg)$$
 	$$V_n'(\theta)=\frac{\sum_{i=1}^{n}x_i}{\theta}-\frac{n- \sum_{i=1}^{n}x_i}{1-\theta}$$
 	$$V_n''(\theta)=\frac{-\sum_{i=1}^{n}x_i}{\theta^2}-\frac{-\sum_{i=1}^{n}x_i}{(1-\theta)^2}$$
 	\[
@@ -174,12 +177,12 @@ P\begin{prop}
 
 \section{Exponential Families}
 \begin{defi}
-	We say that the distribution of a \rv is an element of an \textit{Exponential Family}	$X\sim EF(\theta)$ if its PDF can be written as follow:
+	We say that the distribution of a \rv is an element of an \textbf{Exponential Family}	$X\sim EF(\theta)$ if its PDF can be written as follow:
 	$$f_X(x;\theta)=\exp \{ Q(\theta)A(x)+ C(x) -k(\theta) \}$$
 \end{defi}
-
+The generalization to \rs becomes:
 \begin{defi}
-	We say that the distribution of a \rs $(x_1...x_n)$ from $X\sim EF(\theta)$ is an element of an \textit{Exponential Family}	$X\sim EF(\theta)$ if its PDF can be written as follow:
+	We say that the distribution of a \rs $(x_1...x_n)$ from $X\sim EF(\theta)$ is an element of an \textbf{Exponential Family}	$X\sim EF(\theta)$ if its PDF can be written as follow:
 	$$\lfd=\exp \{ Q(\theta)\sum_{i=1}^{n}A(x_i)+ \sum_{i=1}^{n} C(x_i) -nK(\theta) \}$$
 \end{defi}
 \begin{eg}
@@ -248,7 +251,7 @@ Note that this proposition gives us only the expectation and variance for $A(X)$
 \end{oss}
 \section{Natural Exponential Families}
 \begin{defi}
-	We say that the distribution of a \rs $(x_1...x_n)$ from $X\sim NEF(\theta)$ is an element of a \textit{Natural Exponential Family}	$X\sim NEF(\theta)$ if its PDF can be written as follow:
+	We say that the distribution of a \rs $(x_1...x_n)$ from $X\sim NEF(\theta)$ is an element of a \textbf{Natural Exponential Family}	$X\sim NEF(\theta)$ if its PDF can be written as follow:
 	$$f_X(x;\nu)=\exp \{ \nu x + C(x) -K(\nu) \}$$
 \end{defi}
 

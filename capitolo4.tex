@@ -282,4 +282,112 @@ Indeed we notice that the smaller the MSE the greater is $\p(|T_n(\ux)-\theta|< 
 	$$MSE(T_n')<MSE(T_n'')$$
 \end{defi}
 Usually we choose the estimator with the lower MSE even if it is not unbiased.\\
-The new problem now is to find a lower bond for the MSE.
+
+\section{Properties of Estimators}
+The problem of the MSE is that we can note be sure that there exist $T_n$ such that $MSE (\tn)$ is the lowest possible.\\
+A solution for this comes from
+\begin{teo}\label{teo:Cramer-Rao Bound}
+	\textbf{Cramer-Rao Bound}\\
+			Let $X=(X_1... X_n)$ be a random sample from a parametric model $X\sim f_X(x,\theta)$.\\
+			Then, under condition of regularity, for any estimator $\tn$ of $\theta$ 
+			\[
+			Var(\tn)\geq \frac{[1+b'(\tn)]^2}{\ifn}
+			\]
+Where
+\begin{itemize}
+	\item[$b(\tn)$] is the bias of $\tn$
+	\item[$\ifn$] is the Fisher Information
+\end{itemize}
+\end{teo}
+\begin{proof}
+	consider the estimator $\tn$.
+	\begin{itemize}
+		\item $\e[\tn]=\theta +b(\theta)$
+		\item $\der \e[\tn]=1+b'(\theta)$
+		\item $\e[V_n'(\theta)]=0 \leftarrow$ because we suppose our model regular
+	\end{itemize}
+$\implies Cov(\tn V_n'(\theta))=\e[\tn V_n'(\theta)] - \e[\tn]\e[V_n'n]=\e[\tn V_n'(\theta)]$ 
+\[
+\begin{split}
+\e[\tn T_n'(\theta)]&
+=\int_{\mathbb{R}^n}\tn V_n'(\theta) \lfd d\ux\\
+&=\int_{\mathbb{R}^n}\tn \frac{f_{\uX}'(\ux,\theta)}{\lfd}\lfd d\ux\\
+&=\int_{\mathbb{R}^n}\tn \der \lfd d\ux\\
+&=\der \int_{\mathbb{R}^n}\tn \lfd d\ux\\
+&=\der \e[\tn]\\
+&=1+b'(\theta)
+\end{split}
+\]
+So
+\[
+Cov(\tn,V_n'(\theta))=1+b'(\theta)
+\]
+We know that in general for $X,Y$ \rv s such that $\e[X]=\mu, \e[Y]=\nu, \e[X^2]<\infty, \e[Y^2]<\infty$ it holds
+\[
+\begin{split}
+(Cov(X,Y))^2&=\bigg( \e[(X-\mu)(T-\nu)] \bigg)^2\\
+&\leq  \e[(X-\mu)]^2 \e[(T-\nu)]^2\\
+&= Var(X)Var(Y)
+\end{split}
+\]
+So replacing $X$ with $\tn$ and $Y$ with $V_n'(\theta)$ we  obtain
+\[
+\begin{split}
+Var(\tn)&\geq \frac{(Cov(\tn,V_n'(\theta)))^2}{Var(V_n'(\theta))}\\
+&=\frac{(Cov(\tn,V_n'(\theta)))^2}{\e[V_n'(\theta)-\e[V_n'(\theta)]]^2}\\
+&=\frac{(Cov(\tn,V_n'(\theta)))^2}{\e[V_n'(\theta)]]^2}\\
+&=\frac{(Cov(\tn,V_n'(\theta)))^2}{\ifn}
+\end{split}
+\]
+\end{proof}
+\begin{corol}
+	Under condition of regularity
+	\[MSE \geq \frac{(1+b'(\theta))^2}{\ifn} +b^2(\theta) \]
+\end{corol}
+\begin{proof}
+	Directly from Cramer-Rao Bound \ref{teo:Cramer-Rao Bound} remembering that $MSE(\tn)=Var(\tn)+b^2(\theta)$
+\end{proof}
+
+\begin{corol}
+	Let $\uX=(X_1... X_n)$ be a random sample from a regular model $X\sim f_X(x;\theta)$\\
+	If there exist a unbiased estimator for $\theta$ whose variance is equal to the Cramer-Rao bound, Then $\tn$ is unique
+\end{corol}
+\begin{proof}
+	Take $T_{1n}$, $\tnd$ be unbiased estimators for $\theta$ such that
+	\[
+	Var(\tnu)=Var(\tnd)=\frac{1}{\ifn}
+	\]
+	Define $\tn := \frac{\tnu + \tnd}{2}$\\
+	$\e[\tn]=\frac{\e[\tnu]+\e[\tnd]}{2}=\frac{2}{2}\theta=\theta$\\
+	$\implies \tn$ is also unbiased for $\theta$\\
+	$\implies Var(\tn)\geq \frac{1}{\ifn}$
+	\[
+	\begin{split}
+	Var(\tn)
+	&=Var\bigg( \frac{\tnu + \tnd}{2}  \bigg)\\
+	&=\frac{1}{4}\bigg[ Var(\tnu)+ Var(\tnd) +2 Cov(\tnu, \tnd) \bigg]\\
+	&=\frac{1}{4 }\bigg[ Var(\tnu)+ Var(\tnd) +2 Cov(\tnu, \tnd) \bigg]\frac{[Var(\tnu)Var(\tnd)]^{1/2}}{[Var(\tnu)Var(\tnd)]^{1/2}}\\
+	&=\frac{(1+Corr(\tnu,\tnd))}{2}\frac{1}{\ifn}
+	\end{split}
+	\]
+	\\MEMO:$|Corr(X,Y)|\leq 1$\\
+	Because $Var(\tn)\leq\frac{1}{\ifn}$ then we must have  $Corr(\tnu,\tnd)\geq 1 \implies Corr(\tnu,\tnd)= 1$.\\
+	$\implies \tnd=a+b\tnu$.\\
+	Hence we must have $\theta=\e[\tnu]=\e[a+b\tnu]=\e[a]+b\e[\tnu]=a+b\theta\implies a=0,b=1$\\
+	$\implies \tnd=\tnu$
+\end{proof}
+\begin{defi}
+	Consider a regular model $X\sim f_x(x\theta)$. We say that an unbiased estimator $\tn$ whose variance is 
+	\[
+	Var(\tn)=\frac{1}{\ifn}
+	\]
+	is \textbf{efficient} moreover we define the \textbf{efficiency} of an estimator as:
+	\[
+	Eff(\tn)=\frac{1}{Var(\tn)\ifn} \ \ \ \ \ \ \in [0,1]
+	\]
+\end{defi}
+\begin{teo}
+	\textbf{Rao-Blackwell}\\
+	Let $\uX=(X_1 ... X_n)$ a random sample from a parametric model  $X\sim f_x(x\theta)$.
+\end{teo}
+
