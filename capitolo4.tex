@@ -306,7 +306,7 @@ Where
 		\item $\der \e[\tn]=1+b'(\theta)$
 		\item $\e[V_n'(\theta)]=0 \leftarrow$ because we suppose our model regular
 	\end{itemize}
-$\implies Cov(\tn V_n'(\theta))=\e[\tn V_n'(\theta)] - \e[\tn]\e[V_n'n]=\e[\tn V_n'(\theta)]$ 
+$\implies Cov(\tn, V_n'(\theta))=\e[\tn V_n'(\theta)] - \e[\tn]\e[V_n'n]=\e[\tn V_n'(\theta)]$ 
 \[
 \begin{split}
 \e[\tn T_n'(\theta)]&
@@ -334,8 +334,8 @@ So replacing $X$ with $\tn$ and $Y$ with $V_n'(\theta)$ we  obtain
 \[
 \begin{split}
 Var(\tn)&\geq \frac{(Cov(\tn,V_n'(\theta)))^2}{Var(V_n'(\theta))}\\
-&=\frac{(Cov(\tn,V_n'(\theta)))^2}{\e[V_n'(\theta)-\e[V_n'(\theta)]]^2}\\
-&=\frac{(Cov(\tn,V_n'(\theta)))^2}{\e[V_n'(\theta)]]^2}\\
+&=\frac{(Cov(\tn,V_n'(\theta)))^2}{\e[(V_n'(\theta)-\e[V_n'(\theta)])^2]}\\
+&=\frac{(Cov(\tn,V_n'(\theta)))^2}{\e[V_n'(\theta)]^2}\\
 &=\frac{(Cov(\tn,V_n'(\theta)))^2}{\ifn}
 \end{split}
 \]
@@ -386,8 +386,114 @@ Var(\tn)&\geq \frac{(Cov(\tn,V_n'(\theta)))^2}{Var(V_n'(\theta))}\\
 	Eff(\tn)=\frac{1}{Var(\tn)\ifn} \ \ \ \ \ \ \in [0,1]
 	\]
 \end{defi}
+\begin{oss}
+	\begin{enumerate}
+		\item We introduce (absolute) efficiency at the cost of assuming regularity for the parametric model.
+		\item The variance of an unbiased estimator $\tn$ of $\theta$ can not be smaller than the Cramer-Rao bound. However we do not know if there exist an estimator whose variance is equal to the Cramer-Rao bound.
+		\item The proper lower bound involves the MSE
+		$$MSE(\tn)\geq\frac{[1+b'(\theta)]}{\ifn}+b^2(\theta)$$ 
+\end{enumerate}
+\end{oss}
+\begin{prop}
+	Let $\uX=(X_1...X_n)$ be a random sample from a parametric model  $X\sim f_x(x\theta)$. Let $\tn$ be a unbiased estimator for $\theta$. Than $\tn$ i efficient for $\theta$ if and only if
+	$$V_n'(\theta)=\ifn (T_n-\theta)$$
+\end{prop}
+\begin{proof}
+	\[
+	\begin{split}
+	V_n'(\theta)=\ifn (\tn-\e[\tn])&
+	\iff 	V_n'(\theta)^2=\ifn^2 (\tn-\e[\tn])^2\\
+	&\iff 	\e[V_n'(\theta)^2]=\e[\ifn^2 (\tn-\e[\tn])^2]\\
+	&i.e. \ \ifn=\ifn^2 \e[(\tn-\e[\tn])^2]\\
+	&i.e. \ 1=\ifn Var(\tn)\\
+	&\iff Var(\tn)=\frac{1}{\ifn}
+	\end{split}
+	\]
+	i.e. $\tn$ is efficient.
+\end{proof}
 \begin{teo}
 	\textbf{Rao-Blackwell}\\
-	Let $\uX=(X_1 ... X_n)$ a random sample from a parametric model  $X\sim f_x(x\theta)$.
+	Let $\uX=(X_1 ... X_n)$ a random sample from a parametric model  $X\sim f_x(x\theta)$. Let
+	\begin{itemize}
+		\item $\tnu$ a sufficient estimator for $\theta$
+		\item $\tnd$ a unbiased estimator for $\theta$
+		\item $\tn:=\e[\tnd|\tnu]$
+	\end{itemize}
+Then
+\begin{enumerate}
+	\item $\tn$ is a function of $\tnu$
+	\item $\e[\tn]=\theta$
+	\item $Var(\tn)<Var(\tnd)$
+\end{enumerate}
 \end{teo}
+
+\begin{defi}
+	Let $X_1, X_2...$ real valued  \rv s with CDF $F_{X_1},F_{X_2}...$. We say that $(X_n)_n$ \textbf{converges in distribution} or \textbf{converges weakly} to a \rv  \  $X$ if $$\lim_{n\to \infty}F_{X_n}(x)=F_X(x)$$
+\end{defi}
+\begin{defi}
+	A sequence $\{ X_n\}_n$ of \rv s \textbf{converges in probability} towards the \rv \ $X$ if for all $\epsilon>0$
+	$$\lim_{n\to \infty}\p(|X_n-X|>\epsilon)=0$$
+	We write $X_n\xrightarrow{p}X$
+\end{defi}
+\begin{defi}
+	Given a real number $r \geq 1$, we say that the sequence $\{X_n\}$ converges in the \textbf{r-th mean} (or \textbf{in the $L^r$-norm}) towards the random variable $X$, if the r-th absolute moments $\e(|X_n|^r)$ and $\e(|X|^r)$ of $X_n$ and $X$ exist, and
+	$$\lim_{n\to \infty}\e[|X_n-X|^r]=0$$
+	We write $X_n \xrightarrow{L^r} X$
+	For $r=2$ we say that $\{X_n\}$ converges in \textbf{mean square}  to $X$.
+\end{defi}
+
+\begin{prop}
+	Convergence in probability $\implies$ convergence in distribution.\\
+	If $X$ is a degenerate \rv \ we have also\\  convergence in distribution $\implies$ convergence in probability.
+\end{prop}
+\begin{defi}
+	We say an estimator $\tn$ is \textbf{is consistent in mean squared} for $\theta$ if 
+	$$\lim_{n\to \infty}MSE(\tn)=0$$
+\end{defi}
+NOTATION: we will use $b(\tn)=b(\theta)$
+\begin{oss}
+	Since $MSE(\tn)=Var(T_n)+b^2(\tn)$, then then $\lim_{n\to \infty}MSE(\tn)=0$ is equivalent to say
+	\begin{itemize}
+		\item  $\lim_{n\to \infty}Var(\tn)=0$
+		\item $\lim_{n\to \infty}b^2(\tn)=0$
+	\end{itemize}
+\end{oss}
+\begin{defi}
+	$T_n$ is \textbf{asymptotically unbiased} for $\theta$ if
+	\begin{itemize}
+		\item $\lim_{n\to \infty}\e[\tn]=\theta$
+		\item $\lim_{n\to \infty}b(\tn)=0$
+	\end{itemize}
+\end{defi}
+\begin{prop}
+	A consistent estimator in mean square is also asymptotically unbiased
+\end{prop}
+
+\begin{defi}
+	We say $\tn$ is consistent in probability for $\theta$ if for all $\epsilon >0$
+	$$\lim_{n\to \infty}\p(|\tn-\theta|<\epsilon)=1$$
+\end{defi}
+\begin{prop}
+	The  consistencyin mean squared implies consistency in probability 
+\end{prop}
+\begin{proof}
+	Using Chebyshev's inequality \ref{eq:Chebyshev}
+	$$\p(|\tn-\theta|<\epsilon)\geq 1-\frac{MSE(\tn)}{\epsilon^2}$$
+	$$\lim_{n\to \infty}\p(|\tn-\theta|<\epsilon)\geq 1-\lim_{n\to \infty}\frac{MSE(\tn)}{\epsilon^2}$$
+\end{proof}
+\begin{teo}
+	\textbf{Central Limit Teorem}\\
+	Let $\uX=(X_1... X_n)$ be a random sample of size $n$ with $X_i$ independent and identically distributed \rv s. With  expected value $\mu$ and finite variance $\sigma^2$. Then $S_n:=\frac{\sum_{i=1}^n}{n}$ converges in probability to the expected value $\mu$
+	$$S_n\xrightarrow{p} \mu$$
+\end{teo}
+
+\begin{teo}
+	\textbf{Week law of large numbers}\\
+	Let $\uX=(X_1... X_n)$ be a random sample of size $n$ with $X_i$ independent and identically distributed \rv s. With  expected value $\mu$.
+	Define $\bar X_n=\frac{1}{n}\sum_{i=1}^{n}X_i$, then
+	$$\bar X_n \xrightarrow{p} \mu$$
+	That is, for any $\epsilon>0$
+	$$\lim_{n\to \infty}\p(|\bar X_n- \mu|>\epsilon)=0$$
+\end{teo}
+
 
