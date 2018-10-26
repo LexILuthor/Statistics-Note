@@ -10,8 +10,8 @@ We can try to improve this inequality using a function $\Phi$ that is strictly i
 $$\p (X\geq t)=\p (\Phi(X)\geq \Phi(t) )\leq \frac{ \e [\Phi(X)]}{\Phi(t)}$$
 In particular we can take $\Phi(x)=x^q$ , $X\geq 0, q>0$ so we have
 $$\p (|X- \e [X]|\geq t)\leq \frac{ \e [|X-\e [X]|^q]}{t^q}$$
-In specific examples one can choose the value of $q$ that optimize the upper bound.\\
-A related idea is a the basis of \textbf{Chernoff's bounding method}: taking $\Phi(X)=e^{sx}$ where $s$ is an arbitrary positive number for any random variable $X$ and $t\in \mathbb{R}$ we have:
+In specific examples one can choose the value of $q$ that optimises the upper bound.\\
+A related idea is at the basis of \textbf{Chernoff's bounding method}: taking $\Phi(X)=e^{sx}$ where $s$ is an arbitrary positive number for any random variable $X$ and $t\in \mathbb{R}$ we have:
 \begin{equation}\label{ineq:Chernoffb}
 	\p (X \geq t)= \p (e^{sX}\geq e^{st})\leq \frac{\e[e^{sX}]}{e^{st}}
 \end{equation}
@@ -24,14 +24,14 @@ However it can be proven that the bounding given form $\Phi (X)=x^q$ is always b
 \end{teo}
 
 \begin{teo}
-	let $t\geq 0$ then
+	Let $t\geq 0$ then
 	$$\p(X - \e[X]\geq t)\leq \frac{Var(X)}{Var(X)+t^2}$$
 \end{teo}
 \begin{proof}
 	We assume that $E[X]=0$ (the proof for the general case is the same).\\
 	For all $t$ we can write 
 	$$t=\e[t]=\e[t]-e[X]=\e[t-X]\leq \e[(t-X)\mathbbm{1}_{[X<t]}(X)]$$
-	Then for $t\geq 0$ from Cauchy Swartz inequality:
+	Then for $t\geq 0$ from Cauchy-Schwarz inequality:
 	\[
 	\begin{split}
 	t^2 
@@ -50,7 +50,7 @@ However it can be proven that the bounding given form $\Phi (X)=x^q$ is always b
 	$$\e[f(x)g(x)]\leq \e[f(x)]\e[g(x)]$$ 
 \end{teo}
 \begin{proof}
-	Let $Y$ be a \rv \  with the same distribution of $X$ and $X\coprod Y$. Because $f,g$ are non decreasing functions we have $(f(x)-f(y))(g(x)-g(y))\geq 0$
+	Let $Y$ be a \rv \  with the same distribution as $X$ and $X\coprod Y$. Because $f,g$ are non decreasing functions we have $(f(x)-f(y))(g(x)-g(y))\geq 0$, for $x>y$
 	\[
 		\implies  0 \leq \e[(f(x)-f(y))((g(x)-g(y))]=\e[f(x)g(x)-f(x)g(y)-f(y)g(x) + f(y)g(y)]
 	\]
@@ -83,10 +83,11 @@ Applying the Chebyshev's inequality to $ \frac{1}{n} \sum_{i=1}^{n}x_i$ we get
 &\leq \frac{\sum_{i=1}^{n}Var(X_i)}{\epsilon^2 n^2}
 \end{split}
 \]
-If we define $\sigma^2 :=\frac{1}{n}\sum_{i=1}^{n}x_i$ then:
+If we define $\sigma^2 :=\frac{1}{n}\sum_{i=1}^{n}x_i^2$ then:
 \begin{equation} \label{eq:FromChebishev}
-	\p\bigg( \bigg| \frac{1}{n} \sum_{i=1}^{n}x_i - \e [X_i] \bigg| \geq \epsilon \bigg)\geq \frac{\sigma^2}{n\epsilon^2}
+	\p\bigg( \bigg| \frac{1}{n} \sum_{i=1}^{n}x_i - \e [X_i] \bigg| \geq \epsilon \bigg)\leq \frac{\sigma^2}{n\epsilon^2}
 \end{equation}
+\begin{oss}
 To understand why the equation \ref{eq:FromChebishev} is unsatisfying recall what appens with the \textit{Central Limit Theorem}:
 $$\p\bigg(\sqrt{\frac{n}{\sigma^2}}\bigg( \frac{1}{n}\sum_{i=1}^{n} X_i -\e[X_i] \bigg) \geq y \bigg) \varinjlim^{n\to \infty} 1- \Phi(y)\leq \frac{1}{\sqrt{2\pi}}\frac{e^{-y^2/2}}{y}$$
 (where $\Phi$ is the CDF of the standard Gaussian distribution)\\
@@ -95,7 +96,8 @@ $$\p\bigg(\sqrt{\frac{n}{\sigma^2}}\bigg( \frac{1}{n}\sum_{i=1}^{n} X_i -\e[X_i]
 So for $\p\bigg(\sqrt{\frac{n}{\sigma^2}}\bigg( \frac{1}{n}\sum_{i=1}^{n} X_i -\e[X_i] \bigg) \geq \epsilon \bigg)$ we have:
 $$\exp\bigg\{ \frac{-n\epsilon^2}{2\sigma} \bigg\}\leftarrow \text{from Central Limit Theorem}$$
 $$\frac{\sigma^2}{n\epsilon^2}\leftarrow \text{from Chebyshev's inequaity}$$
-From here we can see that the Chebyshev's inequality doesen't work well for the sum of $n$ \rv s when $n$ is large. Meanwhile the Chebyshev's inequality works better than the Central Limit Theorem for small $n$.\\
+From here we can see that the Chebyshev's inequality doesen't work well for the sum of $n$ \rv s when $n$ is large. Meanwhile the Chebyshev's inequality works better than the Central Limit Theorem for small $n$.
+\end{oss}
 
 Another instrument previously introduced that can be helpful for bounding tail probabilities of sum of independent \rv s is the \textbf{Chernoff bounding} \ref{ineq:Chernoffb}:
 \begin{equation}
@@ -111,9 +113,9 @@ As we saw Chebyshev's inequality \ref{eq:Chebyshev} does not work well for sums 
 In this section we will see a partial solution given by \textit{Hoeffding's Inequality}, then a more complete solution given by \textit{Bernstein Inequality}.
 
 \begin{lem}\label{lem:Hoeffding}
-	Let $X$ be a \r with $\e [X]=0$ (actually it can be generalized for a \rv \  with any expected value), $a\leq X \leq b$ ($X$ bounded \rv). Then
+	Let $X$ be a \rv  \   with $\e [X]=0$ (actually it can be generalized for a \rv \  with any expected value), $a\leq X \leq b$ ($X$ bounded \rv). Then
 	\[
-	\e[e^{sx}] \leq \exp \bigg\{\frac{s^2(b-a)^2}{8} \bigg\}\ \ \ \ \ for  \ \ s>0
+	\e[e^{sX}] \leq \exp \bigg\{\frac{s^2(b-a)^2}{8} \bigg\}\ \ \ \ \ for  \ \ s>0
 	\]
 \end{lem}
 
@@ -125,16 +127,15 @@ In this section we will see a partial solution given by \textit{Hoeffding's Ineq
 	Using $\e[X]=0$ and defining $p:=\frac{-a}{b-a}$ we obtain
 	\[
 	\begin{split}
-		\e[e^{sx}]
-		&\leq \e[\frac{x-a}{b-a}e^{sb}+\frac{b-x}{b-a}e^{sa} ]\\
+		\e[e^{sX}]
+		&\leq \e[\frac{X-a}{b-a}e^{sb}+\frac{b-X}{b-a}e^{sa} ]\\
 		& \leq \frac{b}{b-a}e^{sa}-\frac{a}{b-a}e^{sb}\\
 		& =\frac{b-a+a}{b-a}e^{sa}+pe^{sb}\\
 		&= (1-p)e^{sa}+pe^{sb}\\
 		&= (1-p)e^{sa}+pe^{s(b-a+a)}\\
 		&= (1-p)e^{sa}+pe^{s(b-a)}e^{sa}\\
-		&= (1-p+pe^{s(b-a)})e^{sa}\\
 		&= (1-p)e^{sa}+pe^{s(b-a)}e^{sa\frac{b-a}{b-a}}\\
-		&= (1-p)e^{sa}+pe^{s(b-a)}e^{-ps(b-a)}\\
+		&= (1-p)e^{sa}+pe^{s(b-a)}e^{-ps(b-a)}
 	\end{split}
 	\]
 	Then defining 
@@ -173,7 +174,7 @@ This inequality has the same form as the one based on the central limit theorem 
 \begin{proof}
 	define $F_i=\sum_{r=2}^{\infty} s^{r-2} \frac{\e [x_i^r]}{r! \sigma_i^2 }$.\\
 	Since (for Taylor) $e^{sx}=1+sx+\sum_{r=2}^{\infty} s^r\frac{x^r}{r!}$ then taking into account  $\e[X_i]=0$
-	$$\e[s^{sX_i}]=1+s \e [X_i] \sum_{r=2}^{\infty}s^r\frac{\e [x^r_i]}{r!}=1+s^2\sigma^2 F_i \leq e^{s^2\sigma_i^2F_i}$$
+	$$\e[s^{sX_i}]=1+s \e [X_i] + \sum_{r=2}^{\infty}s^r\frac{\e [x^r_i]}{r!}=1+s^2\sigma^2 F_i \leq e^{s^2\sigma_i^2F_i}$$
 	Because we supposed $|X_i|\leq c$ for each index $r$ we have
 	$$\e[X_i^r]= \e [X_i^{r-2}X_i^2] \leq \e [c^{r-2}X_i^2] = c^{r-2}\sigma_i^2$$
 	Thus

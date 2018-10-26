@@ -18,4 +18,4 @@
 \contentsline {section}{\numberline {4.1}Estimators}{27}{section.4.1}
 \contentsline {section}{\numberline {4.2}Properties of Estimators}{28}{section.4.2}
 \contentsline {chapter}{\numberline {5}Exercises}{33}{chapter.5}
-\contentsline {chapter}{Bibliografia}{37}{ex.7}
+\contentsline {chapter}{Bibliografia}{38}{ex.7}

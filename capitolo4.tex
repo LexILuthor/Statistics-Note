@@ -3,7 +3,7 @@
 
 
 
-The notation of statistic was introduced by fisher (1920).\\
+The notation of statistic was introduced by Fisher (1920).\\
 The importance of sufficiency is that ot can be found in any statistical decision (point estimation, testing, confidential bound)
 \begin{defi}
 	Let $X=(X_1... X_n)$ be a random sample from a parametric model $X\sim f_X(x,\theta)$ for some $\theta \in \Theta$ unknown.\\
@@ -25,7 +25,7 @@ f_{\uX|T_n=t}(X;t,\theta)=\frac{h_{\uX,T_n}(z,t,\theta)}{g_{T_n}(t,\theta)}
 	\begin{itemize}
 		\item $f_{\uX}(\ux;\theta) = \prod_{i=1}^{n} f_{\underline{X_i}}(\underline{x_i};\theta)=\theta^{\sum_{i=1}^{n}x_i}(1-\theta)^{n-\sum_{i=1}^{n}x_i}$
 		\item$g_{T_n}(t,\theta)={{n}\choose{t}}\sigma^t(1-\sigma)^{n-t}\mathbbm{1}_{0,1...n}(t)$
-		\item$h_{\uX,T_n(z,t,\theta)}\p(\uX=\ux,T_n=t)=\sigma^t(1-\sigma)^{n-t}$
+		\item$h_{\uX,T_n(z,t,\theta)}=\p(\uX=\ux,T_n=t)=\sigma^t(1-\sigma)^{n-t}$
 	\end{itemize}
 	so 
 	$$f_{\uX|T_n=t}=\frac{\sigma^t(1-\sigma)^{n-t}}{{{n}\choose{t}}\sigma^t(1-\sigma)^{n-t}}=\frac{1}{{{n}\choose{t}}}$$
@@ -56,7 +56,7 @@ To avoid that there is a corollary of the \textit{Fisher Factorization Theorem}:
  	\end{itemize}
 \end{oss}
 \begin{eg}
-	Recall The example \ref{eg:ber} 
+	Recall the example \ref{eg:ber} 
 		$(X_1... X_n)\in \{0,1\}^n$ from a $Ber(\theta)$, $\theta \in (0,1)$.\\
 	Define $T_n=\sum_{i=1}^{n}X_i$ then we want to verify if $T_n$ is sufficient.
 	\begin{itemize}
@@ -66,7 +66,7 @@ To avoid that there is a corollary of the \textit{Fisher Factorization Theorem}:
 	\end{itemize}
 \end{eg}
 \begin{eg}\label{eg:gauss}
-		$(X_1... X_n)\in \{0,1\}^n$ from a $N(\theta,1)$. We want to verify that $T_n=\sum_{i=1}^{n} X_i$ is a sufficient statistic
+		$(X_1... X_n)\in \{0,1\}^n$ from a $N(\theta,1)$. We want to verify that $T_n=\sum_{i=1}^{n} X_i$ is a sufficient statistic:
 		\[
 		\begin{split}
 			\lf
@@ -79,27 +79,27 @@ To avoid that there is a corollary of the \textit{Fisher Factorization Theorem}:
 		so
 		\begin{itemize}
 			\item $h(x)=\exp \bigg\{ -\frac{1}{2} \sum_{i=1}^{n}x_i^2 \bigg\}$
-			\item $g(\sum_{i=1}^n,\theta) = \exp \bigg\{- \frac{n\theta^2}{2}+\theta\sum_{i=1}^{n} x_i \bigg\}$
+			\item $g(\sum_{i=1}^n x_i,\theta) = \exp \bigg\{- \frac{n\theta^2}{2}+\theta\sum_{i=1}^{n} x_i \bigg\}$
 		\end{itemize}
 \end{eg}
 
 \begin{teo}\textbf{Fisher Theorem}\\
-	If $\lfd$ is the joint density function or the joint probability mass function of $\uX$ and $q(t;\theta)$ is the density function or the probability mass function of $T_n(\uX)$, then $T_n(\uX)$ is sufficient for $\theta$ if for eery point in the sample space, the ratio
+	If $\lfd$ is the joint density function or the joint probability mass function of $\uX$ and $q(t;\theta)$ is the density function or the probability mass function of $T_n(\uX)$, then $T_n(\uX)$ is sufficient for $\theta$ if for every point in the sample space, the ratio
 	$$\frac{\lfd}{q(t;\theta)}$$ 
-	is a constant function of $\theta$
+	is a constant function of $\theta$.
 \end{teo}
 \begin{proof}
 	MISSING
 \end{proof}
 We can see now the prof of the corollary \ref{corol:Savage}
 \begin{corol}\textbf{Savage}
-	Let $\lfd$ be the jonit PDF or PMFof a random sample $\uX=(X_1... X_n)$. A statistic $T_n$ is sufficient for $\theta$ if and only if there exist two non negative functions $g(t,\theta), h(\ux)$ such that for all $\ux$ in the sample space and for all $\theta\in \Theta$ 
+	Let $\lfd$ be the joint PDF or PMF of a random sample $\uX=(X_1... X_n)$. A statistic $T_n$ is sufficient for $\theta$ if and only if there exist two non negative functions $g(t,\theta), h(\ux)$ such that for all $\ux$ in the sample space and for all $\theta\in \Theta$ 
 	$$\lfd=g(T(\ux);\theta)h(\ux)$$
 \end{corol}
 \begin{proof}
-	We re going to prove that in the discrete settings.\\
+	We are going to prove that in the discrete settings.\\
 	\begin{itemize}
-		\item[$\Rightarrow$] Suppose that $T(\uX)$ is sufficient for $\theta$.\\
+		\item["$\Rightarrow$"] Suppose that $T(\uX)$ is sufficient for $\theta$.\\
 		\begin{itemize}
 			\item $g(t,\theta)=\p(T(\uX)=t)$
 			\item $h(\ux)=\p(\uX=\ux|T(\uX)=T(\ux)$
@@ -116,8 +116,8 @@ We can see now the prof of the corollary \ref{corol:Savage}
 	So we have the factorization and in particular we can see that
 	$$\p(T(\uX)=T(\ux))=g(t,\theta)$$
 	$\implies g(T(\ux),\theta)$ is the PMF of $T(s)$
-	\item[$\Leftarrow$] We assume that the factorization holds.\\
-	Let $q(t,\theta)$ be the PMF of $T(\uX)$ we study the ratio
+	\item["$\Leftarrow$"] We assume that the factorization holds.\\
+	Let $q(t,\theta)$ be the PMF of $T(\uX)$. We study the ratio
 	$$\frac{\lfd}{q(T(\ux);\theta)}$$
 	in particular define
 	$$A_{T(\ux)}=\{\underline y | T(\underline y)= T(\ux) \}$$

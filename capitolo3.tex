@@ -44,13 +44,13 @@ The statistical inference based on the likelihood function is a consequence of t
 			\item $X\sim Ber(\theta_3), \theta_3=\frac{1}{4}$
 		\end{enumerate}
 	$X\in [0,1]$ $\Theta = [0,1]$.\\
-	We can imagine $(x_1,x_2,x_3)$ as the results of a experiment where we had to flip a coin 3 times. Now we want to know the parameter $\theta$ of the coin we flipped tree times and we have tree possibilities:$\theta_1=\frac{1}{2}, \theta_2=\frac{1}{3}, \theta_3=\frac{1}{4}$ .
+	We can imagine $(x_1,x_2,x_3)$ as the results of a experiment where we had to flip a single coin 3 times. Now we want to know the parameter $\theta$ of the coin we flipped tree times and we have tree possibilities:$\theta_1=\frac{1}{2}, \theta_2=\frac{1}{3}, \theta_3=\frac{1}{4}$ .
 	\\So $(x_1,x_2,x_3)\in \{0 ,1 \}^3$
 	
 	\begin{center}
 		\begin{tabular}{ | c | c | c | c | }
 			\hline
-			$x_1,x_2,x_3$ & $\theta_1 \frac{1}{2}$ & $\theta_2=\frac{1}{3}$ & $\theta_3=\frac{1}{4}$ \\ \hline
+			$x_1,x_2,x_3$ & $\theta_1 = \frac{1}{2}$ & $\theta_2=\frac{1}{3}$ & $\theta_3=\frac{1}{4}$ \\ \hline
 			0,0,0 & $\frac{1}{8}$ & $\frac{8}{27}$ & $\frac{27}{64} \cdot$ \\ \hline
 			0,0,1 & $\frac{1}{8}$ & $\frac{4}{27} \cdot$ & $\frac{9}{64}$ \\ \hline
 			0,1,0 & $\frac{1}{8}$ & $\frac{4}{27} \cdot$ & $\frac{9}{64}$ \\ \hline
@@ -69,9 +69,9 @@ The statistical inference based on the likelihood function is a consequence of t
 In our investigations on $\theta$ we will assume some condition of regularity for our model.\\
 Given $X\sim F_x(x,\theta)$
 \begin{enumerate}
-	\item we assume that $\theta \in \Theta$ where $\Theta$  is a open real set
-	\item for any $\theta \in \Theta$ there exist the  derivative of $\mathcal{L}(\theta;z)$ \wrt $\theta$ at least up to the third order
-	\item for any $\theta_0 \in \Theta$ there exist tree functions $g,h,H$ that are integrable in a neighborhood of $\theta_0$  and 
+	\item we assume that $\theta \in \Theta$, where $\Theta$  is a open real set
+	\item for any $\theta \in \Theta$, there exist the  derivative of $\mathcal{L}(\theta;z)$ \wrt $\theta$ at least up to the third order
+	\item for any $\theta_0 \in \Theta$, there exist three functions $g,h,H,$ that are integrable in a neighborhood of $\theta_0$  and 
 	\begin{itemize}
 		\item $\bigg| \frac{d}{d\theta} f_X(x,\theta) \bigg|\leq g(x)$
 		\item $\bigg| \frac{d2}{d^2\theta} f_X(x,\theta) \bigg|\leq h(x)$
@@ -79,7 +79,6 @@ Given $X\sim F_x(x,\theta)$
 	\end{itemize}
 	\item for any $\theta \in \Theta$
 	$$0<\e[(\ln(\mathcal{L}(\theta, \uX)))^2]<\infty$$
-	(With $\uX$ we're tanking it as \rv).
 \end{enumerate}
 In addition there is the condition of identifiability.
 \begin{itemize}
@@ -91,7 +90,7 @@ In addition there is the condition of identifiability.
 \begin{prop}
 	\begin{enumerate}Some properties of the score function \ref{defi:scoref} are:
 		\item $\e[V_n'(\theta)]=0$
-		\item $Var(V_n'(\theta)=\e[(V_n'(\theta))^2])=- \e[V_n''(\theta)]$
+		\item $Var(V_n'(\theta))=\e[(V_n'(\theta))^2])=- \e[V_n''(\theta)]$
 	\end{enumerate}
 \end{prop}
 \begin{proof}
@@ -109,11 +108,11 @@ In addition there is the condition of identifiability.
 			\end{split}
 		\]
 		Where in the in the fourth equal we used Leibniz and for the fifth recall that $f_{\uX}(\ux, \theta)$ is the PDF of $\uX$
-		\item Start by showing that $V_n''(\theta)=V_n''(\theta)=\frac{f_{\uX}''(\ux;\theta)}{f_{\uX}(\ux;\theta)}-\bigg( \frac{f_{\uX}'(\ux;\theta)}{f_{\uX}(\ux;\theta)} \bigg)^2$
+		\item Start by showing that $V_n''(\theta)=\frac{f_{\uX}''(\ux;\theta)}{f_{\uX}(\ux;\theta)}-\bigg( \frac{f_{\uX}'(\ux;\theta)}{f_{\uX}(\ux;\theta)} \bigg)^2$
 		\[
 		\begin{split}
 		V_n''(\theta)
-		&=\frac{d^2}{d \theta^2} \mathcal{L}(\theta,ux)\\
+		&=\frac{d^2}{d \theta^2} \ln\mathcal{L}(\theta,\ux)\\
 		&=\frac{d}{d\theta}\frac{f_{\uX}'(\ux;\theta)}{f_{\uX}(\ux;\theta)}\\
 		&=\frac{f_{\uX}''(\ux;\theta)f_{\uX}(\ux;\theta)-f_{\uX}'(\ux;\theta)f_{\uX}'(\ux;\theta)}{|f_{\uX}(\ux;\theta)|^2}\\
 		&=\frac{f_{\uX}''(\ux;\theta)}{f_{\uX}(\ux;\theta)}-\bigg( \frac{f_{\uX}'(\ux;\theta)}{f_{\uX}(\ux;\theta)} \bigg)^2\\
@@ -139,19 +138,19 @@ In addition there is the condition of identifiability.
 \end{defi}
 Note that this is the definition of Fisher information just for a particular case, there exist a more general one.\\
 The Fisher information has a central role in statistic because it can be shown that for \textit{unbiased estimators} $\tilde \theta$ it holds: $Var(\tilde \theta)\geq \frac{1}{\ifn}$. So i we can find an estimator with  $Var(\tilde \theta)= \frac{1}{\ifn}$ we are sure that it is the one with the lowest variance.\\
-P\begin{prop}
+\begin{prop}
 	Consider \rsf \  regular then
 	$$\ifn=n\mathcal{I}_1(\theta)$$
 \end{prop}
 \begin{eg}
 	Consider $(x_1...x_n)$ from $X\sim Ber(\theta)$
 	$$\lf = \prod_{i=1}^{n} f_{\underline{X_i}}(\underline{x_i};\theta)=\theta^{\sum_{i=1}^{n}x_i}(1-\theta)^{n-\sum_{i=1}^{n}x_i}$$
-	$$V_n(theta)=\ln(\lf)=\ln(\theta)\sum_{i=1}^{n}x_i+(\ln(1-\theta))\bigg(n-\sum_{i=1}^{n}x_i\bigg)$$
+	$$V_n(\theta)=\ln(\lf)=\ln(\theta)\sum_{i=1}^{n}x_i+(\ln(1-\theta))\bigg(n-\sum_{i=1}^{n}x_i\bigg)$$
 	$$V_n'(\theta)=\frac{\sum_{i=1}^{n}x_i}{\theta}-\frac{n- \sum_{i=1}^{n}x_i}{1-\theta}$$
 	$$V_n''(\theta)=\frac{-\sum_{i=1}^{n}x_i}{\theta^2}-\frac{-\sum_{i=1}^{n}x_i}{(1-\theta)^2}$$
 	\[
 	\begin{split}
-	\e[V_n(\theta)]
+	\e[V_n'(\theta)]
 	&	=\frac{1}{\theta}\sum_{i=1}^{n}\e[x_i]-\frac{1}{1-\theta}\bigg( n- \sum_{i=1}^{n}\e[x_i]\bigg)\\
 	&=\frac{n\not \theta}{\not \theta}-\frac{1}{1-\theta}(n-n\theta)\\
 	&=n-n=0
@@ -159,7 +158,7 @@ P\begin{prop}
 	\]
 	\[
 	\begin{split}
-		[V_n''(\theta)]
+		\e[V_n''(\theta)]
 		&=-\frac{1}{\theta}\sum_{i=1}^{n}\e[X_i]-\frac{1}{1-\theta}\bigg( n- \sum_{i=1}^{n}\e[X_i] \bigg)\\
 		&=-\frac{n\theta}{\theta^2}-\frac{n-n\theta}{(1-\theta)^2}\\
 		&=-\frac{n}{\theta}-\frac{n(1-\theta)}{(1-\theta)^2}\\
@@ -177,7 +176,7 @@ P\begin{prop}
 
 \section{Exponential Families}
 \begin{defi}
-	We say that the distribution of a \rv is an element of an \textbf{Exponential Family}	$X\sim EF(\theta)$ if its PDF can be written as follow:
+	We say that the distribution of a \rv \  is an element of an \textbf{Exponential Family}	$X\sim EF(\theta)$, if its PDF can be written as follows:
 	$$f_X(x;\theta)=\exp \{ Q(\theta)A(x)+ C(x) -k(\theta) \}$$
 \end{defi}
 The generalization to \rs becomes:
@@ -190,10 +189,10 @@ The generalization to \rs becomes:
 	\[
 	\begin{split}
 	P_X(x)
-	&=\theta^x (1\theta)^{1-x}\mathbbm{1}_{\{0,1\}}(x)\\
-	&=\exp\{x\ln(\theta)+(1-x)\ln(1-\theta)  \}\\
-	&=\exp\{x\ln(\theta)+\ln(1-\theta)-x\ln(1-\theta)  \}\\
-	&=\exp\bigg\{xln{\bigg(\frac{\theta}{1-\theta}\bigg)}+\ln(1-\theta)\bigg\}
+	&=\theta^x (1-\theta)^{1-x}\mathbbm{1}_{\{0,1\}}(x)\\
+	&=\exp\{x\ln(\theta)+(1-x)\ln(1-\theta)  \}\mathbbm{1}_{\{0,1\}}(x)\\
+	&=\exp\{x\ln(\theta)+\ln(1-\theta)-x\ln(1-\theta)  \}\mathbbm{1}_{\{0,1\}}(x)\\
+	&=\exp\bigg\{xln{\bigg(\frac{\theta}{1-\theta}\bigg)}+\ln(1-\theta)\bigg\}\mathbbm{1}_{\{0,1\}}(x)
 	\end{split}
 	\]
 	so we get 
@@ -233,7 +232,7 @@ Note that this proposition gives us only the expectation and variance for $A(X)$
 		\begin{split}
 		0
 		&=\frac{d^2}{d\theta^2}\int f_X(x;\theta)\\
-		&=\int \frac{d^2}{\theta^2} f_X(x;\theta)\\
+		&=\int \frac{d^2}{d\theta^2} f_X(x;\theta)\\
 		&=\int (A(x)Q''(\theta)-K''(\theta))f_X(x;\theta)+(A(x)Q'(\theta)-K'(\theta))^2f_X(x;\theta)dx\\
 		&=Q''(\theta)\e[A(X)]-K''(\theta)+(Q'(\theta))^2\int \bigg( A(x)-\frac{K'(\theta)}{Q'(\theta)} \bigg)^2 f_X(x;\theta)dx\\
 		&=Q''(\theta)\frac{K'(\theta)}{Q'(\theta)}-K''(\theta)+(Q'(\theta))^2\int ( A(x)-\e[A(X)] )^2 f_X(x;\theta)dx\\
