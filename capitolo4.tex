@@ -58,12 +58,13 @@ To avoid that we could use a corollary of the \textit{Fisher Factorization Theor
 \begin{eg}
 	Recall the example \ref{eg:ber} 
 		$(X_1... X_n)\in \{0,1\}^n$ from a $Ber(\theta)$, $\theta \in (0,1)$.\\
-	Define $T_n=\sum_{i=1}^{n}X_i$, then we want to verify if $T_n$ is sufficient.
-	\begin{itemize}
-	 \item $f_{\uX}(\ux;\theta) = \prod_{i=1}^{n} f_{{X_i}}(x_i;\theta)=\theta^{\sum_{i=1}^{n}x_i}(1-\theta)^{n-\sum_{i=1}^{n}x_i}$
-	\item $h(\uX)=1$
-	\item$g(T_n(\uX),\theta)=\theta^{\sum_{i=1}^{n}x_i}(1-\theta)^{n-\sum_{i=1}^{n}x_i}$
-	\end{itemize}
+	Define $T_n=\sum_{i=1}^{n}X_i$, then we want to verify if $T_n$ is sufficient. \\
+	We have
+	 $$f_{\uX}(\ux;\theta) = \prod_{i=1}^{n} f_{{X_i}}(x_i;\theta)=\theta^{\sum_{i=1}^{n}x_i}(1-\theta)^{n-\sum_{i=1}^{n}x_i}$$
+	hence we can apply the previous theorem \ref{corol:Savage} using 
+	\begin{enumerate}
+		\item $h(\uX)=1$ \item $g(T_n(\uX);\theta)=\theta^{\sum_{i=1}^{n}x_i}(1-\theta)^{n-\sum_{i=1}^{n}x_i}$
+	\end{enumerate}
 \end{eg}
 \begin{eg}\label{eg:gauss}
 		$(X_1... X_n)\in \{0,1\}^n$ from a $N(\theta,1)$. We want to verify that $T_n=\sum_{i=1}^{n} X_i$ is a sufficient statistic:
@@ -92,29 +93,30 @@ To avoid that we could use a corollary of the \textit{Fisher Factorization Theor
 	MISSING
 \end{proof}
 We can see now the prof of the corollary \ref{corol:Savage}
-\begin{corol}\textbf{Savage}
+\begin{corol}\textbf{Savage}\\
 	Let $\lfd$ be the joint PDF or PMF of a random sample $\uX=(X_1... X_n)$. A statistic $T_n$ is sufficient for $\theta$ if and only if there exist two non negative functions $g(t,\theta), h(\ux)$ such that for all $\ux$ in the sample space and for all $\theta\in \Theta$ 
 	$$\lfd=g(T(\ux);\theta)h(\ux)$$
 \end{corol}
 \begin{proof}
-	We are going to prove that in the discrete settings.\\
+	We are going to prove the theorem only in the discrete settings.\\
 	\begin{itemize}
 		\item["$\Rightarrow$"] Suppose that $T(\uX)$ is sufficient for $\theta$.\\
+		Define:
 		\begin{itemize}
-			\item $g(t,\theta)=\p(T(\uX)=t)$
-			\item $h(\ux)=\p(\uX=\ux|T(\uX)=T(\ux)$
+			\item $g(t,\theta):=\p(T(\uX)=t)$
+			\item $h(\ux):=\p\bigg(\uX=\ux \bigg|T(\uX)=T(\ux)\bigg)$
 		\end{itemize}
 	Because $T(\uX)$ is sufficient for $\theta$ the conditional probability defining $h(\ux)$ does not depend on $\theta$. Hence the choice of $g(t,\theta)$ and $h(\ux)$ is legitimate and for this choice we have
 	\[
 	\begin{split}
 	\p(\uX=\ux)
 	&=\p(\uX=\ux \wedge T(\uX)=T(\ux))\\
-	&=\p(T(\uX)=T(\ux))\p(\uX=\ux|T(\uX)=T(\ux)\\
+	&=\p(T(\uX)=T(\ux))\p(\uX=\ux|T(\uX)=T(\ux))\\
 	&=g(t,\theta)h(\ux)
 	\end{split}
 	\]
 	So we have the factorization and in particular we can see that
-	$$\p(T(\uX)=T(\ux))=g(t,\theta)$$
+	$$\p\bigg(T(\uX)=T(\ux)\bigg)=g(t,\theta)$$
 	$\implies g(T(\ux),\theta)$ is the PMF of $T(s)$
 	\item["$\Leftarrow$"] We assume that the factorization holds.\\
 	Let $q(t,\theta)$ be the PMF of $T(\uX)$. We study the ratio
@@ -137,8 +139,7 @@ We can see now the prof of the corollary \ref{corol:Savage}
 
 \end{proof}
 
-\begin{eg}In with similar condition of the example \ref{eg:gauss} we want to find if $T_n=\frac{1}{n}\sum_{i=1}^{n} X_i$ is a sufficient statistic for $\mu$.
-	$(X_1... X_n)\in \{0,1\}^n$ from a $N(\mu,\sigma^2)$, $\sigma^2$ known.
+\begin{eg}$(X_1... X_n)\in \{0,1\}^n$ from a $N(\mu,\sigma^2)$, $\sigma^2$ known. As we did in the example \ref{eg:gauss} we want to find if $T_n=\frac{1}{n}\sum_{i=1}^{n} X_i$ is a sufficient statistic for $\mu$.
 	\[
 	\begin{split}
 	f_{\uX}(\ux;\mu\sigma^2)
@@ -147,42 +148,51 @@ We can see now the prof of the corollary \ref{corol:Savage}
 	&=(2 \pi \sigma^2)^{-n/2} \exp \bigg\{ -\frac{1}{2\sigma^2}\bigg( \sum_{i=1}^{n} (x_i-\bar x_n)^2 + n(\bar x_n-\mu)^2  \bigg) \bigg\}\\
 	\end{split}
 	\]
-	we already have the distribution of $T(\ux)=\bar x_n=\frac{1}{n}\sum_{i=1}^{n}x_i$ which is $\bar X_n\sim N(\mu,\sigma^2/n)$.
-	so we try o apply Fisher theorem to the ratio:
+	we already know the distribution of $T(\ux)=\bar x_n=\frac{1}{n}\sum_{i=1}^{n}x_i$ is $\bar X_n\sim N(\mu,\sigma^2/n)$.\\
+	So we can apply Fisher theorem to the ratio:
 	\[
 	\frac{(2 \pi \sigma^2)^{-n/2} \exp \bigg\{ -\frac{1}{2\sigma^2}\bigg( \sum_{i=1}^{n} (x_i-\bar x_n)^2 + n(\bar x_n-\mu)^2  \bigg) \bigg\}}{(2 \pi \sigma^2/n)^{-1/2}\exp \bigg\{- \frac{n}{2\sigma^2} (\bar x_n -\mu)^2 \bigg\}}
 	\]
-	So by Fisher Theorem $T_n=\frac{1}{n}\sum_{i=1}^{n} X_i$ is sufficient for $\mu$
+		\[
+	\frac{(2 \pi \sigma^2)^{-n/2} \exp \bigg\{ -\frac{1}{2\sigma^2} \sum_{i=1}^{n} (x_i-\bar x_n)^2   \bigg\} \exp \bigg\{ -\frac{n}{2\sigma^2}(\bar x_n-\mu)^2  \bigg\}}{(2 \pi \sigma^2/n)^{-1/2}\exp \bigg\{- \frac{n}{2\sigma^2} (\bar x_n -\mu)^2 \bigg\}}
+	\]
+	\[
+	\frac{(2 \pi \sigma^2)^{-n/2} \exp \bigg\{ -\frac{1}{2\sigma^2} \sum_{i=1}^{n} (x_i-\bar x_n)^2   \bigg\} }{(2 \pi \sigma^2/n)^{-1/2}}
+	\]
+	Hence by Fisher Theorem $T_n=\frac{1}{n}\sum_{i=1}^{n} X_i$ is sufficient for $\mu$
 \end{eg}
 \begin{oss}
-	Until now we found only one sufficient statistic for a fixed parametric model. However we can define many sufficient statistic.\\
-	For example the statistic given by the identity $T(\ux)=\ux$ is always a sufficient statistic indeed we can factorize the distribution $f_X(x,\theta)$ with
+	Until now we found only one sufficient statistic for a fixed parametric model. However we can define many sufficient statistics.\\
+	For example the statistic given by the identity $T(\ux)=\ux$ is always a sufficient statistic, indeed we can factorize the distribution $f_X(x,\theta)$ with
 	\begin{itemize}
 		\item $h(x)=1$
 		\item $g(T(x);\theta)=f_X(x,\theta)$
 	\end{itemize}
+\end{oss}
 
 
-Another  way to produce more sufficient statistics given one is thru a one to one function.\\
-Suppose $T(\ux)$ is a sufficient statistic for $\theta$, and define $T*(\ux)=r(T(\ux))$ where $r$ is a one to one function with inverse $r^{-1}$.\\
+\begin{oss}
+ Given one sufficient statistic a way to produce more sufficient statistics is thru a one to one function.\\
+Suppose $T(\ux)$ is a sufficient statistic for $\theta$, and define $T^*(\ux)=r(T(\ux))$ where $r$ is a one to one function with inverse $r^{-1}$.\\
 By Savage's Theorem there exist $g,h$ such that
-$$\lf=g(T(\ux),\theta)h(\ux)=g(r^{-1}T*(\ux),\theta)h(\ux)$$
-So defining $g*(t\theta)=g(r^{-1}(t),\theta)$ we have that
-$$\lf=g*(T*(\ux),\theta)h(\ux)$$
-$\implies$ by Savage Theorem we have that $T*(\ux)$ is a sufficient statistic.
+$$\lf=g(T(\ux),\theta)h(\ux)=g(r^{-1}(r(T(\ux),\theta)))h(\ux)=g(r^{-1}(T^*(\ux)),\theta)h(\ux)$$
+So defining $g^*(t,\theta)=g(r^{-1}(t),\theta)$ we have that
+$$\lf=g^*(T^*(\ux),\theta)h(\ux)$$
+$\implies$ by Savage Theorem we have that $T^*(\ux)$ is a sufficient statistic.
 \end{oss}
 We saw that in principle we can define many sufficient statistics so it is natural to define a tool that allows us to decide when a sufficient statistic is better than another.\\
 Recall that the purpose of statistic is to achieve data reduction without loss of information.\\
 Therefore a statistic that achieve the most data reduction while still retaining all of the information about $\theta$ might be preferable.
 \begin{oss}
-	We saw in example \ref{eg:gauss} that if 	$(X_1... X_n)\in \{0,1\}^n$ from a $N(\theta,1)$,  $T_n=\sum_{i=1}^{n} x_i$ is a sufficient statistic. Instead of $\sum_{i=1}^{n} X_i$ we can use $T'(\ux)\bigg( \sum_{i=1}^{n} x_i, \sum_{i=1}^{n} x_i^2 \bigg)$. Clearly $T(X)$ s a greater data reduction than $T'(\ux)$ since we do not need to know the sample variance if we want to know $T(\ux)$. Moreover we can write $T(\ux)$ as a function of $T'(\ux)$ by defining the function $r(a,b)=a$, then we can write
+	We saw in example \ref{eg:gauss} that if 	$(X_1... X_n)\in \{0,1\}^n$ from a $N(\theta,1)$,  $T_n=\sum_{i=1}^{n} x_i$ is a sufficient statistic. Instead of $\sum_{i=1}^{n} X_i$ we can use $T'(\ux)\bigg( \sum_{i=1}^{n} x_i, \sum_{i=1}^{n} x_i^2 \bigg)$. Clearly $T(X)$ s a greater data reduction than $T'(\ux)$ since we do not need to know the sample variance if we want to know $\theta$. Moreover we can write $T(\ux)$ as a function of $T'(\ux)$ by defining the function $r(a,b)=a$, then we can write
 	$$T(\ux)=\bar x_n=r(\bar x_n, S^2_n)=r(T'(\ux))$$
 	Since $T(\ux)$ and $T'(\ux)$ are both sufficient they contains the same information about $\mu$.
 	In other terms the additional information given by the sample variance is null.
 \end{oss} 
 \begin{defi}
-	A sufficient statistic $T(\ux)$ is called minimal if for any other sufficient statistic $T'(\ux)$, $T(\ux)$ is a function of $T'(\ux)$. 
+	A sufficient statistic $T(\ux)$ is called \textbf{minimal} if for any other sufficient statistic $T'(\ux)$, $T(\ux)$ is a function of $T'(\ux)$. 
 \end{defi}
+NOTE:\\
 To say that $T(\ux)$  is a function of  $T'(\ux)$ simply means that if $T'(x)=T'(y)$ then $T(x)=T(y)$.\\
 In other terms if $\{ B_t\} $ where $B_t:=\{t' : T'(t)=T'(t') \}$ is the partition set induced by $T'$ and $\{ A_t\} $ where $A_t:=\{t' : T(t)=T(t') \}$ is the partition set induced by $T$ then for every $t$, $B_t \subseteq A_t$.\\
 $\implies$the partition of the sample space induced by a minimal statistic is the partition with the smallest cardinality.
@@ -194,16 +204,16 @@ $\implies$the partition of the sample space induced by a minimal statistic is th
 	is constant as a function of $\theta$ if and only if $T(\ux)=T(\uy)$
 	
 	
-	Then $T$is a minimal sufficient statistic for $\theta$ 
+	Then $T$ is a minimal sufficient statistic for $\theta$ 
 \end{teo}
 
 \begin{proof}
-	To simplify the proof we assume $\lfd > 0 \forall \ux, \forall \theta$.\\
+	To simplify the proof we assume $\lfd > 0 \ \forall \ux, \forall \theta$.\\
 	First we show that $T(\ux)$ is sufficient.\\
 	Define $\Tau$ as the image of the sample space under the function $\st$.
 	$$\Tau:=\{ t:t=\st \text{for some $\ux$ in the sample space} \}$$
-	Define $\{ A_t\} $ where $A_t:=\{t' : T(t)=T(t') \}$, the partition set induced by $T$
-	For each $A_t$  choose nd fix some elements $x_t\in A_t$. For any point in the space $\ux_{\st}$ is the fixed element that is in the same set ,$A_t$, as $\ux$. Since $\ux$ and $\ux_{\st}$ are in the same set $A_t$ then $\st=T(\ux_{\st})$ so by the assumptions the ratio
+	Define $\{ A_t\} $ the partition set induced by $T$, where $A_t:=\{t' : T(t)=T(t') \}$ 
+	For each $A_t$  choose and fix some elements $x_t\in A_t$. For any point in the space $\ux_{\st}$ is the fixed element that is in the same set ,$A_t$, as $\ux$. Since $\ux$ and $\ux_{\st}$ are in the same set $A_t$ then $\st=T(\ux_{\st})$ so by the assumptions the ratio
 	\[
 	\frac{\lfd}{f_{\uX}(\ux_{\st};\theta)}
 	\]
@@ -212,11 +222,11 @@ Then define the function $g(\ux,\theta)\lfd$, so we have:
 \[
 \lfd =\frac{f_{\uX}(\ux_{\st};\theta)\lfd}{f_{\uX}(\ux_{\st};\theta)}=\gf h(\theta)
 \]
-and by Savage Theorem $\st$ is sufficient fo $\theta$.\\
+and by Savage Theorem $\st$ is sufficient for $\theta$.\\
 
 
-Now we show that $\st$ is minimal sufficient.\\
-Lt  $T'(\ux)$ be another sufficient statistic. By Savage Theorem we know that exist $h',g'$ such that
+Now we will show that $\st$ is minimal sufficient.\\
+Let  $T'(\ux)$ be another sufficient statistic. By Savage Theorem we know that exist $h',g'$ such that
 \[
 \lfd=g'(T'(\ux),theta)h'(\theta)
 \]
@@ -235,15 +245,16 @@ Now we re going to introduce some definition of \textit{"good"} estimators.
 \begin{defi}
 	$T_n(\uX)$ is said to be \textbf{unbiased} for $\theta$ if $\e[T_n(\uX)]=\theta$
 \end{defi}
+\begin{oss}
+	we use the expected value to define a "good" estimator because of the linearity of the operator.
+\end{oss}
 \begin{defi}
-	\textbf{Bias}
+	\textbf{Bias}:
 	\[
 		Bias_\theta (T_n(\uX))=\e\bigg[T_n(\uX)-\e[T_n(\uX)]\bigg]
 	\]
 \end{defi}
-\begin{oss}
-	In the definition we used the expected value because it is one of the linearity of the operator.
-\end{oss}
+
 When we ask an estimator to be unbiased basically we are requiring it to be centred around $\theta$.\\
 Another parameter that give us information about the goodness of an estimator is the variance. We can interpret the variance as a measure of the dispersion around the expected value, so before check the variance we mus be sure that the expected value overlap with $\theta$. The less is the variance the best is the estimator.
 \begin{oss}
