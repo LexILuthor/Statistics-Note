@@ -7,23 +7,23 @@ The notation of statistic was introduced by Fisher (1920).\\
 The importance of sufficiency is that ot can be found in any statistical decision (point estimation, testing, confidential bound)
 \begin{defi}
 	Let $X=(X_1... X_n)$ be a random sample from a parametric model $X\sim f_X(x,\theta)$ for some $\theta \in \Theta$ unknown.\\
-	We say that $T_n=T(X)$ \textbf{sufficient for the parameter $\theta$} if the conditional distribution of $X$ given $T_n$ does not depend of $\theta$ i.e.
+	We say that $T_n=T(X)$ is \textbf{sufficient for the parameter $\theta$} if the conditional distribution of $X$ given $T_n$ does not depend of $\theta$ i.e. defined:
 	\begin{itemize}
-		\item $f_{\uX|T_n=t}(X;t,\theta)$ conditional distribution of $\uX$ given $T_n$
-		\item $h_{\uX,T_n}(z,t,\theta)$ joint distribution of $\uX$ and $T_n$
-		\item $g_{T_n}(t,\theta)$ marginal distribution of $T_n$
+		\item $f_{\uX|T_n=t}(\ux;t,\theta)$ the conditional distribution of $\uX$ given $T_n$
+		\item $h_{\uX,T_n}(z,t,\theta)$ the joint distribution of $\uX$ and $T_n$
+		\item $g_{T_n}(t,\theta)$ the marginal distribution of $T_n$
 	\end{itemize}
-then $T_n$ is \textbf{sufficient for the parameter $\theta$} only if $f_{\uX|T_n=t}(X;t,\theta)$ does not depend of $\theta$.\\
+then $T_n$ is \textbf{sufficient for the parameter $\theta$} only if $f_{\uX|T_n=t}(\ux;t,\theta)$ does not depend of $\theta$.\\
 Note that
 \[
-f_{\uX|T_n=t}(X;t,\theta)=\frac{h_{\uX,T_n}(z,t,\theta)}{g_{T_n}(t,\theta)}
+f_{\uX|T_n=t}(\ux;t,\theta)=\frac{h_{\uX,T_n}(\ux,t,\theta)}{g_{T_n}(t,\theta)}
 \]
 \end{defi}
 \begin{eg} \label{eg:ber}
 	$(X_1... X_n)\in \{0,1\}^n$ from a $Ber(\theta)$, $\theta \in (0,1)$.\\
-	Define $T_n=\sum_{i=1}^{n}X_i$ then we want to verify if $T_n$ is sufficient.\\
+	Define $T_n=\sum_{i=1}^{n}X_i$, then we want to verify if $T_n$ is sufficient.\\
 	\begin{itemize}
-		\item $f_{\uX}(\ux;\theta) = \prod_{i=1}^{n} f_{\underline{X_i}}(\underline{x_i};\theta)=\theta^{\sum_{i=1}^{n}x_i}(1-\theta)^{n-\sum_{i=1}^{n}x_i}$
+		\item $f_{\uX}(\ux;\theta) = \prod_{i=1}^{n} f_{{X_i}}({x_i};\theta)=\theta^{\sum_{i=1}^{n}x_i}(1-\theta)^{n-\sum_{i=1}^{n}x_i}$
 		\item$g_{T_n}(t,\theta)={{n}\choose{t}}\sigma^t(1-\sigma)^{n-t}\mathbbm{1}_{0,1...n}(t)$
 		\item$h_{\uX,T_n(z,t,\theta)}=\p(\uX=\ux,T_n=t)=\sigma^t(1-\sigma)^{n-t}$
 	\end{itemize}
@@ -34,10 +34,10 @@ f_{\uX|T_n=t}(X;t,\theta)=\frac{h_{\uX,T_n}(z,t,\theta)}{g_{T_n}(t,\theta)}
 \end{eg}
 
 \begin{oss}
-	If $T_n$ is sufficient for $\theta$ then all the statistical information of $\theta$ is contained in the random sample relocated in $T_n$. In the example above we just need $\sum_{i=1}^{n}X_i$.\\
+	If $T_n$ is sufficient for $\theta$ then all the statistical information of $\theta$ contained in the random sample is relocated in $T_n$. In the example above to infer about $\theta$ we just need $\sum_{i=1}^{n}X_i$.\\
 \end{oss}
 \begin{oss}
-	The notation of sufficiency derive from the probability structure of the parametric family $X\sim f_X(x;\theta)$ We can talk about sufficiency for a parameter $\theta$ only after we have specified $X\sim f_X(x;\theta)$
+	The notation of sufficiency derive from the probability structure of the parametric family $X\sim f_X(x;\theta)$. We can talk about sufficiency for a parameter $\theta$ only after we have specified $X\sim f_X(x;\theta)$
 \end{oss}
 The definition of sufficiency based on conditional probability is not of practical use because we need this two distributions $
 \begin{cases}
@@ -45,9 +45,9 @@ g_{T_n}(\cdot)\\
 h_{\uX,T_n}(\cdot,\cdot)
 \end{cases}
 $ that can be difficult to find.
-To avoid that there is a corollary of the \textit{Fisher Factorization Theorem}:
+To avoid that we could use a corollary of the \textit{Fisher Factorization Theorem}:
 \begin{corol}\label{corol:Savage}
-	Let $\uX=(X_1... X_n)$ from $X\sim f_x(x,\theta)$. Then a statistic $T_n$ is sufficient for $\theta$ if and only if there exist two non negative functions $g(\cdot), h(\cdot)$ such that $\lf=g(T(\uX);\theta)h(\uX)$
+	Let $\uX=(X_1... X_n)$ from $X\sim f_x(x,\theta)$. Then a statistic $T_n$ is sufficient for $\theta$ if and only if there exist two non negative functions $g(\cdot), h(\cdot)$ such that $\lf=g(T(\ux);\theta)h(\ux)$
 \end{corol}
 \begin{oss}
 	\begin{itemize}
@@ -58,9 +58,9 @@ To avoid that there is a corollary of the \textit{Fisher Factorization Theorem}:
 \begin{eg}
 	Recall the example \ref{eg:ber} 
 		$(X_1... X_n)\in \{0,1\}^n$ from a $Ber(\theta)$, $\theta \in (0,1)$.\\
-	Define $T_n=\sum_{i=1}^{n}X_i$ then we want to verify if $T_n$ is sufficient.
+	Define $T_n=\sum_{i=1}^{n}X_i$, then we want to verify if $T_n$ is sufficient.
 	\begin{itemize}
-	 \item $f_{\uX}(\ux;\theta) = \prod_{i=1}^{n} f_{\underline{X_i}}(\underline{x_i};\theta)=\theta^{\sum_{i=1}^{n}x_i}(1-\theta)^{n-\sum_{i=1}^{n}x_i}$\\
+	 \item $f_{\uX}(\ux;\theta) = \prod_{i=1}^{n} f_{{X_i}}(x_i;\theta)=\theta^{\sum_{i=1}^{n}x_i}(1-\theta)^{n-\sum_{i=1}^{n}x_i}$
 	\item $h(\uX)=1$
 	\item$g(T_n(\uX),\theta)=\theta^{\sum_{i=1}^{n}x_i}(1-\theta)^{n-\sum_{i=1}^{n}x_i}$
 	\end{itemize}
