@@ -246,7 +246,7 @@ Now we re going to introduce some definition of \textit{"good"} estimators.
 	$T_n(\uX)$ is said to be \textbf{unbiased} for $\theta$ if $\e[T_n(\uX)]=\theta$
 \end{defi}
 \begin{oss}
-	we use the expected value to define a "good" estimator because of the linearity of the operator.
+	we use the expected value to define a "good"v estimator because of the linearity of the operator.
 \end{oss}
 \begin{defi}
 	\textbf{Bias}:
@@ -256,7 +256,7 @@ Now we re going to introduce some definition of \textit{"good"} estimators.
 \end{defi}
 
 When we ask an estimator to be unbiased basically we are requiring it to be centred around $\theta$.\\
-Another parameter that give us information about the goodness of an estimator is the variance. We can interpret the variance as a measure of the dispersion around the expected value, so before check the variance we mus be sure that the expected value overlap with $\theta$. The less is the variance the best is the estimator.
+Another parameter that give us information about the goodness of an estimator is the variance. We can interpret the variance as a measure of the dispersion around the expected value, so before check the variance we mus be sure that the expected value overlap with $\theta$. In this scenario the less is the variance the best is the estimator.
 \begin{oss}
 	Variance is a good parameter to watch only if the estimator is unbiased
 \end{oss}
@@ -270,7 +270,7 @@ The importance of this quantity comes from the \textit{Chebyshev's Inequality} \
 \[
 \p(|T_n(\ux)-\theta|< k)>1-\frac{\e[(T_n(\uX)-\theta)^2]}{k^2}
 \]
-Indeed we notice that the smaller the MSE the greater is $\p(|T_n(\ux)-\theta|< k)$.
+Indeed we notice the smaller the MSE the greater is $\p(|T_n(\ux)-\theta|< k)$.
 \begin{prop}
 	$$\e[(T_n(\uX)-\theta)^2]=Var(T_n(\uX))+Bias_\theta(T_n(\uX))$$
 \end{prop}
@@ -292,7 +292,7 @@ Indeed we notice that the smaller the MSE the greater is $\p(|T_n(\ux)-\theta|< 
 	Let $X_1.. X_n$ from $X\sim f_X(x,\theta)$, $T_n'$ and $T_n''$ estimators for $\theta$. We say $T_n'$ is  \textbf{more efficient} than $T_n''$ if
 	$$MSE(T_n')<MSE(T_n'')$$
 \end{defi}
-Usually we choose the estimator with the lower MSE even if it is not unbiased.\\
+Usually we choose the estimator with the lower MSE even if it is biased.\\
 
 \section{Properties of Estimators}
 The problem of the MSE is that we can note be sure that there exist $T_n$ such that $MSE (\tn)$ is the lowest possible.\\
