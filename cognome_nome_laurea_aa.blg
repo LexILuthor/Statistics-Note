@@ -3,13 +3,9 @@ Capacity: max_strings=100000, hash_size=100000, hash_prime=85009
 The top-level auxiliary file: cognome_nome_laurea_aa.aux
 The style file: plain.bst
 Database file #1: biblio.bib
-Warning--I didn't find a database entry for "Applebaum"
-Warning--I didn't find a database entry for "Shannon"
-Warning--I didn't find a database entry for "Khinchin"
-Warning--I didn't find a database entry for "Robert"
 You've used 1 entry,
             2118 wiz_defined-function locations,
-            512 strings with 4166 characters,
+            504 strings with 4107 characters,
 and the built_in function-call counts, 279 in all, are:
 = -- 24
 > -- 13
@@ -48,4 +44,3 @@ warning$ -- 0
 while$ -- 2
 width$ -- 2
 write$ -- 13
-(There were 4 warnings)
