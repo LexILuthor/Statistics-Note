@@ -234,7 +234,7 @@ Let $\ux,\uy$ be two sample points such that $T'(\ux)=T'(\uy)$ then we can study
 \[
 \frac{\lfd}{f_{\uX}(\uy;\theta)}=\frac{g'(T'(\ux);\theta)h'(\ux)}{g'(T'(\uy);\theta)h'(\uy)}=\frac{h'(\ux)}{h'(\uy)}
 \]
-Since the ratio does not depend on $\theta$, by the assumption (the other implication of the IIF) implies $\st =T(\uy)$. So we can say that $T(\ux)$ is a function of $T'(\ux)$ therefore $\st$ is minimal.
+Since the ratio does not depend on $\theta$, by the assumption (the other implication of the IFF) implies $\st =T(\uy)$. So we can say that $T(\ux)$ is a function of $T'(\ux)$ therefore $\st$ is minimal.
 \end{proof}
 \section{Estimators}
 
@@ -295,7 +295,7 @@ Indeed we notice the smaller the MSE the greater is $\p(|T_n(\ux)-\theta|< k)$.
 Usually we choose the estimator with the lower MSE even if it is biased.\\
 
 \section{Properties of Estimators}
-The problem of the MSE is that we can note be sure that there exist $T_n$ such that $MSE (\tn)$ is the lowest possible.\\
+The problem of the MSE is that we can not be sure that there exist $T_n$ such that $MSE (\tn)$ is the lowest possible.\\
 A solution for this comes from
 \begin{teo}\label{teo:Cramer-Rao Bound}
 	\textbf{Cramer-Rao Bound}\\
@@ -317,10 +317,10 @@ Where
 		\item $\der \e[\tn]=1+b'(\theta)$
 		\item $\e[V_n'(\theta)]=0 \leftarrow$ because we suppose our model regular
 	\end{itemize}
-$\implies Cov(\tn, V_n'(\theta))=\e[\tn V_n'(\theta)] - \e[\tn]\e[V_n'n]=\e[\tn V_n'(\theta)]$ 
+$\implies Cov(\tn, V_n'(\theta))=\e[\tn V_n'(\theta)] - \e[\tn]\e[V_n'n(\theta)]=\e[\tn V_n'(\theta)]$ 
 \[
 \begin{split}
-\e[\tn T_n'(\theta)]&
+\e[\tn V_n'(\theta)]&
 =\int_{\mathbb{R}^n}\tn V_n'(\theta) \lfd d\ux\\
 &=\int_{\mathbb{R}^n}\tn \frac{f_{\uX}'(\ux,\theta)}{\lfd}\lfd d\ux\\
 &=\int_{\mathbb{R}^n}\tn \der \lfd d\ux\\
@@ -392,7 +392,7 @@ Var(\tn)&\geq \frac{(Cov(\tn,V_n'(\theta)))^2}{Var(V_n'(\theta))}\\
 	\[
 	Var(\tn)=\frac{1}{\ifn}
 	\]
-	is \textbf{efficient} moreover we define the \textbf{efficiency} of an estimator as:
+	is \textbf{efficient}.\\ Moreover we define the \textbf{efficiency} of an estimator as:
 	\[
 	Eff(\tn)=\frac{1}{Var(\tn)\ifn} \ \ \ \ \ \ \in [0,1]
 	\]
@@ -415,8 +415,8 @@ Var(\tn)&\geq \frac{(Cov(\tn,V_n'(\theta)))^2}{Var(V_n'(\theta))}\\
 	V_n'(\theta)=\ifn (\tn-\e[\tn])&
 	\iff 	V_n'(\theta)^2=\ifn^2 (\tn-\e[\tn])^2\\
 	&\iff 	\e[V_n'(\theta)^2]=\e[\ifn^2 (\tn-\e[\tn])^2]\\
-	&i.e. \ \ifn=\ifn^2 \e[(\tn-\e[\tn])^2]\\
-	&i.e. \ 1=\ifn Var(\tn)\\
+	&\iff \ \ifn=\ifn^2 \e[(\tn-\e[\tn])^2]\\
+	&\iff \ 1=\ifn Var(\tn)\\
 	&\iff Var(\tn)=\frac{1}{\ifn}
 	\end{split}
 	\]
@@ -449,7 +449,7 @@ Then
 \begin{defi}
 	Given a real number $r \geq 1$, we say that the sequence $\{X_n\}$ converges in the \textbf{r-th mean} (or \textbf{in the $L^r$-norm}) towards the random variable $X$, if the r-th absolute moments $\e(|X_n|^r)$ and $\e(|X|^r)$ of $X_n$ and $X$ exist, and
 	$$\lim_{n\to \infty}\e[|X_n-X|^r]=0$$
-	We write $X_n \xrightarrow{L^r} X$
+	We write $X_n \xrightarrow{L^r} X$.\\
 	For $r=2$ we say that $\{X_n\}$ converges in \textbf{mean square}  to $X$.
 \end{defi}
 
@@ -458,10 +458,10 @@ Then
 	If $X$ is a degenerate \rv \ we have also\\  convergence in distribution $\implies$ convergence in probability.
 \end{prop}
 \begin{defi}
-	We say an estimator $\tn$ is \textbf{is consistent in mean squared} for $\theta$ if 
+	We say an estimator $\tn$ is \textbf{consistent in mean squared} for $\theta$ if 
 	$$\lim_{n\to \infty}MSE(\tn)=0$$
 \end{defi}
-NOTATION: we will use $b(\tn)=b(\theta)$
+NOTATION: we will use $b(\tn):=b(\theta)$
 \begin{oss}
 	Since $MSE(\tn)=Var(T_n)+b^2(\tn)$, then then $\lim_{n\to \infty}MSE(\tn)=0$ is equivalent to say
 	\begin{itemize}
