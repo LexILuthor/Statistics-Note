@@ -16,7 +16,7 @@ A related idea is at the basis of \textbf{Chernoff's bounding method}: taking $\
 	\p (X \geq t)= \p (e^{sX}\geq e^{st})\leq \frac{\e[e^{sX}]}{e^{st}}
 \end{equation}
 
-So we can bound the probability using the characteristic function which is usually easier than $\e [X^q]$ to compute.\\
+So we can bound the probability using the characteristic function which is usually easier to compute than $\e [X^q]$.\\
 However it can be proven that the bounding given form $\Phi (X)=x^q$ is always better than the one given by $\Phi(X)=E^{sX}$.\\
 \begin{teo}\textbf{Cauchy Swartz inequality}\\
 	Given two \rv s with finite second moments then:
@@ -30,14 +30,14 @@ However it can be proven that the bounding given form $\Phi (X)=x^q$ is always b
 \begin{proof}
 	We assume that $E[X]=0$ (the proof for the general case is the same).\\
 	For all $t$ we can write 
-	$$t=\e[t]=\e[t]-e[X]=\e[t-X]\leq \e[(t-X)\mathbbm{1}_{[X<t]}(X)]$$
+	$$t=\e[t]=\e[t]-\e[X]=\e[t-X]\leq \e[(t-X)\mathbbm{1}_{[X<t]}(X)]$$
 	Then for $t\geq 0$ from Cauchy-Schwarz inequality:
 	\[
 	\begin{split}
 	t^2 
 	& \leq \e[(t-X)^2] \e[(\mathbbm{1}_{[X<t]}(X))^2]\\
 	&= \e[(t-X)^2] \p(X<t)\\
-	&= (Var(X)+t^2)\p(x<t)
+	&= (Var(X)+t^2)\p(X<t)
 	\end{split}	
 	\]
 	$\implies \p(X<t)\geq \frac{t^2}{Var(X)+t^2}$\\
@@ -50,7 +50,7 @@ However it can be proven that the bounding given form $\Phi (X)=x^q$ is always b
 	$$\e[f(x)g(x)]\leq \e[f(x)]\e[g(x)]$$ 
 \end{teo}
 \begin{proof}
-	Let $Y$ be a \rv \  with the same distribution as $X$ and $X\coprod Y$. Because $f,g$ are non decreasing functions we have $(f(x)-f(y))(g(x)-g(y))\geq 0$, for $x>y$
+	Let $Y$ be a \rv \  with the same distribution as $X$ and $X\coprod Y$. Because $f,g$ are non decreasing functions we have $(f(x)-f(y))(g(x)-g(y))\geq 0$.
 	\[
 		\implies  0 \leq \e[(f(x)-f(y))((g(x)-g(y))]=\e[f(x)g(x)-f(x)g(y)-f(y)g(x) + f(y)g(y)]
 	\]
