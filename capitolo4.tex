@@ -508,3 +508,25 @@ NOTATION: we will use $b(\tn)=b(\theta)$
 \end{teo}
 
 
+	\section{Method if Moments}
+
+\begin{oss}
+	Before we start, like the likelihood method, this method can also be done for irregular models.
+\end{oss}
+
+
+Let $X=(X_1,\ldots,X_n)$ be a random sample from a parametric model $x\tilde f_x(x,\theta)$.
+Assume that $\theta\in\Theta$ s.t. $\Theta$ has dimension $r$. In order to apply the method of moment for estimating $\theta$ we need: 
+\begin{itemize}
+	\item
+	A condition related to the dimension of $\Theta$. If the number of parameters that we need to estimate is $r$, then the moments of $X$ must exist up to the order $r$.
+	$$E[{|x|}^r]<\infty.$$
+	\item
+	Explicit expression for the first $r$ moments of $X$.
+\end{itemize}
+Given that, the method of moments exists in solving the system of equations given by:
+$$\frac{1}{n}=\sum_{i=1}^{n}{X_i}^{J}=E[X^{J}], \quad \forall\enspace J=1,\ldots,r$$
+\begin{oss}
+	We don't have any result on the theoretical qualities on this method for the simulation. We need to check case by case.
+\end{oss}
+
