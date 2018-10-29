@@ -272,7 +272,7 @@ The importance of this quantity comes from the \textit{Chebyshev's Inequality} \
 \]
 Indeed we notice the smaller the MSE the greater is $\p(|T_n(\ux)-\theta|< k)$.
 \begin{prop}
-	$$\e[(T_n(\uX)-\theta)^2]=Var(T_n(\uX))+Bias_\theta(T_n(\uX))$$
+	$$\e[(T_n(\uX)-\theta)^2]=Var(T_n(\uX))+Bias_\theta(T_n(\uX))^2$$
 \end{prop}
 \begin{proof}
 	\[
@@ -281,7 +281,7 @@ Indeed we notice the smaller the MSE the greater is $\p(|T_n(\ux)-\theta|< k)$.
 		&=\e[(T_n(\uX) - \e[T_n(\uX)] + \e[T_n(\uX)]-\theta)^2 ]\\
 		&=\e[(T_n(\uX)-\e[T_n(\uX)])^2]+\e[(\e[T_n(\uX)]-\theta)^2]+2\e[(T_n(\uX)-\e[T_n(\uX)])(\e[T_n(\uX)]-\theta)]\\
 		&=\e[(T_n(\uX)-\e[T_n(\uX)])^2]+\e[(\e[T_n(\uX)]-\theta)^2]\\
-		&=Var(T_n(\uX))+Bias_\theta(T_n(\uX))
+		&=Var(T_n(\uX))+Bias_\theta(T_n(\uX))^2
 	\end{split}
 	\]
 \end{proof}
