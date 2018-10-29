@@ -280,6 +280,7 @@ Indeed we notice the smaller the MSE the greater is $\p(|T_n(\ux)-\theta|< k)$.
 		\e[(T_n(\uX)-\theta)^2]
 		&=\e[(T_n(\uX) - \e[T_n(\uX)] + \e[T_n(\uX)]-\theta)^2 ]\\
 		&=\e[(T_n(\uX)-\e[T_n(\uX)])^2]+\e[(\e[T_n(\uX)]-\theta)^2]+2\e[(T_n(\uX)-\e[T_n(\uX)])(\e[T_n(\uX)]-\theta)]\\
+		&=\e[(T_n(\uX)-\e[T_n(\uX)])^2]+\e[(\e[T_n(\uX)]-\theta)^2]+2\e[ \tn(\uX)\e[\tn(\uX)] - \tn(\uX)\theta - \e[\tn(\uX)]^2 + \theta \e[\tn(\uX)]\\
 		&=\e[(T_n(\uX)-\e[T_n(\uX)])^2]+\e[(\e[T_n(\uX)]-\theta)^2]\\
 		&=Var(T_n(\uX))+Bias_\theta(T_n(\uX))^2
 	\end{split}
@@ -333,11 +334,11 @@ So
 \[
 Cov(\tn,V_n'(\theta))=1+b'(\theta)
 \]
-We know that in general for $X,Y$ \rv s such that $\e[X]=\mu, \e[Y]=\nu, \e[X^2]<\infty, \e[Y^2]<\infty$ it holds
+We know that in general for $X,Y$ \rv s such that $\e[X]=\mu, \e[Y]=\nu, \e[X^2]<\infty, \e[Y^2]<\infty$, from Cauchy-Schwarz, it holds
 \[
 \begin{split}
-(Cov(X,Y))^2&=\bigg( \e[(X-\mu)(T-\nu)] \bigg)^2\\
-&\leq  \e[(X-\mu)]^2 \e[(T-\nu)]^2\\
+(Cov(X,Y))^2&=\bigg( \e[(X-\mu)(Y-\nu)] \bigg)^2\\
+&\leq  \e[(X-\mu)^2] \e[(Y-\nu)^2]\\
 &= Var(X)Var(Y)
 \end{split}
 \]
@@ -346,7 +347,7 @@ So replacing $X$ with $\tn$ and $Y$ with $V_n'(\theta)$ we  obtain
 \begin{split}
 Var(\tn)&\geq \frac{(Cov(\tn,V_n'(\theta)))^2}{Var(V_n'(\theta))}\\
 &=\frac{(Cov(\tn,V_n'(\theta)))^2}{\e[(V_n'(\theta)-\e[V_n'(\theta)])^2]}\\
-&=\frac{(Cov(\tn,V_n'(\theta)))^2}{\e[V_n'(\theta)]^2}\\
+&=\frac{(Cov(\tn,V_n'(\theta)))^2}{\e[V_n'(\theta)^2]}\\
 &=\frac{(Cov(\tn,V_n'(\theta)))^2}{\ifn}
 \end{split}
 \]
