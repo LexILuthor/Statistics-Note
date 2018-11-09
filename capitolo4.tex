@@ -531,3 +531,93 @@ $$\frac{1}{n}=\sum_{i=1}^{n}{X_i}^{J}=\e[X^{J}], \quad \forall\enspace J=1,\ldot
 	We don't have any result on the theoretical qualities on this method for the simulation. We need to check case by case.
 \end{oss}
 
+\section{Maximum Likelihood Approach}
+We saw (exercitation week not) that the Maximum Likelihood Approach consist in finding the $$arg \  \max_{\theta\in \Theta} \ln(\lf)$$
+\begin{itemize}	
+		\item if the model is regular then we can simply solve the ML equation $\vnp =0$
+		\item if the parameter is a positive integer then we used the ratio
+		\item the parameter defines the support of the model we must insert the indicator function in the likelihood function
+		\item if the model is regular but we can not solve explicitly the likelihood equation.\\
+		A way to solve this is the \textbf{Newton-Raphson  method}
+\end{itemize}
+\begin{teo}
+	\textbf{Delta Method}(Generalization of Central Limit Theorem for functions)\\
+	Let $(Y_n)_{n\geq 1}$ be a sequence of \rv s such that
+	$$\sqrt{n}(Y_n-\theta) \xrightarrow{w} N(0,\sigma^2) \ \ \ \ as \  n \to \infty$$
+	for a specific function $g$ and a given value $\theta$ assume $g'(\theta)$ exist and it is not zero then
+		$$\sqrt{n}(g(Y_n)-g(\theta)) \xrightarrow{w} N(0,\sigma^2[g'(\theta)]^2) \ \ \ \ as \  n \to \infty$$
+\end{teo}
+\begin{proof}
+	Take Taylor's approx of $g(Y_n)$ around $Y_0=\theta$. \\
+	Then $$g(Y_n)=g(\theta)+ g'(\theta)[Y_n-\theta]+R$$
+	Where $R\to 0$ as $Y_n\to \theta$. Since $Y_n\xrightarrow{p}\theta$ then $\xrightarrow{p} 0$. By an application of  Slutsky Theorem we have:
+	$$\sqrt{n}(g(Y_n)-g(\theta)) = \sqrt(n)(Y_n-\theta)g'(\theta)\xrightarrow{w} N(0,\sigma^2[g'(\theta)]^2) \ \ \ \ as \  n \to \infty$$
+\end{proof}
+
+A useful property of the \mle is the \textbf{invariance property}.\\
+Suppose we have a parametric family indexed by a parameter $\theta$ but we re interested in estimating $\Tau(\theta)$. The invariance property of \mle say that if $\hat \theta$ it the \mle for $\theta$ then $\T(\hat{\theta})$ is the \mle for $\T(\theta)$.\\
+If the map $\theta \T(\theta)$ is one to one then the invariance property is easy to show. Indeed if  we let $\mu=\T(\theta)$ then the inverse function$\T^{-1}(\mu)=\theta$ is well defined and the likelihood function written as a function of $\mu $ is:
+$$\lfs=\prod_{i=1}^{n}f_{X_i}(x_i;\T^{-1}(\mu))=\mathcal{L}(\T^{-1}(\mu); \underline x)$$
+and
+$$\sup_{\tau}\lfs=\sup_{\tau}=\mathcal{L}(\T^{-1}(\mu); \underline x)=\sup_\theta \lf$$
+Then the $\max$ of $\lfs$ is attained at $\T=\T(\theta)=\T(\hat \theta)$. This shows $\T(\hat \theta)$ is the \mle for $\T( \theta)$.\\
+In general the invariance property of \mle is true for any functional of $\theta$.
+\begin{teo}\label{them:invariance}
+	\textbf{invariance property of \mle}\\
+	If $\hat \theta$ is the \mle for $\theta$ then for all function $\T(\theta)$ the \mle of $\T(\theta)$ is $\T(\hat \theta)$.
+\end{teo}
+\begin{proof}
+	Define $$\lfs:=\sup_{ \{\theta \in \Theta: \T(\theta)=\T\} }\lf$$
+	let $\hat \mu$ the value that maximize the function $\lfs$, it can be shown that $\hat \mu$ coincides with the argument that maximize $\lf$.\\
+	We must show that 
+	$$\mathcal{L}^*(\hat \mu;\underline x)=\mathcal{L}*(\T(\hat \theta);\underline x)$$
+	As we stated above $\hat \mu$ coincides with the argument that maximize $\lf$ so
+	$$\mathcal{L}^*(\hat \mu;\underline x)=\sup_\mu \sup_{ \{\theta \in \Theta: \T(\theta)=\mu \} }\lf=\sup_\theta \lf=\mathcal{L}^*(\hat \theta;\underline x)$$
+	Moreover 
+	\[
+	\begin{split}
+	\mathcal{L}^*(\hat \theta;\underline x)
+	&= \sup_{ \{\theta \in \Theta: \T(\theta)=\T(\hat \theta) \} }\lf\\
+	&=\mathcal{L}^*(\T(\hat\theta);\ux)
+	\end{split}
+	\]
+	By combining the two identities we have that 
+	$$\mathcal{L}^*(\hat \mu;\ux)=\mathcal{L}^*(\T(\hat \theta);\ux)$$
+	So $\T(\hat \theta)$ is the \mle of $\T(\theta)$ where $\hat \theta$ is the \mle of $\theta$
+\end{proof}
+\begin{oss}
+	Fore example we can use the above theorem \ref{them:invariance} to compute the \mle of $\theta^2$ where $\theta$ is the meano of a Gaussian model
+\end{oss}
+\begin{oss}
+	The above result \ref{them:invariance} holds also in the context of multidimensional parametric spaces.
+\end{oss}
+\begin{eg}
+	$\uX=(X_1... X_n)$ from $X\sim N(\mu,\sigma^2)$. Find the \mle estimator of $(\mu, \sigma^2)$.\\
+	\begin{itemize}
+		\item $\mathcal{L}(\mu, \sigma^2;\ux)=\prod_{i=1}^{n}\frac{1}{\sqrt{2 \pi \sigma^2}}\exp \bigg\{  -\frac{(x_i-\mu)^2}{2\sigma^2}		\bigg\}=(2 \pi \sigma^2)^{-n/2}\exp \bigg\{-\frac{1}{2\sigma^2} \sum_{i=1}^{n} (x_i-\mu)^2 \bigg\}$
+		\item $\ln(\mathcal{L}(\mu, \sigma^2;\ux))=-\frac{n}{2}\ln(2 \pi \sigma^2)-\frac{1}{2\sigma^2}\sum_{i=1}^{n}(x_i-\mu)^2\propto -\frac{n}{2}\ln \sigma^2-\frac{1}{2\sigma^2}\sum_{i=1}^{n}(x_i-\mu)^2$
+		\item $\frac{d}{d\mu}\ln(\mathcal{L}(\mu, \sigma^2;\ux))=\frac{1}{\sigma^2}\sum_{i=1}^{n}(x_1-\mu)$
+		\item $\frac{d}{\sigma^2}\ln(\mathcal{L}(\mu, \sigma^2;\ux))=-\frac{n}{2\sigma^2}+\frac{1}{2(\sigma^2)^2}\sum_{i=1}^{n}(x_1-\mu)^2$
+	\end{itemize}
+so solving the system 
+\[
+\begin{cases}
+\frac{d}{d\mu}\ln(\mathcal{L}(\mu, \sigma^2;\ux))=\frac{1}{\sigma^2}\sum_{i=1}^{n}(x_1-\mu)=0
+\\ \frac{d}{\sigma^2}\ln(\mathcal{L}(\mu, \sigma^2;\ux))=-\frac{n}{2\sigma^2}+\frac{1}{2(\sigma^2)^2}\sum_{i=1}^{n}(x_1-\mu)^2=0
+\end{cases}		
+\]
+we obtain $\hat \mu=\frac{1}{n} \sum_{i=1}^{n}x_i; \hat \sigma^2=\frac{1}{n}\sum_{i=1}^{n}(x_i-\bar x_n)^2$.\\
+The question now is whether $(\hat \mu , \hat \sigma^2)$ is a point of maximum or not.
+To do this we can check the Jacobian, but the computational work would be too heavy.\\ Another way is by reducing the dimension of the problem:\\
+Note that
+	$$\sum_{i=1}^{n}(x_i-\mu)^2=\sum_{i=1}^{n}(x_i- \bar x_n +\bar x_n -\mu)^2=\sum_{i=1}^{n}(x_i-\bar x_n)^2 + \sum_{i=1}^{n}(\bar x_n-\mu)^2 + 2 \sum_{i=1}^{n}(x_i-\bar x_n)(\bar x_n -\mu)=\sum_{i=1}^{n}(x_i-\bar x_n)^2 + \sum_{i=1}^{n}(\bar x_n-\mu)^2> \sum_{i=1}^{n}(x_i -\bar x_n)^2$$
+
+So, for any $\theta \not = bar x_n$ we have:
+$$\sum_{i=1}^{n}(x_i-\mu)^2>\sum_{i=1}^{n}(x_i -\bar x_n)^2$$
+Hence:
+$$(2 \pi \sigma^2)^{-n/2}\exp \bigg\{-\frac{1}{2\sigma^2} \sum_{i=1}^{n} (x_i-\bar x_n)^2 \bigg\}\geq(2 \pi \sigma^2)^{-n/2}\exp \bigg\{-\frac{1}{2\sigma^2} \sum_{i=1}^{n} (x_i-\mu)^2 \bigg\}$$
+Therefore the problem of verifying that $(\hat \mu, \hat \ sigma^2)$ is a maximum is reduced to a one dimensional problem (we need to check only $\hat \sigma^2$ is actually the max).
+\end{eg}
+\begin{oss}
+	In the end  we can say that the invariance property is a good property form a computable point of view, but this property is also the reason why the \mle can be biased for a finite sample size.
+\end{oss}

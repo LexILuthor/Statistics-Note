@@ -50,6 +50,7 @@ However it can be proven that the bounding given form $\Phi (X)=x^q$ is always b
 	$$\e[f(x)g(x)]\leq \e[f(x)]\e[g(x)]$$ 
 \end{teo}
 \begin{proof}
+	WRONG
 	Let $Y$ be a \rv \  with the same distribution as $X$ and $X\coprod Y$. Because $f,g$ are non decreasing functions we have $(f(x)-f(y))(g(x)-g(y))\geq 0$.
 	\[
 		\implies  0 \leq \e[(f(x)-f(y))((g(x)-g(y))]=\e[f(x)g(x)-f(x)g(y)-f(y)g(x) + f(y)g(y)]
@@ -57,7 +58,7 @@ However it can be proven that the bounding given form $\Phi (X)=x^q$ is always b
 	$\implies$
 	\[
 	\begin{split}
-\e[f(x)g(x)] &\geq \e[f(x)g(y)]+ \e[f(y)g(x)]- \e[f(x)g(y)] \\&=\e[f(x)g(y)]\\&=\e[f(x)]\e[g(y)]\\&=\e[f(x)]\e[g(x)]
+\e[f(x)g(x)] &\geq \e[f(x)g(y)]+ \e[f(y)g(x)]- \e[f(y)g(y)] \\&=\e[f(x)g(y)]\\&=\e[f(x)]\e[g(y)]\\&=\e[f(x)]\e[g(x)]
 	\end{split}
 	\]
 	The second part of the theorem can be proved in the same way.
