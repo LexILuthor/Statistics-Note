@@ -1,0 +1,32 @@
+\chapter{Hypothesis Testing}
+\vspace{15pt}
+
+$\uX(X_1 ... X_n)$ a random sample from $X\sim f_X(x;\theta)$ $\theta \in \Theta$. We want to use the observed sample to evaluate $\theta$.\\
+First we need a bit of terminology.
+\begin{defi}
+	 a \textbf{statistical test} is defined as a decision rule on the sample space. Using this decision rule and the observed sample we decide to accept or reject an hypothesis about $\theta$.\\
+	 The hypothesis we decide to accept or refuse is called \textbf{ the null hypothesis $H_0$} 
+\end{defi} 
+\begin{defi}
+	We define a \textbf{statistical hypothesis} any sentence that specifies a partition of the statistical model $\{ f_x(X;\theta): \te \in \Theta \}$.\\If the specification of the statistical model is complete then the statistical hypothesis is called \textbf{simple $\te=\te^*$}.\\If the specification is partial is called composite, in particular $\te >\theta^*, \theta \in R^*\subset \Theta$ is called \textbf{composite unidirectional hypothesis}.\\
+	We denote by $\omega_0 \subset \Theta$ the set of values that are specified by the null statistical hypothesis \h .\\
+	We want	to heck if data support hypothesis of this type:
+	\begin{itemize}
+		\item[\h]:$\theta\in \Theta$
+		\item[$H_1$]:$\te \not \in \Theta$
+	\end{itemize}
+\end{defi}
+The null statistical hypothesis is something that exist before the experiment. It is an hypothesis that exist until proved otherwise. The alternative of \h (denoted by $H_1$) is the complement of \h.\\ The decision rule about accepting or rejecting \h has different interpretations, in particular:
+\begin{itemize}
+	\item if we decide, based on data, to reject \h, this has a unique consequence
+	\item if we decide, based on data, to accept \h this does not imply the support of \h.
+\end{itemize}
+The hypothesis test is a decision on the sample space and this decision rule is characterized by a function defined on the set of all the possible value of $(X_1 ...X_n)$. There will be some points $\uX \in R_0\subset \mathbb{R}^n$ such that the decision rule leads o reject \h and some other points such that the decision rule leads to do not reject \h.\\
+\begin{defi}
+	the subspace $R_0$ is called \textbf{rejection region for \h}.
+\end{defi}
+The decision rule is determined by the following criteria:\begin{itemize}
+	\item if $x\in R_0$ then reject \h
+	\item if $x\not \in R_0$ do not reject \h .
+\end{itemize}
+At this space the decision

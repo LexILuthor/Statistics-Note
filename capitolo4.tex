@@ -621,3 +621,57 @@ Therefore the problem of verifying that $(\hat \mu, \hat \ sigma^2)$ is a maximu
 \begin{oss}
 	In the end  we can say that the invariance property is a good property form a computable point of view, but this property is also the reason why the \mle can be biased for a finite sample size.
 \end{oss}
+
+\begin{prop}
+	Let $\uX=(X_1... X_n)$ be a random sample from a parametric model $X\sim f_X(x,\theta)$. If the \mle $\tn$ for $\theta $ exist and it is unique then $\tn$ is a function of the sufficient statistic for $\theta$
+\end{prop}
+\begin{proof}\textit{(informal)}\\
+	If a sufficient statistic exist then the likelihood function $\lf$ can be factorized as follows:
+	$$\lf =g(T(\ux);\theta)h(\ux)$$
+	$$\implies \ln \lf = \ln (g(T(\ux);\theta))+ \ln (h(\ux))\propto \ln (g(T(\ux);\theta)) $$
+\end{proof}
+
+\begin{teo}
+	Let $\uX=(X_1... X_n)$ be a random sample from a parametric model $X\sim f_X(x;\theta)$ and let $\lf$ be the likelihood function. Let $\hat \theta_n$ be the \mle for $\theta$ and let $\T(\theta)$ be a continuous function of $\theta$. Under the assumption of regularity, for any $\epsilon>0$ and for any point $\theta \in \Theta$ we have that:
+	$$\lim_{n\to \infty}\p(|\T(\hat \theta_n)-\T(\theta)|\geq \epsilon)=0$$
+	I.e. the \mle are consistent in probability
+\end{teo}
+\begin{teo}
+	Let $\uX=(X_1... X_n)$ be a random sample from a parametric model $X\sim f_X(x;\theta)$ and let $\lf$ be the likelihood function. Let $\hat \theta_n$ be the \mle for $\theta$ and let $\T(\theta)$ be a continuous function of $\theta$. Under the assumption of regularity, for any $\epsilon>0$ and for any point $\theta \in \Theta$ we have that:
+	$$\sqrt{n}[\T(\hat \theta_n)-\T(\theta)]\xrightarrow{w}N\bigg(0, \frac{1}{\mathcal{I}_1(\theta)} \bigg)$$
+	where $\mathcal{I}_1(\theta)$ is the Fisher information of the parametric model.
+\end{teo}
+This means that the \mle are:
+\begin{itemize}
+	\item consistent (weakly)
+	\item asymptotically unbiased
+	\item asymptotically Gaussian
+	\item asymptotically efficient
+\end{itemize}
+\begin{proof}
+	we will prove the result only for $\T(\theta)=\theta$. The proof for a generic $\T(\te)$ is an application of the delta method.\\
+	We have that $L(\theta;\ux)=\sum_{i=1}^{n}\ln (f_{X_i}(x_i;\theta))$.\\ We denote by $L'$ and $L''$ the first and the second derivative \wrt $\theta$.\\
+	Expand the first derivative (Taylor) around $\theta_0$
+	$$L'(\theta; \ux)= L'(\theta_0; \ux)+ (\theta- \theta_0)L''(\theta_0, \ux)+R$$
+	where $R$ is the residual and can be ignored.?\\
+	Now substitute $\theta$ with the \mle of $\theta$, say $\hat \theta_n$
+	$$0= L'(\hat \theta_0; \ux)+ (\hat \theta- \theta_0)L''(\theta_0, \ux)+R$$
+	\[
+	\begin{split}
+	\implies \sqrt{n}(\hat \theta_n;- \theta_0)&=-\sqrt{n}\frac{L'(\theta_0)}{L''(\theta_0; \ux)}\\&=\frac{-\frac{1}{\sqrt{n}} L'(\theta_0)}{\frac{1}{n}L''(\theta_0; \ux)}
+	\end{split}
+	\]
+	We can apply the Central Limit Theorem to the denominator and the Weak Law of Large Numbers to the numerator:\\
+	\begin{itemize}
+		\item[Numerator:]  $$\frac{1}{\sqrt{n}}L'(\theta_0;\ux)=\sqrt{n}\bigg(\frac{1}{n}\sum_{i=1}^{n}W_i \bigg)$$
+		Where $W_i=\frac{\frac{d}{d\theta} f_{X_i}(x_i;\theta)}{f_{X_i}(x_i;\theta)}$ and $\e[W_i]=0$ and $Var(W_i)=\mathcal{I}_1(\theta)$. By the Central Limit Theorem
+		$$\frac{1}{\sqrt{n}} L'(\theta_0);\ux \xrightarrow{w}N(0;\mathcal{I}_1(\theta))$$
+		\item[Denominator:] $$-\frac{1}{n}L''(\theta_0;\ux)=\frac{1}{n}\sum_{i=1}^{n}W_i^2-\frac{1}{n}\sum_{i=1}^{n}\frac{\frac{d^2}{d \theta^2}f_{X_i}(x_i;\theta)}{f_{X_i}(x_i;\theta)}$$
+		Where $\e[\frac{1}{n}\sum_{i=1}^{n}W_i^2]=\mathcal{I}_1(\theta_0)$ and  $\e\bigg[ \frac{1}{n} \sum_{i=1}^{n}  \frac{\frac{d^2}{d \theta^2}f_{X_i}(x_i;\theta)}{f_{X_i}(x_i;\theta)}\bigg]=0$. Then by the Weak Law of Large Numbers
+		$$-\frac{1}{n}L''(\theta;\ux)\xrightarrow{w}\mathcal{I}_1(\theta_0)$$
+	\end{itemize}
+   	So 
+   	$$\sqrt{n}(\hat \theta_n - \theta )\xrightarrow{w} \frac{X}{\mathcal{I}_1(\theta_0)}$$
+	Where $X\sim N(0,\mathcal{I}_1(\theta_0))$
+	$$\implies \sqrt{n}(\hat \theta_n - \theta )\xrightarrow{w}  N\bigg(0,\frac{1}{\mathcal{I}_1(\theta_0)}\bigg) $$
+\end{proof}
