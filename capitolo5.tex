@@ -1,7 +1,7 @@
 \chapter{Hypothesis Testing}
 \vspace{15pt}
 
-$\uX(X_1 ... X_n)$ a random sample from $X\sim f_X(x;\theta)$ $\theta \in \Theta$. We want to use the observed sample to evaluate $\theta$.\\
+$\uX=(X_1 ... X_n)$ a random sample from $X\sim f_X(x;\theta)$ $\theta \in \Theta$. We want to use the observed sample to evaluate $\theta$.\\
 First we need a bit of terminology.
 \begin{defi}
 	 a \textbf{statistical test} is defined as a decision rule on the sample space. Using this decision rule and the observed sample we decide to accept or reject an hypothesis about $\theta$.\\
@@ -29,4 +29,258 @@ The decision rule is determined by the following criteria:\begin{itemize}
 	\item if $x\in R_0$ then reject \h
 	\item if $x\not \in R_0$ do not reject \h .
 \end{itemize}
-At this space the decision
+With this space, the decision rule provides a partition of the sample space into two subsets. However we can work with a sub partition of the sample space ($\mathbb{R}^n$) only if $n$ is small.\\
+To reduce the dimensionality of the decision rule (or the partition of the sample space) we can use a sufficient statistic $\tn=T(\ux)$ with $T:\mathbb{R}^n\to \mathbb{R}^m$ with $m\leq n$. The original decision rule is transformed in the new decision rule:
+\begin{itemize}
+	\item If $\tn \in C_0$ then we reject \h
+	\item if $\tn \not \in C_0$ then we do no reject \h
+\end{itemize}
+Where $C_0$ is our new rejection region.\\
+The statistical hypothesis defines a partition of the parametric space $\Theta$.\\
+The decision rule defines  a partition of the sample space (or a lower dimensional counterpart).\\
+So we can see a test as a link between the two partitions.\\
+
+Confronting the choices done with the test with the real situation it can happen 4 different scenarios:
+\begin{center}
+	\begin{tabular}{ | c | c | c | c | }
+		\hline
+		                              & $X\in R_0$ (reject \h)     & $X\not \in R_0$ (accept \h)  \\ \hline
+		\h:$\te \in \omega_0$         & $E_1$          & $G_1$            \\ \hline
+		$H_1$:$\te \not \in \omega_0$ & $G_2$          & $E_2$            \\
+		\hline
+	\end{tabular}
+\end{center}
+	\begin{itemize}
+		\item[$G_1$] accept \h when \h is true , so we took the right decision 
+		\item[$G_2$] reject \h when \h is false, so we took the right decision
+		\item[$E_1$] reject \h when \h is true, so we took the wrong decision
+		\item[$E_2$] accept \h when \h is false, so we took the wrong decision
+	\end{itemize}
+\begin{defi}
+	we define the function $\gamma(\theta) $ with $\te \in \Theta$ in this way
+	\begin{itemize}
+		\item if $\theta \in \Theta_0$   $\gamma(\theta):=\p(\uX \in R_0 ; \theta \in \Theta_0)$
+		\item if $\theta\in \Theta_0^c$    $\gamma(\theta):= \p(\ux \in R_0, \theta \not \in \Theta_0)$
+	\end{itemize}
+\end{defi}
+\begin{defi}Some terminology.\\
+	$E_1$ is called \textbf{error of the first type} and  $$\alpha:=\p(E_1)=\p(\text{reject \h, \h \ \ true})=\p(\ux \in R_0 , \theta \in \omega_0)$$ $\alpha$ is called \textbf{size of the test}.\\
+	$E_2$ is called \textbf{error of the second type} and $$\beta:=\p(E_2)=\p(\text{accept \h, \h \ \ false})=\p(\ux \not \in R_0 , \theta \not \in \omega_0)$$
+	note that $\gamma=1-\beta=\p(\ux \in R_0, \theta \not \in \omega_0)$.\\$1-\beta$ is called \textbf{power of the test}.
+\end{defi}
+\begin{defi}for $\alpha\in [0,1]$ a test with power function $\gamma (\theta)$ is a \textbf{size $\alpha$ test} is :
+	$$\sup_{\te \in \Theta_0}\gamma (\te)=\alpha$$
+\end{defi}
+\begin{defi}
+	for $\alpha \in [o,1]$ a test with power function $\gamma(\te)$ is a \textbf{level $\alpha$ test} if 
+	$$\sup_{\te \in \Theta_0}\gamma(\te)\leq \alpha$$
+\end{defi}
+We want to find a rejection region $R_0$ where $\alpha$ and $\beta$ are small.\\
+But it is impossible to reduce $\alpha$ and at the same time $\beta$ as shown in the next observation \ref{obs:alpha}
+\begin{oss}\label{obs:alpha}
+	Fix a rejection region $C_0$  and define 
+	\begin{itemize}
+		\item$\alpha=\alpha(C_0)$
+		\item$\beta=\beta(C_0)$
+	\end{itemize}
+Suppose that $C_0'$ is a different reject  region such that
+$$\alpha(C_0')<\alpha(C_0)$$
+Then we want to show that $\beta(C_0')>\beta(C_0)$.\\
+Indeed if $\alpha(C_0')<\alpha(C_0)$ then $\p(C_0')<\p(C_0)$ because 
+$$\alpha (C_0')=\p(\ux \in C_0'|H_0)< \p(\ux \in C_0|H_0)=\alpha(C_0)$$
+so $\p((C_0')^c)>\p(C_0^c)$
+$$\beta (C_0')=\p(\ux \not \in C_0'|H_1)\p(\ux \in (C_0')^c|H_1 )> \p(\ux \in C_0^c|H_1)= \p(\ux \not \in C_0|H_1)=\beta(C_0)$$
+So we have that if $\alpha$ decrease $\beta$ increase.
+\end{oss}
+The most dangerous error is the type one error so usually we fix $\alpha$ to control it and look for the reject region $C_0$ which has $\alpha$ as probability of committing an error of the first type an the smallest possible $\beta$ as probability of committing an error of the second type.\\
+\begin{eg}
+	Consider $\uX=(X_1 ... X_n)$ a random sample from $X\sim Ber(\theta)$ (Flip of a coin).\\
+	$\hat \theta_n=\frac{1}{n}\sum_{i=1}^{n}X_i$.\\
+	We consider the following test:
+	\begin{itemize}
+		\item[$H_0$]: $\theta=\frac{1}{2}$
+		\item[$H_1$]: $\theta=\frac{2}{3}$
+	\end{itemize}
+	The easiest way to test this hypothesis is by taking an experiment.\\
+	Suppose we film the coin $30$ times, we have:
+	$\sumi X_i\sim Bin(30,\theta)$.\\
+	Now guess some reject regions
+	\begin{itemize}
+		\item[$C_0'$] we reject \h if the number of heads is strictly greater than $25$
+		\item[$C_0''$] we reject \h if the number of heads is strictly greater than $17$
+	\end{itemize}
+	In $C_0'$ we expect a large $\beta$ because we will "reject very often".\\
+	In $C_0''$ we expect a large $\alpha$ because we will "reject quite rarely".\\
+	\begin{itemize}
+		\item $\alpha(C_0') = \p \big( \sum_{i=1}^{30} x_i > 25 | \te = \frac{1}{2} \big) = \sum_{M=25}^{30} \binom{30}{M} \big(\frac{1}{2}\big)^M \big( \frac{1}{2} \big)^{30-M}=0.000029...$
+		\item $\beta(C_0') = \p \big( \sum_{i=1}^{30} x_i < 25 | \te = \frac{2}{3} \big) = \sum_{M=25}^{30} \binom{30}{M} \big(\frac{2}{3}\big)^M \big( \frac{1}{3} \big)^{30-M}=0.9877...$
+		\item $\alpha(C_0'') = \p \big( \sum_{i=1}^{30} x_i > 17 | \te = \frac{1}{2} \big) = \sum_{M=17}^{30} \binom{30}{M} \big(\frac{1}{2}\big)^M \big( \frac{1}{2} \big)^{30-M}=0.18...$
+		\item $\beta(C_0'') = \p \big( \sum_{i=1}^{30} x_i < 17 | \te = \frac{2}{3} \big) = \sum_{M=17}^{30} \binom{30}{M} \big(\frac{2}{3}\big)^M \big( \frac{1}{3} \big)^{30-M}=0.166...$
+	\end{itemize}
+\end{eg}
+\begin{defi}
+	Let $C$ be the class of tests for testing \h :$\te \in \Theta_0$ versus $H_1$:$\theta \in \Theta_0^c$.\\
+	A test in the class $C$, with power function $\gamma(\te)$ is a \textbf{uniformly most powerful (UMP)} class $C$ test if
+	$$\gamma(\te)\geq \gamma'(\te)$$
+	for every $\theta \in \Theta_0^c$ and every $\gamma'$ that is the power function of a test in the class $C$.\\
+	For us the class $C$ will be the class of tests of size $\alpha$. Then we will write \textbf{UMP level $\alpha$ test}
+\end{defi}
+In most cases this test does not exist. A situation in which this test exist is when $H_0, H_1$ are simple.\\
+In other words the requirements of this definition are very strong, in particular the fact that we are considering arbitrary hypothesis. In order to identify the UMP level $\alpha$ test we restrict to the class of simple hypothesis. So we can use the "Neyman-Pearson lemma".
+\begin{teo}\label{teo:NP} \textbf{Neyman-Pearson lemma}\\
+	Consider the prolem of testing $H_0: \theta=\theta_0$ versus $H_1:\theta =\theta_1$. Let $\lfd$ be the joint densisty function of $\uX=(X_1...X_n)$. Consider the test with the rejection region $R_0$ that satisfies
+	\begin{itemize}
+		\item[A:]$\ux \in R_0$ if $f_{\ux}(\ux;\theta_1) > k f_{\ux}(\ux;\theta_0)$ and $\ux \in R_0^c$ if $ f_{\ux}(\ux;\theta_1)< k f_{\ux}(\ux;\theta_0)$ for some $k \geq 0$
+		\item[B:]$\alpha=\p(\ux\in R_0; \theta_0)$
+	\end{itemize}
+A is called the \textbf{shape of the rejection region}\\
+B is called \textbf{size of the rejection region}.\\
+Then
+\begin{itemize}
+	\item any test that satisfies A and B is a UMP level $\alpha$ test
+	\item if exist a test that satisfies A and B with $k\geq 0$ then every UMP level $\alpha$ test is a size $\alpha$ test (B) and every UMP level $\alpha$ test satisfies A except on a set such that:
+	$$\p(\ux \in A;\theta_0)=\p(\ux\in A; \theta_1)=0$$ 
+\end{itemize}
+\end{teo}  
+\begin{eg}
+	Let $\uX=(X_1 ... X_n)$ a random sample from $X\sim N(\te, \sigma^2)$, where $\sigma^2$ is known. We test:
+	$$H_0: \theta= \theta_0 \ \ \ \ vs\ \ \ \ \ H_1: \theta= \theta_1 $$
+	with $\te_1>\te_0$ \\
+	$$\frac{\mathcal{L}(\theta_1;\ux)}{\mathcal{L}(\theta_0;\ux)}\geq c$$
+	with $\alpha=\p(\ux \in R_0;\theta_0)$ fixed\\
+	
+	\[
+	\begin{split}
+	\implies 
+	&
+	\exp \bigg\{ -\frac{1}{2\sigma^2}\bigg[ \sumi (x_i- \theta_1)^2 - \sumi(x_i-\theta_0)^2 \bigg] \bigg\} \geq c \\
+	&\iff \exp \bigg\{ -\frac{1}{2\sigma^2}\bigg[ \sumi x_i^2 - n\theta^2_1 -2\theta_1\sumi x_i-\sumi x_i^2 - n \theta_0^2 + 2\theta_0 \sumi x_i \bigg] \bigg\} \geq c\\
+	&\iff \exp \bigg\{ -\frac{1}{2\sigma^2}\bigg[ - n\theta^2_1 -2\theta_1\sumi x_i - n \theta_0^2 + 2\theta_0 \sumi x_i \bigg] \bigg\} \geq c\\
+	&\iff \exp \bigg\{ -\frac{1}{2\sigma^2}\bigg[ n(\theta_1^2 -\theta_0^2)- 2 \sumi x_i (\theta_1 - \theta_0) \bigg] \bigg\} \geq c\\
+	&\iff \exp \bigg\{ -\frac{1}{2\sigma^2}(\theta_1 - \theta_0)\bigg[ n(\theta_1 +\theta_0)- 2 \sumi x_i \bigg] \bigg\} \geq c\\
+	&\iff -(\theta_1 - \theta_0)\bigg[ n(\theta_1 +\theta_0)- 2 \sumi x_i \bigg] \bigg\} \geq 2\ln(c)\sigma^2\\
+	&\iff  n(\theta_1 +\theta_0)- 2 \sumi x_i \leq - \frac{2\ln(c)\sigma^2}{\theta_1-\theta_0}\\
+	&\iff -2 \sumi x_i \leq  - \frac{2\ln(c)\sigma^2}{\theta_1-\theta_0} -  n(\theta_1 +\theta_0)\\
+	&\iff  \sumi x_i \geq  - \frac{\ln(c)\sigma^2}{\theta_1-\theta_0} -  \frac{n}{2}(\theta_1 +\theta_0)
+	\end{split}
+	\]
+	So $\bar X_n \geq c$ is the shape of the rejection region. Where now $c$ is: $- \frac{\ln(c)\sigma^2}{\theta_1-\theta_0} -  \frac{n}{2}(\theta_1 +\theta_0)$  So to fin the value of $c$ given $\alpha$ we remember that $\bar X_n\sim N\big( \theta, \frac{\theta}{n} \big)$ so:
+	\[
+		\begin{split}
+		\alpha&=\p(\bar X_n \geq c| H_0: \te =\te_0)\\&=\p(\frac{\bar X_n-\theta_0}{\sigma/\sqrt{n}}\geq \frac{c-\theta_0}{\sigma/\sqrt{n}})\\&=\p(Z \geq \frac{c-\theta_0}{\sigma/\sqrt{n}})\\&=1- \Phi\big( \frac{c-\theta_0}{\sigma/\sqrt{n}} \big)
+		\end{split}
+	\]
+	Where $Z$ is the standard Gaussian.
+	In the end $c=\theta_0 + z_{\alpha} \frac{\sigma}{\sqrt{n}}$.\\
+	According to the Neyman-Pearson lemma \ref{teo:NP}
+	$$\big\{ \bar X_n \geq \theta_0 + z_\alpha \frac{\sigma}{\sqrt{n}} \big\} \ \ \ \ \ \ \text{ is the UMP level $\alpha$}$$
+\end{eg}
+\begin{eg}
+		Let $\uX=(X_1 ... X_n)$ a random sample from $X\sim Ber(\te)$.
+		 We test:
+		$$H_0: \theta= \theta_0 \ \ \ \ vs\ \ \ \ \ H_1: \theta= \theta_1 $$
+		With $\theta_1>\theta_0$
+		\[
+			\begin{split}
+		\implies & \frac{\mathcal{L}(\theta_0;\ux)}{\mathcal{L}(\theta_1;\ux)}\leq k\\
+		&\frac{\theta_0^{\sumi x_i}(1-\theta_0)^{n-\sumi x_i}}{\theta_1^{\sumi x_i}(1-\theta_1)^{n-\sumi x_i}}=\bigg( \frac{\theta_0}{\theta_1} \bigg)^{\sumi} \bigg(  \frac{1-\theta_0}{1-\theta_1} \bigg)^{n-\sumi x_i}\leq k\\
+		& \ln\bigg(\frac{\te_0}{\te_1}\bigg)\sumi x_i + \bigg(n-\sumi x_i\bigg)\ln\bigg(\frac{1-\theta_0}{1-te_1}\bigg)\leq \ln k\\
+		&\ln\bigg(\frac{\te_0}{\te_1}\bigg)\sumi x_i + n \ln\bigg( \frac{1-\theta_0}{1-te_1} \bigg)-\ln\bigg(\frac{1-\theta_0}{1-te_1}\bigg)\sumi x_i\leq \ln k\\
+		&\sumi x_i \bigg[ \ln\bigg(\frac{\te_0}{\te_1}\bigg)   -\ln\bigg(\frac{1-\theta_0}{1-te_1}\bigg) \bigg]	\leq \ln k - n \ln\bigg( \frac{1-\theta_0}{1-te_1} \bigg)	
+			\end{split}
+		\]
+		because $ \ln\bigg(\frac{\te_0}{\te_1}\bigg)$   and $ -\ln\bigg(\frac{1-\theta_0}{1-te_1}\bigg)$ are $\leq 0$ we have
+		$$\sumi x_i\geq k$$
+		where $\sumi x_i \sim Bin(\te, n)$.\\
+		$\alpha =\p \bigg( \sumi x_i \geq k ; \te =\te_0 \bigg)=\sum_{r=k}^n \binom{n}{r} \theta_0^r (1-\theta_0)^{n-r}$.\\
+		We have $k\in \mathbb{N}$ so we can not find a  $k$ such that $\p \bigg( \sumi x_i \geq k ; \te =\te_0 \bigg)$ is exactly equal to $\alpha$. So we look for a value that provides a value very close to $\alpha$
+\end{eg}
+\begin{eg}\label{eg:exponentialf}
+		Let $\uX=(X_1 ... X_n)$ a random sample from $X\sim EF()$ (Exponential Family) so $f_X(x;\te)=\exp \{ A(x) Q(\te)+ C(x)- K(\te) \}$. Assume $Q$ monotone increasing. We want to test 
+			$$H_0: \theta= \theta_0 \ \ \ \ vs\ \ \ \ \ H_1: \theta= \theta_1 $$
+			With $\te_0< \te_1$. Apply the Neyman-Pearson lemma \ref{teo:NP}
+			
+			\[
+			\begin{split}
+			\implies & \frac{\mathcal{L}(\theta_0;\ux)}{\mathcal{L}(\theta_1;\ux)}\leq k\\
+			&\iff \frac{\prod_{i=1}^{n} \exp \{ A(x_i) Q(\te_0)+ C(x_i)- K(\te_0) \} }{\prod_{i=1}^{n} \exp \{ A(x_i) Q(\te_1)+ C(x_i)- K(\te_1) \}}\leq k\\
+			&\iff  \exp \{  Q(\te_0) \sumi A(x_i)+ \sumi C(x_i)- nK(\te_0) - Q(\te_1)  \sumi A(x_i)+\sumi C(x_i)+nK(\te_1) \}\leq k\\
+			&\iff  \exp \{  Q(\te_0) \sumi A(x_i) - nK(\te_0) - Q(\te_1)  \sumi A(x_i)+nK(\te_1) \}\leq k\\
+			&\iff  \exp \{   \sumi A(x_i)(Q(\te_0) -  Q(\te_1)) - n(K(\te_0) - K(\te_1)) \}\leq k\\
+			&\iff    \sumi A(x_i)(Q(\te_0) -  Q(\te_1)) - n(K(\te_0) - K(\te_1)) \leq \ln k\\
+			&\iff    \sumi A(x_i)(Q(\te_0) -  Q(\te_1))  \leq c\\
+			&\iff \sumi A(X_i) \geq c
+			\end{split}
+			\]
+			where in the last passage we used $	(Q(\te_0) -  Q(\te_1))< 0$ because $\te_1 > \te_0$ and $Q$ is strictly increasing.\\
+			$\sumi A(X_i) \geq c$ is the shape of the reject region for an arbitrary exponential family with $Q$ strictly increasing
+\end{eg}
+
+\begin{proof} of the Neyman-Pearson lemma \ref{teo:NP}
+	Any test that satisfies $B$  is a size  $\alpha$ test, and hence a level $\alpha$ test because
+	$$\sup_{\theta \in \Theta_0} \p(\ux \in \ R)=\alpha$$
+	Consider a test function in the sample space that is $1$ if $\ux\in R$ and $0$ if $\ux\in R^C$.
+	\begin{itemize}
+		\item let $\Phi(\ux)$ be a test function that satisfies $A$ and $B$
+		\item let $\Phi'(\ux)$ be a test function (dichotomic) of any otherlevel $\alpha$ test.
+		\item let $\gamma(\theta)$ and $\gamma'(\te)$ be the corresponding power functions (when $\theta \in \Theta_0^c$)
+	\end{itemize}
+Observe that 
+$\Phi(\ux)=1$ if $\ux\in R$ if $f_{\uX}(\ux;\te_1) > k f_{\uX}(\ux;\te_0)$\\
+$\Phi(\ux)=0$ if $\ux\in R^c$ if $f_{\uX}(\ux;\te_1) < k f_{\uX}(\ux;\te_0)$\\
+From this we get
+$$(\Phi(\ux)-\Phi'(\ux))(f_{\uX}(\ux;\te_1)-k f_{\uX}(\ux;\te_0))\geq 0$$
+Then
+$$\int (\Phi(\ux)-\Phi'(\ux))(f_{\uX}(\ux;\te_1)-k f_{\uX}(\ux;\te_0))=\gamma(\theta_1)-\gamma'(\theta_1)-k[\gamma(\theta_0)- \gamma(\theta_1)]\geq 0$$
+Now observe that $\Phi'$ is a level $\alpha$ test and $\phi$ is a size $\alpha$ test, this implies that 
+$$0	\leq \gamma(\theta_1) -\gamma'(\theta_1) - k \gamma(\theta_0) -\gamma'(\theta_0)\leq \gamma(\theta_1) -\gamma'(\theta_1)$$
+$\implies 0\leq \gamma(\theta_1) -\gamma'(\theta_1)$\\
+$\implies \gamma(\theta_1) \geq \gamma'(\theta_1)$
+We proved the test defined by Neyman-Pearson condition $A,B$ is a UMP level $\alpha$ test.\\
+Second part\\
+Let $\Phi'$ be a test function for every UMP level $\alpha$ test. By the previous part, that is the test $\Phi$ satisfying $A;B$ is also a UMP level $\alpha$ test. This implies 
+$$\gamma(\theta_1)=\gamma'(\theta_1)$$
+This implues that for any $k>0$
+$$\alpha - \gamma'(\theta_0)=\gamma(\theta_0) - \gamma'(\theta_1)\leq 0$$
+Now since $\Phi'$ is a  level $\alpha$ test we have that
+$$ \gamma'(\theta_0)\leq \alpha \implies  \gamma'(\theta_0)=\alpha$$
+This implies that $\Phi'$ is a size $\alpha$ test. Finally Recall that 
+$$(\Phi(\ux)-\Phi'(\ux))(f_{\uX}(\ux;\te_1)-k f_{\uX}(\ux;\te_0))\geq 0$$
+if we integrate over the sample  space, we have 0 only if $\Phi'$ satisfies assumption A. Except on a set A of probability 0:
+$$\int_{A}f_{\uX}(\ux;\te_1)dx=0 \ \ \ i=0,1$$
+\end{proof}
+We will see extensions of the Neyman-Pearson Lemma for
+\begin{itemize}
+	\item unidirectional hypothesis (robin test)
+	\item arbitrary hypothesis (likelihood ratio test)
+\end{itemize}
+\begin{corol}\label{cor:NP}
+	(link between Neyman-Pearson Lemma and sufficiency)\\
+	Consider the hypothesis of the Neyman-Pearson Lemma \ref{teo:NP}. Suppose $T(\uX) $ a sufficient statistic for the parameter $\theta$. Denote by $f_{\uX}(\ux; \te_i) $ for $i=0,1$ the joint density distribution function of the random sample and by $g(t;\te_i), i=0,1$ the density function of the sufficient statistic.\\
+	Then any test based on $T$ whit rejection region $S$ (a subset o the sample space defined by $T$) is a UMP level  $\alpha$ test if it satisfies the two following:
+	\begin{itemize}
+		\item $t\in S$ if $g(t;\theta_1)>k g(t;\te_0)$
+		\item $t\in S^x$ if $g(t;\te_1)< k g(t; \te_0)$
+	\end{itemize}  
+	for some $k \geq 0$, where $\alpha = \p(T\in S; \theta_0)$
+\end{corol}
+\begin{proof}
+	In terms of the random sample $(X_1...X_n)$, the test based on the sufficient static  $T$ has the following rejection region $$R=\{\ux : T(\ux) \in S\}$$
+	By the factorization theorem the distribution of the random sample  $(X_1...X_n)$ can be written as 
+	$$f_{\uX}(\ux;\te_i)=g(T(\ux);\te_i)h(\ux) \ \ \ \ i=0,1$$
+	Consider the condition $t\in S$ if $g(t;\te_1)> g(t;\te_0)$ and multiply both sides of the inequality by the non negative function $h$. We see that the rejection region $R$ satisfies $\ux\in R$ if 
+	$$f_{\uX}(\ux;\te_1)=g(T(\ux);\te_1)h(\ux)< g(T(\ux);\te_0)h(\ux)=f_{\uX}(\ux;\te_0)$$
+	By the size condition we have
+	$$	\p (\uX \in R; \te_0)=\p(T(\uX)\in S; \te_0)=\alpha$$
+	At this point we remember the Neyman-Pearson Lemma \ref{teo:NP} and the test based on the  sufficient statistic $T$ is a UMP level $\alpha$ test.
+\end{proof}
+\begin{eg}Remember the example \ref{eg:exponentialf} of with the exponential family
+	$f_X(x;\theta)=\exp \{ A(x) Q(\te)+ C(x)- K(\te) \}$ we know a sufficient statistic is $\sumi A(X_i)$
+	We want to test 
+	$$H_0: \theta= \theta_0 \ \ \ \ vs\ \ \ \ \ H_1: \theta= \theta_1 $$
+	Assume $Q$ monotone increasing and $\te_1>\te_0$. So $Q(\te_1)> Q(\te_0)$.\\
+	The shape of the rejection region is 
+	$$\sumi A(x_i)\geq c$$
+	which is a   function of a sufficient statistic for $\theta$
+\end{eg}
+In general, by the previous corollary \ref{cor:NP} the shape of the reject region defined by the Neyman-Pearson Lemma is a function of the sufficient statistic for the parameter of interest.
