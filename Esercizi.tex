@@ -73,7 +73,7 @@
 		\end{cases}
 		\end{split}
 		\]
-		\item for the distribution of $Z$ we will adopt a more straight forward approach an we will use the CDF function:
+		\item for the distribution of $Z$ we will adopt a more straight forward approach and we will use the CDF function:
 		\[
 		\begin{split}
 		F_Z(z)
@@ -321,10 +321,10 @@ e[e^{sx}]
 		Compare the estimators.
 	\end{itemize}
 \end{ex}
-\clearpage
-\textbf{HOMEWORK B}
-Question 1
-To find the set $\Theta$ we need to check that $\int_{0}^{1} f_\theta (x) dx=\int_{0}^{1} (\theta x +1 - \theta/2)dx=1$  $\forall \te \in \Theta$.
+
+\textbf{HOMEWORK B}\\
+Question 1\\
+To find the set $\Theta$ we need to check if $\int_{0}^{1} f_\theta (x) dx=\int_{0}^{1} (\theta x +1 - \theta/2)dx=1$  $\forall \te \in \Theta$.
 $$\int_{0}^{1} (\theta x +1 - \theta/2)dx=\bigg[ \te \frac{x^2}{2} + x - \frac{\theta}{2} \bigg]_0^1=1$$
 But we need also to check that $f_\theta (x)\geq 0 \ \ \ \forall x\in [0,1]$
 $$\theta x +1 - \theta/2 \geq 0 \iff \te \geq \frac{1}{\frac{1}{2}-x}\iff -2\leq \te \leq 2$$
@@ -337,8 +337,8 @@ Hence $\Theta=[-2,2]$
 	\end{split}
 	\]
 	Hence $T_n$ is unbiased\\
-	If we compute $Var(T_n)$ we get...
-	\item Start computing $\e[U_n]$
+	If we compute $Var(T_n)$ we get $\frac{144}{n}\bigg(\frac{\te}{12} - \te^2 +\frac{1}{3}\bigg)$ which goes to $0$ when $n\to \infty$  so $T_n$ is asymptotically consistent
+	\item Start by computing $\e[U_n]$
 	\[
 	\begin{split}
 	\e[U_n]&=
@@ -360,6 +360,7 @@ Hence $\Theta=[-2,2]$
 	&=\frac{32}{n}-\frac{12}{n}\te
 	\end{split}
 	\]
+	Now we just need to compare the two variances.
 	\item we need to compute $\p(Z>z ;\te_0)$. Notice that under $H_0$ $X_i\sim Uniform$ and remember that if $X\sim Uniform$ $-\ln X \sim Exp (1)$ Hence
 	\[
 	\begin{split}
@@ -370,5 +371,62 @@ Hence $\Theta=[-2,2]$
 	&=\p(\sumi - \ln(X_i)<-\ln z)
 	\end{split}
 	\]
-	Knowing $ - \ln(X_i)\sim Exp(1)$ then $(\sumi - \ln(X_i) \sim $ and we jus need to compute the quantile
+	Knowing $ - \ln(X_i)\sim Exp(1)$ then $\sumi - \ln(X_i) \sim Gamma(n,1)$ and we just need to compute the quantile
+\end{enumerate}
+
+
+Question 2\\
+Notice that asking $X$ to be a uniform random variable is the same as asking the density of $X$ to be equal to $f_\lambda (x)=\lambda x^{\lambda -1} \mathbbm{1}_{0,1}(x)$  with $\lambda=1$. So our test becomes: $H_0 : \lambda =1 $ VS $H_1: \lambda > 1$
+\begin{enumerate}
+	\item we aim to prove all the hypothesis of Rubin Test.\\
+	first we find a sufficient statistic:
+	$$\mathcal{L}(\ux;\lambda)=\lambda^n\bigg(\prod_{i=1}^{n} x_i\bigg)^{\lambda -1}$$
+	So a sufficient statistic will be $T=\prod_{i=1}^{n} x_i$. And also $T'=\sumi \ln(x_i)$ will be a sufficient statistic.\\
+	Now we need to verify that the pdf has the MLR property:\\
+	Suppose $\lambda_2 >\lambda_1$
+	$$\frac{\mathcal{L}(T;\lambda_1)}{\mathcal{L}(T;\lambda_2)}=\frac{\lambda_1^n(T)^{\lambda_1 -1}\mathbbm{1}_{0,1}(x)}{\lambda_2^n(T)^{\lambda_2 -1}\mathbbm{1}_{0,1}(x)}=\bigg(\frac{\lambda_1}{\lambda_2}\bigg)^n T^{\lambda_1 -\lambda_2}$$
+	Which is monotone with respect to $T$.\\
+	Now we can apply the Robin Test:\\
+	And remember that for $\lambda =1$ $X\sim Uniform$ and $-log(X) \sim Exp(1)$
+	\[
+	\begin{split}
+	\p(T>c; \lambda =1)
+	&=\p(\prod_{i=1}^{n} x_i >c)\\
+	&=\p(\sumi \ln (x_i)> \ln(c))\\
+	&=\p(\sumi -\ln (x_i) < d)
+	\end{split}
+	\]
+	where $d=-\ln c$\\
+	An now we notice that $\sumi -\ln (x_i)\sim Gamma(n,\lambda)$ so for $n=1$ it is an exponential:
+	$$	\p(T>c; \lambda =1)=\p(\sumi -\ln (x_i) < d)=1-e^{-dn}$$
+	\[
+	\begin{split}
+	\implies 
+	&0.05=\alpha=\p(T>c; \lambda =1)=1-e^{-dn}\\
+	&\iff 0.05=1-e^{-dn}\\
+	&\iff \ln (1- 0.05 )=-dn\\
+	&\iff d=-\frac{\ln (0.95 )}{n}
+	\end{split}
+	\]
+	And so $d=-\ln (0.95 )=  0.05129329438755058$ for $n=1$\\
+	
+	
+	
+	For $n=400$ we have 
+		$$	\alpha=\p(T>c; \lambda =1)=\p(\sumi -\ln (x_i) < d_{400})= \p \bigg(  \frac{\sumi -\ln (x_i) - n/\lambda}{\sqrt{n}n/\lambda^2} <  \frac{d_{400} - n/\lambda}{\sqrt{n}n/\lambda^2} \bigg)$$
+		so by CLT we can approximate $ \frac{\sumi Y_i - n/\lambda}{\sqrt{n}n/\lambda^2} \sim N(0,1)$.\\ Hence  $\alpha = \Phi\bigg( \frac{d_{400} - n/\lambda}{\sqrt{n}n/\lambda^2} \bigg)$ with $\lambda = 4$
+	\item For $n=1$ and $\lambda =4$\\
+	$$\gamma =\p\bigg(\prod_{i=1}^1 X_i > c ; \lambda >1\bigg)=\int_{0}^{c} 4 X^3 = [x^4]^d_0=c^4$$
+	with $c=e^{-d}$ and  $d=0.05129329438755058$\\
+	
+	
+	For $n=400$ and $\lambda=1.2$\\
+	define $Y_i=-\ln (x_i)$.\\
+	Hence by the transformation theorem we get
+	$$f_Y(y)=f_X(e^{-y})e^{-y}=\lambda e^{-\lambda y} \sim Exp (\lambda)$$
+	And $\sumi Y_i \sim Gamma(n,\lambda)$\\
+	Hence
+	$$\gamma = \p \bigg(\sumi -\ln (x_i) < d_{400}; \lambda=1.2\bigg)=\p\bigg(\sumi Y_i < d_{400}; \lambda=1.2\bigg) = \p\bigg(  \frac{\sumi Y_i - n/\lambda}{\sqrt{n}n/\lambda^2} <  \frac{d_{400} - n/\lambda}{\sqrt{n}n/\lambda^2} \bigg)$$
+	so by CLT we can approximate $ \frac{\sumi Y_i - n/\lambda}{\sqrt{n}n/\lambda^2} \sim N(0,1)$.
+	\\Hence  $\gamma = \Phi\bigg( \frac{d_{400} - n/\lambda}{\sqrt{n}n/\lambda^2} \bigg)$ with $\lambda = 1.2$
 \end{enumerate}
