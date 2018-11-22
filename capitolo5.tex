@@ -56,11 +56,11 @@ Confronting the choices done with the test with the real situation it can happen
 		\item[$E_1$] reject \h when \h is true, so we took the wrong decision
 		\item[$E_2$] accept \h when \h is false, so we took the wrong decision
 	\end{itemize}
-\begin{defi}
+\begin{defi}\ref{defi:powerf} \textbf{power function $\gamma(\te)$}\\
 	we define the function $\gamma(\theta) $ with $\te \in \Theta$ in this way
 	\begin{itemize}
-		\item if $\theta \in \Theta_0$   $\gamma(\theta):=\p(\uX \in R_0 ; \theta \in \Theta_0)$
-		\item if $\theta\in \Theta_0^c$    $\gamma(\theta):= \p(\ux \in R_0, \theta \not \in \Theta_0)$
+		\item $\gamma(\theta):=\p(\uX \in R_0 ; \theta \in \Theta_0)$   if $\theta \in \Theta_0$
+		\item $\gamma(\theta):= \p(\ux \in R_0, \theta \not \in \Theta_0)$    if $\theta\in \Theta_0^c$
 	\end{itemize}
 \end{defi}
 \begin{defi}Some terminology.\\
@@ -72,7 +72,7 @@ Confronting the choices done with the test with the real situation it can happen
 	$$\sup_{\te \in \Theta_0}\gamma (\te)=\alpha$$
 \end{defi}
 \begin{defi}
-	for $\alpha \in [o,1]$ a test with power function $\gamma(\te)$ is a \textbf{level $\alpha$ test} if 
+	for $\alpha \in [0,1]$ a test with power function $\gamma(\te)$ is a \textbf{level $\alpha$ test} if 
 	$$\sup_{\te \in \Theta_0}\gamma(\te)\leq \alpha$$
 \end{defi}
 We want to find a rejection region $R_0$ where $\alpha$ and $\beta$ are small.\\
@@ -102,7 +102,7 @@ The most dangerous error is the type one error so usually we fix $\alpha$ to con
 		\item[$H_1$]: $\theta=\frac{2}{3}$
 	\end{itemize}
 	The easiest way to test this hypothesis is by taking an experiment.\\
-	Suppose we film the coin $30$ times, we have:
+	Suppose we flip the coin $30$ times, we have:
 	$\sumi X_i\sim Bin(30,\theta)$.\\
 	Now guess some reject regions
 	\begin{itemize}
@@ -130,7 +130,7 @@ In other words the requirements of this definition are very strong, in particula
 \begin{teo}\label{teo:NP} \textbf{Neyman-Pearson lemma}\\
 	Consider the prolem of testing $H_0: \theta=\theta_0$ versus $H_1:\theta =\theta_1$. Let $\lfd$ be the joint densisty function of $\uX=(X_1...X_n)$. Consider the test with the rejection region $R_0$ that satisfies
 	\begin{itemize}
-		\item[A:]$\ux \in R_0$ if $f_{\ux}(\ux;\theta_1) > k f_{\ux}(\ux;\theta_0)$ and $\ux \in R_0^c$ if $ f_{\ux}(\ux;\theta_1)< k f_{\ux}(\ux;\theta_0)$ for some $k \geq 0$
+		\item[A:]$\ux \in R_0$ if $f_{\uX}(\ux;\theta_1) > k f_{\uX}(\ux;\theta_0)$ and $\ux \in R_0^c$ if $ f_{\uX}(\ux;\theta_1)< k f_{\uX}(\ux;\theta_0)$ for some $k \geq 0$
 		\item[B:]$\alpha=\p(\ux\in R_0; \theta_0)$
 	\end{itemize}
 A is called the \textbf{shape of the rejection region}\\
@@ -260,7 +260,7 @@ We will see extensions of the Neyman-Pearson Lemma for
 	Then any test based on $T$ whit rejection region $S$ (a subset o the sample space defined by $T$) is a UMP level  $\alpha$ test if it satisfies the two following:
 	\begin{itemize}
 		\item $t\in S$ if $g(t;\theta_1)>k g(t;\te_0)$
-		\item $t\in S^x$ if $g(t;\te_1)< k g(t; \te_0)$
+		\item $t\in S^c$ if $g(t;\te_1)< k g(t; \te_0)$
 	\end{itemize}  
 	for some $k \geq 0$, where $\alpha = \p(T\in S; \theta_0)$
 \end{corol}

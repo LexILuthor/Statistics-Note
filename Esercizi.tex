@@ -321,3 +321,54 @@ e[e^{sx}]
 		Compare the estimators.
 	\end{itemize}
 \end{ex}
+\clearpage
+\textbf{HOMEWORK B}
+Question 1
+To find the set $\Theta$ we need to check that $\int_{0}^{1} f_\theta (x) dx=\int_{0}^{1} (\theta x +1 - \theta/2)dx=1$  $\forall \te \in \Theta$.
+$$\int_{0}^{1} (\theta x +1 - \theta/2)dx=\bigg[ \te \frac{x^2}{2} + x - \frac{\theta}{2} \bigg]_0^1=1$$
+But we need also to check that $f_\theta (x)\geq 0 \ \ \ \forall x\in [0,1]$
+$$\theta x +1 - \theta/2 \geq 0 \iff \te \geq \frac{1}{\frac{1}{2}-x}\iff -2\leq \te \leq 2$$
+Hence $\Theta=[-2,2]$
+\begin{enumerate}
+	\item We need to compute the expected value of $T_n$:
+	\[
+	\begin{split}
+	\e[T_n]&=\frac{12}{n}\e[X_i]-6\\&=\frac{12}{n}\int_{0}^{1} x(\theta x +1 - \theta/2)dx\\&	\frac{12n(\te+6)}{12n}-6\\&=\te
+	\end{split}
+	\]
+	Hence $T_n$ is unbiased\\
+	If we compute $Var(T_n)$ we get...
+	\item Start computing $\e[U_n]$
+	\[
+	\begin{split}
+	\e[U_n]&=
+	\frac{1}{n}\sumi \e[\ln X_i]\\&=-\frac{\te}{4}+\frac{\te}{2}-1\\&=\frac{\te}{4}-1
+	\end{split}
+	\]
+	Hence $S_n:=4U_n +4$ is unbiased for $\te$.\\
+	To compare the two estimator we need to compute the MSE of the two, but knowing they're unbiased we just need to calculate the variance:
+	\[
+	\begin{split}
+	Var(S_n)&=Var(\frac{4}{n}\sumi \ln X_i+4)\\
+	&=\frac{16}{n^2}\sumi \e[(\ln X_i)^2]- \te^2\\
+	&=\frac{16}{n^2}\sumi \bigg(\int_{0}^{1} (\ln x)^2(\theta x +1 - \theta/2)dx \bigg)\\
+	&=\frac{16}{n^2}\sumi \bigg(\te \int_{0}^{1} (\ln x)^2x dx +(1-\frac{\te}{2})\int_{0}^{1} (\ln x)^2 dx \bigg)\\
+	&=\frac{16}{n^2}\sumi \bigg( \bigg[\te (\ln x)^2 \frac{x^2}{2} \bigg]_0^1 -\te \int_{0}^{1} \frac{2 \ln x}{x} \frac{x^2}{2}dx +\bigg(1-\frac{\te}{2}\bigg)\bigg( \bigg[ (\ln x)^2  \bigg]_0^1 -\int_{0}^{1} \frac{2 \ln x}{x} x dx \bigg)   \bigg)\\
+	&=\frac{16}{n^2}\sumi \bigg( -\te \int_{0}^{1}x \ln x dx -(1- \te/2)\bigg[2x\ln x -2x \bigg]_0^1 \bigg)\\
+	&=\frac{16}{n^2}\sumi \bigg( \te\bigg[\frac{x^2}{2}\ln x -\frac{x^2}{4}\bigg]_0^1 +2-\te \bigg)\\
+	&=\frac{16}{n^2}\sumi \bigg( \frac{\te}{4} +2 -\te \bigg)\\
+	&=\frac{32}{n}-\frac{12}{n}\te
+	\end{split}
+	\]
+	\item we need to compute $\p(Z>z ;\te_0)$. Notice that under $H_0$ $X_i\sim Uniform$ and remember that if $X\sim Uniform$ $-\ln X \sim Exp (1)$ Hence
+	\[
+	\begin{split}
+	\p(Z>z ;\te_0)
+	&=\p(\ln Z> \ln z)\\
+	&=\p(\ln\bigg(\prod_{i=1}^{n}X_i\bigg)> \ln z)\\
+	&=\p(\sumi \ln(X_i)> \ln z)\\
+	&=\p(\sumi - \ln(X_i)<-\ln z)
+	\end{split}
+	\]
+	Knowing $ - \ln(X_i)\sim Exp(1)$ then $(\sumi - \ln(X_i) \sim $ and we jus need to compute the quantile
+\end{enumerate}
